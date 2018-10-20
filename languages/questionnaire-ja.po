@@ -1,0 +1,895 @@
+# Copyright (C) 2016 questionnaire
+# This file is distributed under the same license as the questionnaire package.
+msgid ""
+msgstr ""
+"Project-Id-Version: questionnaire 2.6.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/questionnaire\n"
+"POT-Creation-Date: 2016-02-23 09:11+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-02-23 09:24+0900\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.6\n"
+"Last-Translator: 黒原 浩善 <kurohara@microgadget-inc.com>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ja_JP\n"
+
+#: actform.php:66
+msgid ""
+"Cookie timeout has expired. Please reload this page and issue answer again."
+msgstr ""
+"Cookieの期限が切れています、もう一度このページを読み込んだあとで再度回答して"
+"ください。"
+
+#: actform.php:72 questionnaire.php:242
+msgid "Required field is empty"
+msgstr "必須フィールドが空です。"
+
+#: actform.php:89
+msgid "Timeout has already expired."
+msgstr "回答期限が過ぎています。"
+
+#: actform.php:177
+msgid "You have already answered to this questionnaire."
+msgstr "あなたはすでにこのアンケートに回答しています。"
+
+#: actform.php:195 questionnaire.php:238
+msgid "Thank you for answering!"
+msgstr "ご回答ありがとうございます。"
+
+#: actform.php:236 questionnaire.php:243
+msgid "Please specify your name and e-mail address."
+msgstr "お名前とメールアドレスをご記入下さい。"
+
+#: actform.php:238 questionnaire.php:244
+msgid "Please specify your name."
+msgstr "お名前をご記入下さい。"
+
+#: actform.php:240 questionnaire.php:245
+msgid "Please specify your e-mail address."
+msgstr "メールアドレスをご記入下さい。"
+
+#: actform.php:246 questionnaire.php:233
+msgid "Your Name"
+msgstr "お名前"
+
+#: actform.php:256 questionnaire.php:234
+msgid "Your EMail Address"
+msgstr "メールアドレス"
+
+#: actform.php:267 questionnaire.php:224
+msgid "Submit"
+msgstr "回答"
+
+#: actform.php:344
+msgid ""
+"Too early committing answer after you answered before. Please wait for "
+"several minutes."
+msgstr "頻繁な回答がブロックされました。しばらく待ってご回答下さい。"
+
+#: answerinfo.php:52
+msgid "Count of Answers: "
+msgstr "回答数"
+
+#: answerinfo.php:53 questionnaire.php:237
+msgid "Delete all answers"
+msgstr "全回答を削除"
+
+#: answerinfo.php:57
+msgid "Are you sure to delete all answer data?"
+msgstr "全ての回答を削除してよろしいですか？"
+
+#: answerinfo.php:58
+msgid "OK"
+msgstr ""
+
+#: answerinfo.php:59
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: answerlist.php:49
+msgid "name"
+msgstr "名前"
+
+#: answerlist.php:50
+msgid "email"
+msgstr "Eメール"
+
+#: answerlist.php:51
+msgid "date"
+msgstr "日時"
+
+#: answerlist.php:212
+msgid "Download answers as CSV"
+msgstr "回答一覧を CSV ファイルとしてダウンロード"
+
+#: metaform.php:26
+msgid "Questionnaire Sheet"
+msgstr "アンケートシート"
+
+#: metaform.php:92 questionnaire.php:226
+msgid "Form Designer"
+msgstr "フォームデザイナー"
+
+#: metaform.php:100
+msgid "Edit questionnaire&apos;s form."
+msgstr "アンケート用紙を編集"
+
+#: metaform.php:100
+msgid "Edit form entries"
+msgstr "フォーム要素を編集"
+
+#: metaform.php:102 metaform.php:105
+msgid "Add new form item."
+msgstr "フォーム要素を追加"
+
+#: metaform.php:102 metaform.php:105 questionnaire.php:228
+msgid "Add Item"
+msgstr "追加"
+
+#: metaform.php:108
+msgid "Edit other attributes."
+msgstr "詳細設定"
+
+#: metaform.php:108
+msgid "Edit attributes"
+msgstr "詳細設定"
+
+#: metaform.php:112
+msgid ""
+"Check here if you wish to make this questionnaire public, otherwise this "
+"questionnaire will only be seen by the user who has login account of this "
+"site.&#13;"
+msgstr ""
+"このアンケートを公開したい場合、チェックしてください。&#13;チェックされていな"
+"い場合、このアンケートはこのサイトにログインできるユーザのみ見ることができま"
+"す。"
+
+#: metaform.php:113 questionnaire.php:232
+msgid "Is public questionnaire?"
+msgstr "公開アンケート？"
+
+#: metaform.php:115
+msgid ""
+"This section specifies how to distinguish each answer.&#13;Combining "
+"multiple item makes distinguishing strict.&#13;Checking e-mail and name "
+"makes display the input box on the questionnaire form.&#13;Leaving all items "
+"unchecked causes that all answers will be regarded as unique."
+msgstr ""
+"このセクションは回答の一意判定方法を指定します。&#13;いくつかの項目を組み合わ"
+"せる事で、一意性判定を厳密にする事が出来ます。&#13;「名前」と「メールアドレ"
+"ス」を指定すると、アンケートフォームに名前とメールアドレスのための入力欄が自"
+"動的に追加されます。&#13;全てのアイテムをチェックしない場合、全ての回答が別人"
+"のものと判定されます。"
+
+#: metaform.php:116
+msgid "Uniqueness"
+msgstr "一意性"
+
+#: metaform.php:118
+msgid ""
+"Distinguish answers using COOKIE which holds server generated unique key."
+"&#13;The unique key will be generated using IP Address, date & time the "
+"request issued(in seconds), and random number."
+msgstr ""
+"回答をサーバで生成したCookieで区別。&#13;Cookieの値はIPアドレス、日時（秒"
+"数）、乱数を組み合わせて生成されます。"
+
+#: metaform.php:118
+msgid "Use Cookie"
+msgstr " Cookieを使用"
+
+#: metaform.php:119
+msgid "These values control the expiration duration of cookie value."
+msgstr "Cookieの有効期限を設定"
+
+#: metaform.php:120
+msgid "Expire time setting"
+msgstr "有効期限の設定"
+
+#: metaform.php:124
+msgid "Months"
+msgstr "月数"
+
+#: metaform.php:125
+msgid "Days"
+msgstr "日数"
+
+#: metaform.php:126
+msgid "Hours"
+msgstr "時"
+
+#: metaform.php:127
+msgid "Mins"
+msgstr "分"
+
+#: metaform.php:141
+msgid ""
+"Distinguish answers using name(or nickname).&#13;Checking this item makes "
+"display the Name input box.&#13;To see the effect of this item, you should "
+"logout from wordpress first, then view this page.&#13;The answer with "
+"different name will be regarded as from different visitor."
+msgstr ""
+"名前で一意性を判定します。&#13;ここをチェックするとアンケートに名前の入力欄が"
+"表示されます。&#13;この効果を確認するには一旦WordPressからログアウトしてペー"
+"ジを表示する必要があります。&#13;同じ名前で回答されたものは同一の回答者のもの"
+"と判断されます。"
+
+#: metaform.php:141
+msgid "Use user name"
+msgstr "名前を使用"
+
+#: metaform.php:143
+msgid ""
+"Distinguish answers using e-mail address.&#13;Checking this item makes "
+"display the E-Mail input box on the questionnaire form. &#13;To see the "
+"effect of this item, you should logout from wordpress first, then view this "
+"page.&#13;In general, distinguishing by e-mail address is strict enough.&#13;"
+"The answer with different e-mail address will be regarded as from different "
+"visitor"
+msgstr ""
+"メールアドレスで一意性を判定します。&#13;ここをチェックするとアンケートにメー"
+"ルアドレスの入力欄が表示されます。&#13;この効果を確認するには一旦WordPressか"
+"らログアウトしてページを表示する必要があります。&#13;同一のメールアドレスで回"
+"答されたものは同一の回答者のものと判断されます。&#13;一般的にはメールアドレス"
+"で一意性を判断すれば十分だと思われます。"
+
+#: metaform.php:143
+msgid "Use e-mail address"
+msgstr "メールアドレスを使用"
+
+#: metaform.php:145
+msgid ""
+"Distinguish answers using ip address of visitor.&#13;The answer from "
+"different ip-address will be regarded as an answer from different visitor."
+"&#13;In general, this item is combined with browser value."
+msgstr ""
+"IPアドレスで一意性を判定します。&#13;同一のIPアドレスから回答されたものは同一"
+"の回答者のものと判断されます。"
+
+#: metaform.php:145
+msgid "Use ip address"
+msgstr "IPアドレスを使用"
+
+#: metaform.php:147
+msgid ""
+"Distinguish answers using browser(user agent value).&#13;In general, this "
+"item is combined with ip-address value."
+msgstr ""
+"ブラウザの種別、バージョンで一意性を判断します。&#13;同一のブラウザから回答さ"
+"れたものは同一の回答者のものと判断されます。"
+
+#: metaform.php:147
+msgid "Use browser name and version"
+msgstr "ブラウザ名、バージョンを使用"
+
+#: metaform.php:151
+msgid ""
+"You can change the type of questionnaire&apos;s visual design from "
+"preconstructed design set."
+msgstr "アンケートフォームのデザインを選ぶことができます。"
+
+#: metaform.php:151
+msgid "Form Style Type: "
+msgstr "デザインタイプ"
+
+#: metaform.php:162
+msgid ""
+"Check here if you wish to apply additional CSS definitions to your "
+"questionnaire form."
+msgstr "アンケートフォームに追加のCSSをあてたい場合、チェックしてください。"
+
+#: metaform.php:163
+msgid "Specify Additional Styles?"
+msgstr "スタイルを追加？"
+
+#: metaform.php:165
+msgid "Copy CSS into textarea below from current style type."
+msgstr ""
+
+#: metaform.php:165
+msgid "Copy from current style type CSS"
+msgstr ""
+
+#: metaform.php:168
+msgid ""
+"You can write any CSS definitions here, but for security reason, only styles "
+"for questionnaire form will be dynamically applied on this screen.&#13;(on "
+"actual questionnaire page, all styles will be applied)"
+msgstr ""
+"ここには好きなCSS定義を書くことができますが、安全上の理由により、アンケート"
+"フォームの外側に対してはダイナミックに反映されないようになっています。"
+
+#: metaform.php:173
+msgid ""
+"Check here if you wish to receive notification by e-mail.&#13;An e-mail will "
+"be sent to page author when visitor answered to this questionnaire at first "
+"time, next time, when a visitor updates his answer, no notification be made "
+"even if this checkbox is checked."
+msgstr ""
+"訪問者がアンケートに回答した時に通知のメールを受け取ることができます。&#13;通"
+"知メールは、訪問者が新規に回答した時のみ送られ、次回以降の回答（更新となりま"
+"す）時には送信されません。"
+
+#: metaform.php:174
+msgid "Notify Answer"
+msgstr "回答を通知"
+
+#: metaform.php:179
+msgid ""
+"Checking this makes the questionnaire form be disappeared after the visitor "
+"answered."
+msgstr ""
+"ここをチェックすると一度回答した訪問者にはアンケートが表示されなくなります。"
+
+#: metaform.php:180
+msgid "Only viewable to visitors who have not answered this questionnaire yet."
+msgstr "未解答者のみにアンケートを表示"
+
+#: metaform.php:184 metaform.php:204
+msgid "Alternative content"
+msgstr "代替のコンテンツ"
+
+#: metaform.php:186 metaform.php:206
+msgid "You can specify alternative HTML text here."
+msgstr "代替のHTMLを記入できます。"
+
+#: metaform.php:189
+msgid ""
+"Checking this enables expiration timeout for questionnaire form.&#13;After "
+"timeout expired, questionnaire form will be disappeared, then alternative "
+"content will be displayed."
+msgstr "ここをチェックするとアンケートの有効期限を設定できます。"
+
+#: metaform.php:190
+msgid "Disappear after specified timeout expired"
+msgstr "期限付きアンケート"
+
+#: metaform.php:192
+msgid "These values control the expiration duration of questionnaire form."
+msgstr "有効期限を設定できます。"
+
+#: metaform.php:193
+msgid "Timed expire setting"
+msgstr "有効期限設定"
+
+#: metaform.php:196
+msgid "When to expire"
+msgstr "有効期限"
+
+#: metaform.php:200
+msgid "(Format: \"yyyy-mm-ddThh:MM\". ex; \"2016-02-28T00:00\")"
+msgstr ""
+
+#: metaform.php:209
+msgid "Settings about Submit action."
+msgstr "「回答」動作の設定"
+
+#: metaform.php:211
+msgid "Settings about \"Submit action\""
+msgstr "「回答」動作の設定"
+
+#: metaform.php:213
+msgid ""
+"What is displayed after submit action succeeded, default is disalog box."
+msgstr "回答実施後に何が表示されるかの設定、デフォルトはダイアログボックス。"
+
+#: metaform.php:214
+msgid "Greeting type"
+msgstr "返答のタイプ"
+
+#: metaform.php:216 metaform.php:240
+msgid "Default"
+msgstr ""
+
+#: metaform.php:217 metaform.php:241 metaform.php:403
+msgid "None"
+msgstr "無し"
+
+#: metaform.php:218
+msgid "Hide"
+msgstr "非表示"
+
+#: metaform.php:219
+msgid "Dialog box"
+msgstr "ダイアログボックス"
+
+#: metaform.php:220
+msgid "Blink"
+msgstr "点滅"
+
+#: metaform.php:221
+msgid "Page transit or Dialogbox"
+msgstr "ページ遷移もしくはダイアログボックス"
+
+#: metaform.php:222
+msgid "Page transit or Hide"
+msgstr "ページ遷移もしくは非表示"
+
+#: metaform.php:225
+msgid ""
+"Alternative contents which will be displayed after questionaire form is "
+"hidden.&#13;Please specify some HTML if you need to show something."
+msgstr ""
+"アンケートフォームが非表示になった後の代替のコンテンツ。&#13;必要な場合、ここ"
+"にHTMLを記入して下さい。"
+
+#: metaform.php:226
+msgid "Alternative content after hidden"
+msgstr "代替のコンテンツ"
+
+#: metaform.php:228
+msgid ""
+"Check this if you want to keep the size of questionnaire area after this "
+"questionnaire is hidden."
+msgstr ""
+"アンケートが非表示になった後、アンケート領域のサイズを保持したい場合ここを"
+"チェックして下さい。"
+
+#: metaform.php:228
+msgid "Keep area size"
+msgstr "サイズを保持"
+
+#: metaform.php:230
+msgid ""
+"Page transition settings.&#13;Questionnaire can make page transition after "
+"visitor answered this questionnaire.&#13;The transition destination can be "
+"selected by the value visitor answered."
+msgstr ""
+"ページ遷移設定。&#13;アンケートに回答した後ページ遷移することが出来ます。"
+"&#13;ページ遷移の条件を回答の内容に応じて設定出来ます。"
+
+#: metaform.php:233
+msgid "Alternative text for Submit button."
+msgstr "「回答」ボタンのテキスト"
+
+#: metaform.php:233
+msgid "Button text for \"Submit\""
+msgstr "「回答」ボタンのテキスト"
+
+#: metaform.php:234
+msgid "The text displayed on the dialog"
+msgstr "ダイアログに表示されるテキスト"
+
+#: metaform.php:234
+msgid "Greeting text after Submit"
+msgstr "ダイアログに表示されるテキスト"
+
+#: metaform.php:235
+msgid "Alternative text for Dismiss button."
+msgstr "「閉じる」ボタンのテキスト"
+
+#: metaform.php:235
+msgid "Button text for \"Dismiss\""
+msgstr "「閉じる」ボタンのテキスト"
+
+#: metaform.php:237
+msgid "Dependency setting for Submit button."
+msgstr "「回答」動作の依存設定"
+
+#: metaform.php:238 metaform.php:401
+msgid "Dependency"
+msgstr "依存性"
+
+#: metaform.php:242
+msgid "Auto submit if on"
+msgstr ""
+
+#: metaform.php:243 metaform.php:404
+msgid "show if on"
+msgstr ""
+
+#: metaform.php:244 metaform.php:405
+msgid "show if off"
+msgstr ""
+
+#: metaform.php:245 metaform.php:406
+msgid "hide if on"
+msgstr ""
+
+#: metaform.php:246 metaform.php:407
+msgid "hide if off"
+msgstr ""
+
+#: metaform.php:247 metaform.php:408
+msgid "enable if on"
+msgstr ""
+
+#: metaform.php:248 metaform.php:409
+msgid "enable if off"
+msgstr ""
+
+#: metaform.php:249 metaform.php:410
+msgid "disable if on"
+msgstr ""
+
+#: metaform.php:250 metaform.php:411
+msgid "disable if off"
+msgstr ""
+
+#: metaform.php:260
+msgid ""
+"Unless pressing this button, questionnaire&apos;s design won&apos;t be saved."
+msgstr "保存ボタンを押して編集内容を保存してください。"
+
+#: metaform.php:260 questionnaire.php:240
+msgid "Save"
+msgstr "保存"
+
+#: metaform.php:261
+msgid "Redraw Form Sample"
+msgstr "サンプルフォームを再表示"
+
+#: metaform.php:261
+msgid "Redraw"
+msgstr "再表示"
+
+#: metaform.php:266
+msgid ""
+"Shortcode of this questionnaire.&#13;Clicking the text box below will copy "
+"the code into clipboard.&#13;You can paste the shortcode into the other "
+"pages or posts."
+msgstr ""
+"このアンケートのショートコード&#13;下のテキストボックスをクリックするとクリッ"
+"プボードに内容がコピーされます。&#13;他の投稿、固定ページなどに貼り付けて使用"
+"できます。"
+
+#: metaform.php:267
+msgid "Shortcode of this questionnaire form "
+msgstr "このアンケートのショートコード"
+
+#: metaform.php:274
+msgid "Page transition settings"
+msgstr ""
+"ページ遷移設定。&#13;アンケートに回答した後ページ遷移することが出来ます。"
+"&#13;ページ遷移の条件を回答の内容に応じて設定出来ます。"
+
+#: metaform.php:276
+msgid "Default URL"
+msgstr "デフォルト遷移先"
+
+#: metaform.php:277
+msgid "Clicking text area shows link selection dialogue."
+msgstr "テキストボックスをクリックするとダイアログが表示されます"
+
+#: metaform.php:277
+msgid "Click to select the default transition URL"
+msgstr "クリックして遷移先を選択"
+
+#: metaform.php:278
+msgid "Clear default url"
+msgstr "デフォルト遷移先をクリア"
+
+#: metaform.php:281
+msgid "Add conditional transition"
+msgstr "条件付き遷移を追加"
+
+#: metaform.php:286
+msgid "Delete"
+msgstr "削除"
+
+#: metaform.php:290
+msgid "Click to select the transition URL"
+msgstr "クリックして遷移先ＵＲＬを選択"
+
+#: metaform.php:294
+msgid "Click to import answer pattern from sample form."
+msgstr "クリックして回答パターンをサンプルフォームから入力"
+
+#: metaform.php:307
+msgid "Delete this form item"
+msgstr "このフォーム要素を削除します。"
+
+#: metaform.php:312
+msgid "Move up this form item"
+msgstr "この要素を上に移動します。"
+
+#: metaform.php:317
+msgid "Move down this form item"
+msgstr "この要素を下に移動します。"
+
+#: metaform.php:324
+msgid "This item will become a question text(subject) of the questionnaire."
+msgstr "この要素が質問項目の質問文になります。"
+
+#: metaform.php:324
+msgid "Label"
+msgstr "ラベル"
+
+#: metaform.php:329
+msgid "This item will become a free text input area for your questionnaire."
+msgstr "この要素が自由解答欄になります。"
+
+#: metaform.php:329
+msgid "Message"
+msgstr "テキスト"
+
+#: metaform.php:334
+msgid ""
+"This item will become a option item of a dropdown of the questionnaire, a "
+"dropdown wrapping this item will be created automatically."
+msgstr ""
+"この要素がドロップダウンメニューの項目になります。ドロップダウンメニューは自"
+"動で生成されます。"
+
+#: metaform.php:334
+msgid "Option"
+msgstr "オプション"
+
+#: metaform.php:339
+msgid "This item will become a radio button of the questionnaire."
+msgstr "この要素がラジオボタンになります。"
+
+#: metaform.php:339
+msgid "Radio"
+msgstr "ラジオ"
+
+#: metaform.php:344
+msgid "This item will become a checkbox of the questionnaire."
+msgstr "この要素はチェックボックスになります。"
+
+#: metaform.php:344
+msgid "Check"
+msgstr "チェック"
+
+#: metaform.php:358
+msgid "Image settings"
+msgstr "画像設定"
+
+#: metaform.php:360
+msgid "Clicking here shows media dialogue."
+msgstr "ここをクリックするとメディアダイアログが表示されます。"
+
+#: metaform.php:360
+msgid "Image"
+msgstr "画像"
+
+#: metaform.php:361
+msgid "Delete attached image"
+msgstr "画像を削除"
+
+#: metaform.php:362
+msgid "Image location setting"
+msgstr "画像配置設定"
+
+#: metaform.php:363
+msgid "Locate image at"
+msgstr "画像をこの要素の"
+
+#: metaform.php:365
+msgid "Before"
+msgstr "前"
+
+#: metaform.php:366
+msgid "After"
+msgstr "後"
+
+#: metaform.php:367
+msgid "Background"
+msgstr "背景"
+
+#: metaform.php:369
+msgid "of this item"
+msgstr "へ配置"
+
+#: metaform.php:373
+msgid "Use original geometry of the image"
+msgstr "画像の元のサイズを使用"
+
+#: metaform.php:374
+msgid "Auto Geometry"
+msgstr "自動サイズ"
+
+#: metaform.php:377
+msgid "Specify geometry of displayed image"
+msgstr "画像の表示サイズを指定"
+
+#: metaform.php:379
+msgid "Opacity"
+msgstr "透明度"
+
+#: metaform.php:382
+msgid "Width"
+msgstr "幅"
+
+#: metaform.php:383
+msgid "Height"
+msgstr "高さ"
+
+#: metaform.php:394 metaform.php:395
+msgid "Constraint settings"
+msgstr "依存制約設定"
+
+#: metaform.php:397
+msgid "If checked, this item have to have some value to do submit."
+msgstr "チェックした場合この項目に入力が無いと回答出来ません"
+
+#: metaform.php:397
+msgid "Required?"
+msgstr "必須？"
+
+#: metaform.php:401
+msgid "The appearance of this item will depend on other items."
+msgstr "この項目は他の項目の値で表示が変わります"
+
+#: metaform.php:463
+msgid "Answers view"
+msgstr "回答"
+
+#: metaform.php:472
+msgid "Summary"
+msgstr "集計"
+
+#: metaform.php:473
+msgid "List"
+msgstr "回答リスト"
+
+#: miscview.php:17 questionnaire.php:239
+msgid "Dismiss"
+msgstr "閉じる"
+
+#: notification.php:114
+msgid "New answer on your questionnaire \"%s\""
+msgstr "アンケート “%s” に新しい回答がありました。"
+
+#. translators: 1: comment author, 2: author IP, 3: author domain
+#: notification.php:116
+msgid "Author: %1$s (IP: %2$s, %3$s)"
+msgstr "作成者: %1$s (IP: %2$s, %3$s)"
+
+#: notification.php:117
+msgid "E-mail: %s"
+msgstr "メールアドレス: %s"
+
+#: notification.php:118
+msgid "URL: %s"
+msgstr ""
+
+#: notification.php:119
+msgid "Whois: %s"
+msgstr ""
+
+#: notification.php:120
+msgid "Answer: %s"
+msgstr "回答: %s"
+
+#: notification.php:140
+msgid "[%1$s] Answer: \"%2$s\""
+msgstr "[%1$s] “%2$s” への回答: "
+
+#: questionnaire.php:88 questionnaire.php:89 questionnaire.php:99
+msgid "Questionnaire"
+msgstr "アンケート"
+
+#: questionnaire.php:90
+msgid "Add New"
+msgstr "新規追加"
+
+#: questionnaire.php:91
+msgid "Add New Questionnaire"
+msgstr "新規アンケート追加"
+
+#: questionnaire.php:92
+msgid "Edit Questionnaire"
+msgstr "アンケートの編集"
+
+#: questionnaire.php:93
+msgid "New Questionnaire"
+msgstr "新規アンケート"
+
+#: questionnaire.php:94
+msgid "View Questionnaire"
+msgstr "アンケートを見る"
+
+#: questionnaire.php:95
+msgid "Search Questionnaire"
+msgstr "アンケートを検索"
+
+#: questionnaire.php:96
+msgid "No Questionnaire found"
+msgstr "アンケートはありません"
+
+#: questionnaire.php:97
+msgid "No Questionnaire found in trash"
+msgstr "ゴミ箱にアンケートはありません"
+
+#: questionnaire.php:98
+msgid "Parent Questionnaire:"
+msgstr "親アンケート"
+
+#: questionnaire.php:105
+msgid "For Collecting Questionnaires especially for Absent/Present"
+msgstr "アンケート、特に出欠を取るため"
+
+#: questionnaire.php:225
+msgid "Please Answer"
+msgstr "ご回答お願いします"
+
+#: questionnaire.php:227
+msgid "Form Sample"
+msgstr "サンプルフォーム"
+
+#: questionnaire.php:229
+msgid "Show Sample"
+msgstr "サンプルを見る"
+
+#: questionnaire.php:230
+msgid "Successfully Committed!"
+msgstr "回答完了"
+
+#: questionnaire.php:231
+msgid "Server Error!"
+msgstr "サーバーエラー"
+
+#: questionnaire.php:235
+msgid "Please identify yourself"
+msgstr "お名前とメールアドレスが必要です"
+
+#: questionnaire.php:236
+msgid "Current count of Answers: "
+msgstr "回答数"
+
+#: questionnaire.php:241
+msgid "Request returned with error: "
+msgstr "サーバー要求はエラーとなりました"
+
+#: widget.php:51
+msgid "New title"
+msgstr "タイトル"
+
+#: widget.php:60
+msgid ""
+"Be cautious about that only 1 questionnaire form can be displayed on a "
+"screen."
+msgstr ""
+"注意： 一つのブラウザ画面に一つのアンケートフォームしか表示出来ません。"
+
+#: widget.php:61
+msgid ""
+"If your page/post contents contains a questionnaire form, either of "
+"questionnaires on the widget or on the contents will be displayed."
+msgstr ""
+"もしページや投稿にアンケートフォームが含まれている場合、ウィジェットかページ/"
+"投稿のどちらか片方しか表示されません。"
+
+#: widget.php:62
+msgid ""
+"(If your theme calls contents first, the questionnaire on the contents will "
+"be dispalyed, or if your theme calls widgets first, the questionnaire on the "
+"widget will be displayed)"
+msgstr ""
+"(もしご使用のテーマが先に投稿やページを呼び出すならそちらのアンケートが表示さ"
+"れます、そうで無い場合、ウィジェットのアンケートが表示されます）"
+
+#: widget.php:67
+msgid "Title:"
+msgstr "表題："
+
+#: widget.php:75
+msgid "Message:"
+msgstr "メッセージ："
+
+#: widget.php:83
+msgid "ID:"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "questionnaire"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.microgadget-inc.com/labo/wordpress/questionnaire/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Application for collecting questionnaires."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Hiroyoshi Kurohara(Microgadget,inc.)"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.microgadget-inc.com/"
+msgstr ""

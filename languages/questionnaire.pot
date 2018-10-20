@@ -1,0 +1,843 @@
+# Copyright (C) 2016 questionnaire
+# This file is distributed under the same license as the questionnaire package.
+msgid ""
+msgstr ""
+"Project-Id-Version: questionnaire 2.6.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/questionnaire\n"
+"POT-Creation-Date: 2016-02-23 00:09:58+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: actform.php:66
+msgid ""
+"Cookie timeout has expired. Please reload this page and issue answer again."
+msgstr ""
+
+#: actform.php:72 questionnaire.php:242
+msgid "Required field is empty"
+msgstr ""
+
+#: actform.php:89
+msgid "Timeout has already expired."
+msgstr ""
+
+#: actform.php:177
+msgid "You have already answered to this questionnaire."
+msgstr ""
+
+#: actform.php:195 questionnaire.php:238
+msgid "Thank you for answering!"
+msgstr ""
+
+#: actform.php:236 questionnaire.php:243
+msgid "Please specify your name and e-mail address."
+msgstr ""
+
+#: actform.php:238 questionnaire.php:244
+msgid "Please specify your name."
+msgstr ""
+
+#: actform.php:240 questionnaire.php:245
+msgid "Please specify your e-mail address."
+msgstr ""
+
+#: actform.php:246 questionnaire.php:233
+msgid "Your Name"
+msgstr ""
+
+#: actform.php:256 questionnaire.php:234
+msgid "Your EMail Address"
+msgstr ""
+
+#: actform.php:267 questionnaire.php:224
+msgid "Submit"
+msgstr ""
+
+#: actform.php:344
+msgid ""
+"Too early committing answer after you answered before. Please wait for "
+"several minutes."
+msgstr ""
+
+#: answerinfo.php:52
+msgid "Count of Answers: "
+msgstr ""
+
+#: answerinfo.php:53 questionnaire.php:237
+msgid "Delete all answers"
+msgstr ""
+
+#: answerinfo.php:57
+msgid "Are you sure to delete all answer data?"
+msgstr ""
+
+#: answerinfo.php:58
+msgid "OK"
+msgstr ""
+
+#: answerinfo.php:59
+msgid "Cancel"
+msgstr ""
+
+#: answerlist.php:49
+msgid "name"
+msgstr ""
+
+#: answerlist.php:50
+msgid "email"
+msgstr ""
+
+#: answerlist.php:51
+msgid "date"
+msgstr ""
+
+#: answerlist.php:212
+msgid "Download answers as CSV"
+msgstr ""
+
+#: metaform.php:26
+msgid "Questionnaire Sheet"
+msgstr ""
+
+#: metaform.php:92 questionnaire.php:226
+msgid "Form Designer"
+msgstr ""
+
+#: metaform.php:100
+msgid "Edit questionnaire&apos;s form."
+msgstr ""
+
+#: metaform.php:100
+msgid "Edit form entries"
+msgstr ""
+
+#: metaform.php:102 metaform.php:105
+msgid "Add new form item."
+msgstr ""
+
+#: metaform.php:102 metaform.php:105 questionnaire.php:228
+msgid "Add Item"
+msgstr ""
+
+#: metaform.php:108
+msgid "Edit other attributes."
+msgstr ""
+
+#: metaform.php:108
+msgid "Edit attributes"
+msgstr ""
+
+#: metaform.php:112
+msgid ""
+"Check here if you wish to make this questionnaire public, otherwise this "
+"questionnaire will only be seen by the user who has login account of this "
+"site.&#13;"
+msgstr ""
+
+#: metaform.php:113 questionnaire.php:232
+msgid "Is public questionnaire?"
+msgstr ""
+
+#: metaform.php:115
+msgid ""
+"This section specifies how to distinguish each answer.&#13;Combining "
+"multiple item makes distinguishing strict.&#13;Checking e-mail and name "
+"makes display the input box on the questionnaire form.&#13;Leaving all items "
+"unchecked causes that all answers will be regarded as unique."
+msgstr ""
+
+#: metaform.php:116
+msgid "Uniqueness"
+msgstr ""
+
+#: metaform.php:118
+msgid ""
+"Distinguish answers using COOKIE which holds server generated unique key."
+"&#13;The unique key will be generated using IP Address, date & time the "
+"request issued(in seconds), and random number."
+msgstr ""
+
+#: metaform.php:118
+msgid "Use Cookie"
+msgstr ""
+
+#: metaform.php:119
+msgid "These values control the expiration duration of cookie value."
+msgstr ""
+
+#: metaform.php:120
+msgid "Expire time setting"
+msgstr ""
+
+#: metaform.php:124
+msgid "Months"
+msgstr ""
+
+#: metaform.php:125
+msgid "Days"
+msgstr ""
+
+#: metaform.php:126
+msgid "Hours"
+msgstr ""
+
+#: metaform.php:127
+msgid "Mins"
+msgstr ""
+
+#: metaform.php:141
+msgid ""
+"Distinguish answers using name(or nickname).&#13;Checking this item makes "
+"display the Name input box.&#13;To see the effect of this item, you should "
+"logout from wordpress first, then view this page.&#13;The answer with "
+"different name will be regarded as from different visitor."
+msgstr ""
+
+#: metaform.php:141
+msgid "Use user name"
+msgstr ""
+
+#: metaform.php:143
+msgid ""
+"Distinguish answers using e-mail address.&#13;Checking this item makes "
+"display the E-Mail input box on the questionnaire form. &#13;To see the "
+"effect of this item, you should logout from wordpress first, then view this "
+"page.&#13;In general, distinguishing by e-mail address is strict enough.&#13;"
+"The answer with different e-mail address will be regarded as from different "
+"visitor"
+msgstr ""
+
+#: metaform.php:143
+msgid "Use e-mail address"
+msgstr ""
+
+#: metaform.php:145
+msgid ""
+"Distinguish answers using ip address of visitor.&#13;The answer from "
+"different ip-address will be regarded as an answer from different visitor."
+"&#13;In general, this item is combined with browser value."
+msgstr ""
+
+#: metaform.php:145
+msgid "Use ip address"
+msgstr ""
+
+#: metaform.php:147
+msgid ""
+"Distinguish answers using browser(user agent value).&#13;In general, this "
+"item is combined with ip-address value."
+msgstr ""
+
+#: metaform.php:147
+msgid "Use browser name and version"
+msgstr ""
+
+#: metaform.php:151
+msgid ""
+"You can change the type of questionnaire&apos;s visual design from "
+"preconstructed design set."
+msgstr ""
+
+#: metaform.php:151
+msgid "Form Style Type: "
+msgstr ""
+
+#: metaform.php:162
+msgid ""
+"Check here if you wish to apply additional CSS definitions to your "
+"questionnaire form."
+msgstr ""
+
+#: metaform.php:163
+msgid "Specify Additional Styles?"
+msgstr ""
+
+#: metaform.php:165
+msgid "Copy CSS into textarea below from current style type."
+msgstr ""
+
+#: metaform.php:165
+msgid "Copy from current style type CSS"
+msgstr ""
+
+#: metaform.php:168
+msgid ""
+"You can write any CSS definitions here, but for security reason, only styles "
+"for questionnaire form will be dynamically applied on this screen.&#13;(on "
+"actual questionnaire page, all styles will be applied)"
+msgstr ""
+
+#: metaform.php:173
+msgid ""
+"Check here if you wish to receive notification by e-mail.&#13;An e-mail will "
+"be sent to page author when visitor answered to this questionnaire at first "
+"time, next time, when a visitor updates his answer, no notification be made "
+"even if this checkbox is checked."
+msgstr ""
+
+#: metaform.php:174
+msgid "Notify Answer"
+msgstr ""
+
+#: metaform.php:179
+msgid ""
+"Checking this makes the questionnaire form be disappeared after the visitor "
+"answered."
+msgstr ""
+
+#: metaform.php:180
+msgid "Only viewable to visitors who have not answered this questionnaire yet."
+msgstr ""
+
+#: metaform.php:184 metaform.php:204
+msgid "Alternative content"
+msgstr ""
+
+#: metaform.php:186 metaform.php:206
+msgid "You can specify alternative HTML text here."
+msgstr ""
+
+#: metaform.php:189
+msgid ""
+"Checking this enables expiration timeout for questionnaire form.&#13;After "
+"timeout expired, questionnaire form will be disappeared, then alternative "
+"content will be displayed."
+msgstr ""
+
+#: metaform.php:190
+msgid "Disappear after specified timeout expired"
+msgstr ""
+
+#: metaform.php:192
+msgid "These values control the expiration duration of questionnaire form."
+msgstr ""
+
+#: metaform.php:193
+msgid "Timed expire setting"
+msgstr ""
+
+#: metaform.php:196
+msgid "When to expire"
+msgstr ""
+
+#: metaform.php:200
+msgid "(Format: \"yyyy-mm-ddThh:MM\". ex; \"2016-02-28T00:00\")"
+msgstr ""
+
+#: metaform.php:209
+msgid "Settings about Submit action."
+msgstr ""
+
+#: metaform.php:211
+msgid "Settings about \"Submit action\""
+msgstr ""
+
+#: metaform.php:213
+msgid ""
+"What is displayed after submit action succeeded, default is disalog box."
+msgstr ""
+
+#: metaform.php:214
+msgid "Greeting type"
+msgstr ""
+
+#: metaform.php:216 metaform.php:240
+msgid "Default"
+msgstr ""
+
+#: metaform.php:217 metaform.php:241 metaform.php:403
+msgid "None"
+msgstr ""
+
+#: metaform.php:218
+msgid "Hide"
+msgstr ""
+
+#: metaform.php:219
+msgid "Dialog box"
+msgstr ""
+
+#: metaform.php:220
+msgid "Blink"
+msgstr ""
+
+#: metaform.php:221
+msgid "Page transit or Dialogbox"
+msgstr ""
+
+#: metaform.php:222
+msgid "Page transit or Hide"
+msgstr ""
+
+#: metaform.php:225
+msgid ""
+"Alternative contents which will be displayed after questionaire form is "
+"hidden.&#13;Please specify some HTML if you need to show something."
+msgstr ""
+
+#: metaform.php:226
+msgid "Alternative content after hidden"
+msgstr ""
+
+#: metaform.php:228
+msgid ""
+"Check this if you want to keep the size of questionnaire area after this "
+"questionnaire is hidden."
+msgstr ""
+
+#: metaform.php:228
+msgid "Keep area size"
+msgstr ""
+
+#: metaform.php:230
+msgid ""
+"Page transition settings.&#13;Questionnaire can make page transition after "
+"visitor answered this questionnaire.&#13;The transition destination can be "
+"selected by the value visitor answered."
+msgstr ""
+
+#: metaform.php:233
+msgid "Alternative text for Submit button."
+msgstr ""
+
+#: metaform.php:233
+msgid "Button text for \"Submit\""
+msgstr ""
+
+#: metaform.php:234
+msgid "The text displayed on the dialog"
+msgstr ""
+
+#: metaform.php:234
+msgid "Greeting text after Submit"
+msgstr ""
+
+#: metaform.php:235
+msgid "Alternative text for Dismiss button."
+msgstr ""
+
+#: metaform.php:235
+msgid "Button text for \"Dismiss\""
+msgstr ""
+
+#: metaform.php:237
+msgid "Dependency setting for Submit button."
+msgstr ""
+
+#: metaform.php:238 metaform.php:401
+msgid "Dependency"
+msgstr ""
+
+#: metaform.php:242
+msgid "Auto submit if on"
+msgstr ""
+
+#: metaform.php:243 metaform.php:404
+msgid "show if on"
+msgstr ""
+
+#: metaform.php:244 metaform.php:405
+msgid "show if off"
+msgstr ""
+
+#: metaform.php:245 metaform.php:406
+msgid "hide if on"
+msgstr ""
+
+#: metaform.php:246 metaform.php:407
+msgid "hide if off"
+msgstr ""
+
+#: metaform.php:247 metaform.php:408
+msgid "enable if on"
+msgstr ""
+
+#: metaform.php:248 metaform.php:409
+msgid "enable if off"
+msgstr ""
+
+#: metaform.php:249 metaform.php:410
+msgid "disable if on"
+msgstr ""
+
+#: metaform.php:250 metaform.php:411
+msgid "disable if off"
+msgstr ""
+
+#: metaform.php:260
+msgid ""
+"Unless pressing this button, questionnaire&apos;s design won&apos;t be saved."
+msgstr ""
+
+#: metaform.php:260 questionnaire.php:240
+msgid "Save"
+msgstr ""
+
+#: metaform.php:261
+msgid "Redraw Form Sample"
+msgstr ""
+
+#: metaform.php:261
+msgid "Redraw"
+msgstr ""
+
+#: metaform.php:266
+msgid ""
+"Shortcode of this questionnaire.&#13;Clicking the text box below will copy "
+"the code into clipboard.&#13;You can paste the shortcode into the other "
+"pages or posts."
+msgstr ""
+
+#: metaform.php:267
+msgid "Shortcode of this questionnaire form "
+msgstr ""
+
+#: metaform.php:274
+msgid "Page transition settings"
+msgstr ""
+
+#: metaform.php:276
+msgid "Default URL"
+msgstr ""
+
+#: metaform.php:277
+msgid "Clicking text area shows link selection dialogue."
+msgstr ""
+
+#: metaform.php:277
+msgid "Click to select the default transition URL"
+msgstr ""
+
+#: metaform.php:278
+msgid "Clear default url"
+msgstr ""
+
+#: metaform.php:281
+msgid "Add conditional transition"
+msgstr ""
+
+#: metaform.php:286
+msgid "Delete"
+msgstr ""
+
+#: metaform.php:290
+msgid "Click to select the transition URL"
+msgstr ""
+
+#: metaform.php:294
+msgid "Click to import answer pattern from sample form."
+msgstr ""
+
+#: metaform.php:307
+msgid "Delete this form item"
+msgstr ""
+
+#: metaform.php:312
+msgid "Move up this form item"
+msgstr ""
+
+#: metaform.php:317
+msgid "Move down this form item"
+msgstr ""
+
+#: metaform.php:324
+msgid "This item will become a question text(subject) of the questionnaire."
+msgstr ""
+
+#: metaform.php:324
+msgid "Label"
+msgstr ""
+
+#: metaform.php:329
+msgid "This item will become a free text input area for your questionnaire."
+msgstr ""
+
+#: metaform.php:329
+msgid "Message"
+msgstr ""
+
+#: metaform.php:334
+msgid ""
+"This item will become a option item of a dropdown of the questionnaire, a "
+"dropdown wrapping this item will be created automatically."
+msgstr ""
+
+#: metaform.php:334
+msgid "Option"
+msgstr ""
+
+#: metaform.php:339
+msgid "This item will become a radio button of the questionnaire."
+msgstr ""
+
+#: metaform.php:339
+msgid "Radio"
+msgstr ""
+
+#: metaform.php:344
+msgid "This item will become a checkbox of the questionnaire."
+msgstr ""
+
+#: metaform.php:344
+msgid "Check"
+msgstr ""
+
+#: metaform.php:358
+msgid "Image settings"
+msgstr ""
+
+#: metaform.php:360
+msgid "Clicking here shows media dialogue."
+msgstr ""
+
+#: metaform.php:360
+msgid "Image"
+msgstr ""
+
+#: metaform.php:361
+msgid "Delete attached image"
+msgstr ""
+
+#: metaform.php:362
+msgid "Image location setting"
+msgstr ""
+
+#: metaform.php:363
+msgid "Locate image at"
+msgstr ""
+
+#: metaform.php:365
+msgid "Before"
+msgstr ""
+
+#: metaform.php:366
+msgid "After"
+msgstr ""
+
+#: metaform.php:367
+msgid "Background"
+msgstr ""
+
+#: metaform.php:369
+msgid "of this item"
+msgstr ""
+
+#: metaform.php:373
+msgid "Use original geometry of the image"
+msgstr ""
+
+#: metaform.php:374
+msgid "Auto Geometry"
+msgstr ""
+
+#: metaform.php:377
+msgid "Specify geometry of displayed image"
+msgstr ""
+
+#: metaform.php:379
+msgid "Opacity"
+msgstr ""
+
+#: metaform.php:382
+msgid "Width"
+msgstr ""
+
+#: metaform.php:383
+msgid "Height"
+msgstr ""
+
+#: metaform.php:394 metaform.php:395
+msgid "Constraint settings"
+msgstr ""
+
+#: metaform.php:397
+msgid "If checked, this item have to have some value to do submit."
+msgstr ""
+
+#: metaform.php:397
+msgid "Required?"
+msgstr ""
+
+#: metaform.php:401
+msgid "The appearance of this item will depend on other items."
+msgstr ""
+
+#: metaform.php:463
+msgid "Answers view"
+msgstr ""
+
+#: metaform.php:472
+msgid "Summary"
+msgstr ""
+
+#: metaform.php:473
+msgid "List"
+msgstr ""
+
+#: miscview.php:17 questionnaire.php:239
+msgid "Dismiss"
+msgstr ""
+
+#: notification.php:114
+msgid "New answer on your questionnaire \"%s\""
+msgstr ""
+
+#. translators: 1: comment author, 2: author IP, 3: author domain
+#: notification.php:116
+msgid "Author: %1$s (IP: %2$s, %3$s)"
+msgstr ""
+
+#: notification.php:117
+msgid "E-mail: %s"
+msgstr ""
+
+#: notification.php:118
+msgid "URL: %s"
+msgstr ""
+
+#: notification.php:119
+msgid "Whois: %s"
+msgstr ""
+
+#: notification.php:120
+msgid "Answer: %s"
+msgstr ""
+
+#: notification.php:140
+msgid "[%1$s] Answer: \"%2$s\""
+msgstr ""
+
+#: questionnaire.php:88 questionnaire.php:89 questionnaire.php:99
+msgid "Questionnaire"
+msgstr ""
+
+#: questionnaire.php:90
+msgid "Add New"
+msgstr ""
+
+#: questionnaire.php:91
+msgid "Add New Questionnaire"
+msgstr ""
+
+#: questionnaire.php:92
+msgid "Edit Questionnaire"
+msgstr ""
+
+#: questionnaire.php:93
+msgid "New Questionnaire"
+msgstr ""
+
+#: questionnaire.php:94
+msgid "View Questionnaire"
+msgstr ""
+
+#: questionnaire.php:95
+msgid "Search Questionnaire"
+msgstr ""
+
+#: questionnaire.php:96
+msgid "No Questionnaire found"
+msgstr ""
+
+#: questionnaire.php:97
+msgid "No Questionnaire found in trash"
+msgstr ""
+
+#: questionnaire.php:98
+msgid "Parent Questionnaire:"
+msgstr ""
+
+#: questionnaire.php:105
+msgid "For Collecting Questionnaires especially for Absent/Present"
+msgstr ""
+
+#: questionnaire.php:225
+msgid "Please Answer"
+msgstr ""
+
+#: questionnaire.php:227
+msgid "Form Sample"
+msgstr ""
+
+#: questionnaire.php:229
+msgid "Show Sample"
+msgstr ""
+
+#: questionnaire.php:230
+msgid "Successfully Committed!"
+msgstr ""
+
+#: questionnaire.php:231
+msgid "Server Error!"
+msgstr ""
+
+#: questionnaire.php:235
+msgid "Please identify yourself"
+msgstr ""
+
+#: questionnaire.php:236
+msgid "Current count of Answers: "
+msgstr ""
+
+#: questionnaire.php:241
+msgid "Request returned with error: "
+msgstr ""
+
+#: widget.php:51
+msgid "New title"
+msgstr ""
+
+#: widget.php:60
+msgid ""
+"Be cautious about that only 1 questionnaire form can be displayed on a "
+"screen."
+msgstr ""
+
+#: widget.php:61
+msgid ""
+"If your page/post contents contains a questionnaire form, either of "
+"questionnaires on the widget or on the contents will be displayed."
+msgstr ""
+
+#: widget.php:62
+msgid ""
+"(If your theme calls contents first, the questionnaire on the contents will "
+"be dispalyed, or if your theme calls widgets first, the questionnaire on the "
+"widget will be displayed)"
+msgstr ""
+
+#: widget.php:67
+msgid "Title:"
+msgstr ""
+
+#: widget.php:75
+msgid "Message:"
+msgstr ""
+
+#: widget.php:83
+msgid "ID:"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "questionnaire"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.microgadget-inc.com/labo/wordpress/questionnaire/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Application for collecting questionnaires."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Hiroyoshi Kurohara(Microgadget,inc.)"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.microgadget-inc.com/"
+msgstr ""

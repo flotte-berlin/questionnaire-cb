@@ -1,0 +1,1236 @@
+/*
+ */
+@font-face {
+    font-family: 'icomoon';
+    src:url('icomoon/fonts/icomoon.eot?-x0bmjb');
+    src:url('icomoon/fonts/icomoon.eot?#iefix-x0bmjb') format('embedded-opentype'),
+    url('icomoon/fonts/icomoon.ttf?-x0bmjb') format('truetype'),
+    url('icomoon/fonts/icomoon.woff?-x0bmjb') format('woff'),
+    url('icomoon/fonts/icomoon.svg?-x0bmjb#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* start for test env (comment me out later) */
+/*
+div.main-content {
+    overflow: hidden;
+    width: 100%;
+}
+
+div.main-content:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+div.sidebar {
+    float: left;
+    display:inline;
+    border:solid;
+}
+div.content {
+    display: inline;
+    float:left;
+    width: 600px;
+    border:solid;
+}
+div.rightbar {
+    border:solid;
+    display:inline;
+    float:left;
+}
+div.clear {
+    clear: both;
+}
+*/
+/* end for test env */
+
+.qstnr-modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1005;
+    background-color: #000;
+    opacity: 0.5;
+}
+/****************************************************
+ * meta form styles                                 *
+ ****************************************************/
+.qstnr-propsheet, #qstnr-answerinfo, .qstnr-resultsheet {
+    margin: 10px 10px;
+}
+.qstnr-propsheet, .qstnr-resultsheet, .qstnr-answersheet-sample {
+    padding-left: 3px;
+    padding-right: 3px;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+.qstnr-propsheet button, .qstnr-propsheet span {
+    line-height: 1.2em;
+}
+.qstnr-propsheet button:active {
+    border: 2px inset buttonface;
+}
+
+.qstnr-form-meta-ident {
+    display: inline;
+    color: green;
+    vertical-align: middle;
+}
+
+.qstnr-additem {
+    margin: 10px 0;
+}
+
+.qstnr-propsheet-title {
+    margin: 0.5em 0 0.5em 0;
+    border-bottom: 1px solid #E0E0E0;
+}
+#qstnr-formmeta {
+    padding-bottom: 10px;
+    padding-left: 5px;
+}
+.formmeta-errorview, .answerinfo-errorview, .formmeta-panelview {
+    position:relative;
+}
+.formmeta-errorview-msgbox, #qstnr-answerinfo-errormsg {
+    display:none;
+    text-align: center;
+    vertical-align: center;
+    position: absolute;
+    color: red;
+    z-index: 65536;
+    left: 0;
+    top: 0;
+    opacity: 0.8;
+    background-color: gray;
+    width: 100%;
+    height: 100%;
+}
+.qstnr-info-display {
+    margin: 5px 3em 0 0;
+    padding: 3px;
+    border: dotted 1px #707070;
+    border-radius: 3px;
+    
+}
+.qstnr-info-display * {
+    font-size: 12px;
+}
+.qstnr-info-display input[type=text] {
+    width: 100%;
+}
+/*
+ toggle switch for edit-formmeta
+*/
+#qstnr-edit-formmeta-toggle {
+    display:none;
+}
+#qstnr-edit-formmeta-toggle + label span:after {
+    font-family: 'icomoon';
+    font-style: normal;
+    padding-right: 6px;
+    content: "\f05a";
+}
+#qstnr-edit-formmeta-toggle:checked + label span:after {
+    padding-right: 0px;
+    content: "\f05b";
+}
+#qstnr-edit-formmeta-toggle ~ div.qstnr-formmeta-metaedit {
+    max-height: 0px;
+}
+
+#qstnr-edit-formmeta-toggle:checked ~ div.qstnr-formmeta-metaedit {
+    max-height: 10000px;
+}
+/* end of toggle switch */
+
+/*
+ edit-formmeta div
+*/
+.qstnr-formmeta-metaedit, .qstnr-form-meta-othersettings {
+    background-color: aliceblue;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 5px;
+}
+
+.qstnr-formmeta-metaedit {
+    margin: 0 0 5px 15px;
+    overflow:hidden;
+    transition-property: max-height;
+    transition-duration: 0.2s;
+}
+
+/*
+ toggle switch for edit-detail
+*/
+#qstnr-edit-detail-toggle {
+    display:none;
+}
+#qstnr-edit-detail-toggle + label span:after {
+    font-family: 'icomoon';
+    font-style: normal;
+    padding-right: 6px;
+    content: "\f05a";
+}
+
+#qstnr-edit-detail-toggle:checked + label span:after {
+    padding-right: 0px;
+    content: "\f05b";
+}
+#qstnr-edit-detail-toggle ~ div.qstnr-form-meta-othersettings {
+    max-height: 0px;
+}
+
+#qstnr-edit-detail-toggle:checked ~ div.qstnr-form-meta-othersettings {
+    max-height: 4000px;
+}
+/* end of toggle switch */
+
+div.qstnr-form-meta-othersettings {
+    margin-left: 15px;
+    overflow:hidden;
+    transition-property: max-height;
+    transition-duration: 0.2s;
+}
+.qstnr-form-meta-othersettings * {
+    padding: 5px;
+}
+.qstnr-form-meta-othersettings div label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#qstnr-unique-cookie:checked ~ .qstnr-cookie-settings, #qstnr-disappear-after-timeout:checked ~ .qstnr-form-expired-settings, #qstnr-disappear-after-answer:checked ~ .qstnr-after-answered-info-input, #qstnr-specify-action-property:checked ~ .qstnr-specify-action-property {
+    max-height: 4000px;
+    border: dotted 1px #FFFFFF;
+    color: #444;
+    margin: 0px 20px 20px 20px;
+}
+.qstnr-optional-input-area {
+    overflow:hidden;
+    transition-property: max-height, color, margin;
+    transition-duration: 0.2s;
+    margin: 0px 20px 0px 20px;
+    border: dotted 0px #FFFFFF;
+    max-height: 0;
+    padding: 0px 5px 5px 5px;
+    color: #E0E0E0;
+    background-color: #E0E0E0;
+}
+.qstnr-optional-input-area-visible {
+    max-height: 4000px;
+    border: dotted 1px #FFFFFF;
+    color: #444;
+    margin: 0px 20px 20px 20px;
+}
+.qstnr-optional-input-area table input {
+    width: 5em;
+}
+
+.qstnr-form-meta-othersettings > div {
+    border-bottom-style: double;
+    border-bottom-width: 3px;
+    border-bottom-color: darkgray;
+    margin-bottom: 5px;
+}
+.qstnr-public-uniqueness {
+    max-height: 0;
+    overflow:hidden;
+    transition-property: max-height;
+    transition-duration: 0.2s;
+    background-color: #E0E0E0;
+}
+input#qstnr-ispublic:checked ~ .qstnr-public-uniqueness {
+    max-height: 1000px;
+}
+.qstnr-public-uniqueness input {
+    display: inline-block;
+}
+
+.qstnr-form-meta-othersettings textarea {
+    width: calc(100% - 20px);
+    height: 100px;
+    resize: vertical;
+    display: block;
+    clear: both;
+}
+.qstnr-form-meta-othersettings textarea:disabled {
+    height: 100px;
+    color: gray;
+    background-color: gainsboro;
+    resize:none;
+}
+    
+.qstnr-form-meta-fss {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.qstnr-form-meta-fss > label {
+    margin-left: 0px;
+}
+.qstnr-form-meta-fss > textarea {
+    margin-left: 15px;
+}
+.qstnr-form-meta-fss > button {
+    display: block;
+    margin-left: 15px;
+}
+.qstnr-propsheet button {
+    border: 2px outset buttonface;
+    padding:4px;
+    border-radius: 3px;
+    background-color: white;
+}
+.qstnr-form-meta-itemlist button {
+    display: inline-block;
+}
+.qstnr-propsheet select {
+    border: 1px outset buttonface;
+    padding: 4px;
+    border-radius: 3px;
+    background-color: white;
+    vertical-align: top;
+}
+
+/*
+.qstnr-form-meta-item {
+    display:table;
+    width:100%;
+    padding: 3px;
+}
+.qstnr-form-meta-item input, .qstnr-form-meta-item select, .qstnr-form-meta-item textarea {
+    display: inline-block;
+    vertical-align: middle;
+}
+*/
+td.qstnr-auto-align {
+    max-width: 100%;
+    white-space:nowrap;
+    width: 1%;
+}
+td.qstnr-right-align {
+    text-align: right;
+}
+td.qstnr-justify-align {
+    text-align: justify;
+}
+td.qstnr-left-align {
+    text-align: left;
+}
+.qstnr-form-meta-itemlist {
+    width: 100%;
+}
+.qstnr-form-meta-itemlist table {
+    width: 100%;
+}
+.qstnr-form-meta-itemlist table tr {
+    width: 100%;
+    text-align: justify-all;
+}
+.qstnr-form-meta-itemlist table tr td button, .qstnr-form-meta-itemlist table tr td select, .qstnr-form-meta-itemlist table tr td textarea {
+    display:inline;
+    vertical-align: middle;
+}
+.qstnr-form-meta-itemlist table tr td textarea.qstnr-nametext {
+    width: 100%;
+    resize:none;
+    padding:1px;
+    height: 2em;
+    transition-property: height;
+    transition-duration: 0.2s;
+}
+.qstnr-form-meta-itemlist table tr td textarea.qstnr-nametext:focus {
+    height: 5em;
+}
+.qstnr-form-meta-itemlist table tr td textarea.qstnr-nametext-narrow {
+    width: calc(100% - 4em - 6px);
+}
+.qstnr-form-meta-itemlist table tr td textarea.qstnr-nametext-narrow:focus {
+    width: 100%;
+    height: 5em;
+}
+.qstnr-form-meta-itemlist table tr td input[type=number].qstnr-meta-rowcount {
+    width: 4em;
+}
+.qstnr-form-meta-itemlist table tr td input[type=number].qstnr-meta-maxnumber {
+    width: calc(50% - 4px);
+}
+.qstnr-form-meta-itemlist table tr td input[type=number].qstnr-meta-minnumber {
+    width: calc(50% - 4px);
+}
+div.qstnr-meta-valuearea {
+    text-align: left;
+}
+label.qstnr-checkarea * {
+    font-size: 10px;
+}
+label.qstnr-checkarea input[type=checkbox] {
+    display:none;
+}
+label.qstnr-checkarea input[type=checkbox] ~ span {
+    border: aliceblue 2px solid;
+    border-radius: 5px;
+}
+label.qstnr-checkarea input[type=checkbox]:checked ~ span {
+    border: silver 2px inset;
+    background-color: turquoise;
+}
+div.qstnr-form-meta-ident {
+    font-size: 10px;
+}
+tr.qstnr-form-meta-item-props-record td,tr.qstnr-form-meta-item-props-record div  {
+    margin:0;
+    padding:0;
+}
+input.qstnr-item-year-range {
+    width: 2em;
+}
+input.qstnr-item-year-range:focus {
+    width: 5em;
+}
+/* */
+.qstnr-form-meta-greeting-type span, .qstnr-form-meta-constraint-dependency span {
+    display: inline-block;
+}
+.qstnr-form-meta-greeting-type select, .qstnr-form-meta-constraint-dependency select {
+    display: inline-block;
+}
+.qstnr-form-meta-answer-action-setting input[type=text] {
+    width: 100%;
+}
+.qstnr-form-meta-answer-action-setting table {
+    width: 100%;
+}
+/* */
+.qstnr-deletebtn {
+    display:inline-block;
+}
+
+.qstnr-upbtn {
+    display:inline-block;
+}
+
+.qstnr-downbtn {
+    display:inline-block;
+}
+
+.qstnr-itemtypesel {
+    display:table-cell;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.qstnr-nametext {
+}
+
+.qstnr-nametext:focus {
+    height:7em;
+    vertical-align:top;
+}
+
+.qstnr-nametext-editing {
+    height:auto;
+    resize:vertical;
+}
+
+#qstnr-answerinfo {
+    position: relative;
+}
+#qstnr-answerinfo .qstnr-confirm-dialog {
+    position: absolute;
+    background-color: white;
+    z-index:1024;
+    border-style: solid;
+    padding: 10px;
+    text-height: 2em;
+}
+
+label.qstnr-item-props-label {
+    display: inline-block;
+    margin: 0;
+    vertical-align: center;
+}
+input.qstnr-item-props {
+    display:none;
+}
+.qstnr-item-props + span:before {
+    content: "\f05e";
+    font-family: 'icomoon';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 16px;
+    padding: 4px 2px 4px 2px;
+    vertical-align: middle;
+}
+.qstnr-item-props:checked + span:before {
+    color:green;
+}
+.qstnr-item-props:disabled + span:before {
+    color:#E0E0E0;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props {
+    margin: 3px 10px 3px 10px;
+    padding: 3px;
+    border: solid 1px;
+    background-color: #E0E0E0;
+}
+
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props input,
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props button,
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props select {
+    display: inline;
+    padding: 2px;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props option {
+    margin: 0 3px 0 3px;
+    padding:0;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props * {
+    font-size: 8pt;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props fieldset {
+    border: groove 2px;
+    padding: 6px;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props input[type=number] {
+    width: 6em;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props div.qstnr-meta-props-image-and-pos * {
+    vertical-align: middle;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props div.qstnr-meta-constraint-dependency * {
+    vertical-align: middle;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props label.qstnr-label-check span, 
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props label.qstnr-label-check input {
+    vertical-align: middle;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props div.qstnr-meta-props-image-params {
+    margin: 3px;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props div.qstnr-meta-props-image-params * {
+    vertical-align: middle;
+}
+tr.qstnr-form-meta-item-props-record td .qstnr-form-meta-item-props div.qstnr-meta-props-image-params span {
+    border-bottom: 1px solid;
+    margin: 2px 3px 2px 10px;
+    padding: 8px;
+}
+.qstnr-meta-item-delete:after {
+    font-family: 'icomoon';
+    content: "\ea0f";
+}
+/*transit setting area */
+#qstnr-form-meta-transit-settings td {
+    padding: 0;
+}
+#qstnr-form-meta-transit-settings label {
+    padding: 0;
+}
+#qstnr-form-meta-transit-settings tr {
+    border: dotted 1px;
+    border-radius: 5px;
+}
+
+#qstnr-form-meta-transit-settings span {
+    text-align: center;
+    display:table-cell;
+    vertical-align: middle;
+    width: auto;
+}
+#qstnr-form-meta-transit-settings div {
+    display:table;
+    padding: 0;
+    width: 100%;
+}
+#qstnr-form-meta-transit-settings input[type=text] {
+    display: table-cell;
+    width: 100%;
+}
+.qstnr-form-meta-transit-item {
+    border: dotted 1px white;
+    border-radius: 5px;
+    margin: 3px 5px 3px 3px;
+}
+
+/* shortcode display */
+input[name=qstnr-shortcode-select] {
+    display:none;
+}
+label.qstnr-shortcode-select {
+    padding: 3px;
+    border: 2px outset gray;
+    margin-bottom: 3px;
+    border-radius: 3px;
+}
+label.qstnr-shortcode-selected {
+    display: none;
+}
+input[name=qstnr-shortcode] {
+    display: none;
+}
+/* */
+label[for=qstnr-shortcode-select-form] span:before {
+    font-family: 'icomoon';
+    font-size: 12pt;
+    content: "\e9b8";
+}
+label[for=qstnr-shortcode-select-meta] span:before {
+    font-family: 'icomoon';
+    font-size: 12pt;
+    content: "\f011";
+}
+label[for=qstnr-shortcode-select-summary] span:before {
+    font-family: 'icomoon';
+    font-size: 12pt;
+    content: "\e99a";
+}
+
+input[name=qstnr-shortcode-select]:checked + label {
+    border: 2px inset gray;
+    background-color: #EEEEEE;
+}
+
+input#qstnr-shortcode-select-form:checked ~ label[for=qstnr-form-shortcode] {
+    display: inline;
+}
+input#qstnr-shortcode-select-form:checked ~ input#qstnr-form-shortcode {
+    display: inline;
+}
+
+input#qstnr-shortcode-select-meta:checked ~ label[for=qstnr-meta-shortcode] {
+    display: inline;
+}
+input#qstnr-shortcode-select-meta:checked ~ input#qstnr-meta-shortcode {
+    display: inline;
+}
+
+input#qstnr-shortcode-select-summary:checked ~ label[for=qstnr-summary-shortcode] {
+    display: inline;
+}
+input#qstnr-shortcode-select-summary:checked ~ input#qstnr-summary-shortcode {
+    display: inline;
+}
+
+/****************************************************
+ * questionnaire form styles                        *
+ ****************************************************/
+.qstnr-answersheet-sample {
+    background-color: #FFFFFF;
+    margin: 3px;
+    padding: 7px;
+    z-index: 1020;
+}
+.qstnr-answersheet {
+    margin: 10px 10px;
+    padding-bottom: 10px;
+    z-index: 1020;
+}
+
+.qstnr-answersheet-title {
+    padding: 10px;
+}
+
+label.qstnr-metaparam {
+    display: block;
+}
+
+button.qstnr-additem {
+    display: block;
+}
+.qstnr-meta-actionbutton {
+    display: inline-block;
+}
+.qstnr-qstlist {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 10px 0 10px 0;
+}
+
+.qstnr-qid {
+    display: none;
+}
+
+.questitem fieldset label {
+    display: inline;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    padding: 0.1em 0 0.1em 0;
+    vertical-align: middle;
+}
+.questitem fieldset div {
+}
+.questitem fieldset input[type=radio], .questitem fieldset input[type=checkbox], .questitem fieldset select, .questitem fieldset textarea {
+    margin: 0.3em 0.5em 0.3em 0;
+    padding: 0;
+}
+textarea.qstnr-message {
+    width: 80%;
+    margin-left: 0;
+}
+
+.questitem fieldset input[type=radio], .questitem fieldset input[type=checkbox] {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+}
+.questitem textarea {
+    resize: vertical;
+}
+.questitem {
+    padding: 10px;
+}
+.questitem fieldset {
+    border: none;
+}
+.questitem fieldset > div {
+    display: block;
+    position: relative;
+}
+.questitem fieldset > div > input {
+    display: inline-block;
+    position: relative;
+}
+.questitem fieldset > div > label {
+    display: inline-block;
+    position: relative;
+    width: calc( 100% - 3em );
+}
+.questitem fieldset > div > label > * {
+    display: block;
+}
+.questitem img.align-center {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.questitem img.align-right {
+    display: block;
+    float: right;
+    margin-right: 1em;
+}
+.questitem .qstnr-radio {
+    width: 100%;
+}
+.qstnr-item-disabled {
+    color: gray;
+    opacity: 0.5;
+}
+.questitem fieldset legend {
+    width: auto;
+    white-space: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: break-word;
+    display: table;
+}
+.questitem textarea {
+    resize: vertical;
+    height: 5em;
+}
+.questitem textarea[rows] {
+    height: auto;
+}
+.questitem label > span:hover {
+    cursor: pointer;
+    cursor: hand;
+}
+.questitem div.qstnr-datetime {
+    text-align:bottom;
+}
+.questitem .qstnr-hour, .questitem .qstnr-min, .questitem .qstnr-sec {
+    display: inline;
+}
+.questitem .qstnr-timeinput {
+    display: inline-block;
+}
+.questitem .qstnr-dateinput {
+    display:inline-block;
+}
+.questitem .qstnr-dateinput input.qstnr-date {
+    display:inline-block;
+    max-width: 100%;
+    width: 12em;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.questitem select.qstnr-hour, .questitem select.qstnr-min, .questitem select.qstnr-sec {
+    margin: 1px;
+}
+.questitem select {
+}
+.questitem table {
+    width: auto;
+    max-width: 100%;
+    border: none;
+    margin-bottom: 0;
+}
+.questitem table td {
+    border:none;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.questitem table th {
+    border: none;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+/*
+ START SELECTABLE STYLE LIST
+ */
+/* QUESTIONNAIRE SELECTABLE STYLE: 1
+ */
+/* qbody-1 */
+.qstnr-qbody-1 textarea {
+    width: 100%;
+}
+.qstnr-qbody-1 fieldset {
+    padding: 0px;
+    margin: 0px;
+}
+
+.qstnr-qbody-1 .qstnr-qdivtitle {
+    display:block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: dotted 1px;
+}
+.qstnr-qbody-1 .questitem {
+    margin-bottom: 20px;
+    background-color: #E0E0E0;
+    padding: 15px;
+}
+.qstnr-qbody-1 fieldset legend {
+    display:none;
+}
+.qstnr-qbody-1 fieldset select, .qstnr-qbody-1 fieldset textarea {
+    display: block;
+/*    margin-left: 1em; */
+}
+.qstnr-qbody-1 fieldset input {
+    margin-right: 0.5em;
+}
+.qstnr-qbody-1 fieldset input, .qstnr-qbody-1 fieldset label {
+/*    margin-bottom: 0.5em; */
+}
+/* END OF SELECTABLE STYLE: 1 */
+
+/* QUESTIONNAIRE SELECTABLE STYLE: 2
+ */
+/* qbody-2 */
+.qstnr-qbody-2 .questitem {
+    margin: 0px 0px;
+    padding: 10px;
+    display: table;
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px groove threedface;
+    margin-bottom: 1em;
+}
+
+.qstnr-qbody-2 {
+    display:block;
+}
+
+.qstnr-qbody-2 fieldset legend {
+    display:none;
+}
+
+.qstnr-qbody-2 .qstnr-qdivtitle {
+    width: 40%;
+    box-sizing: border-box;
+    padding:0 5px 0 5px;
+    display: table-cell;
+    margin-left: 10px;
+    vertical-align: top;
+}
+
+.qstnr-qbody-2 fieldset {
+    width: 100%;
+    box-sizing: border-box;
+    display: table-cell;
+}
+
+.qstnr-qbody-2 fieldset textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+.qstnr-qbody-2 fieldset label:after {
+    content: " ";
+    display:block;
+}
+.qstnr-qbody-2 fieldset select, .qstnr-qbody-2 fieldset textarea {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.qstnr-qbody-2 fieldset input {
+    margin-right: 1em;
+}
+/* END OF SELECTABLE STYLE: 2 */
+
+/* QUESTIONNAIRE SELECTABLE STYLE: 3
+ */
+/* qbody-3 */
+.qstnr-qbody-3 .qstnr-qdivtitle {
+    display: none;
+}
+.qstnr-qbody-3 fieldset legend {
+    display:inline;
+    padding: 0 0.5em 0 0.5em;
+}
+.qstnr-qbody-3 fieldset {
+    border: groove;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+.qstnr-qbody-3 fieldset input, .qstnr-qbody-3 fieldset input {
+    margin-left: 0;
+    margin-bottom: 0;
+    text-align: left;
+}
+.qstnr-qbody-3 .questitem {
+    text-height: 1.5em;
+    border: none;
+}
+.qstnr-qbody-3 .questitem .qstnr-qid {
+    display: none;
+}
+.qstnr-qbody-3 .questitem label {
+    margin-right: 5px;
+}
+/* END OF SELECTABLE STYLE: 3 */
+
+/* QUESTIONNAIRE SELECTABLE STYLE: 4
+ */
+/* qbody-4 */
+.qstnr-qbody-4 fieldset > div {
+    display:inline-block;
+    margin-right: 2em;
+}
+.qstnr-qbody-4 fieldset > div.qstnr-textarea {
+    display: block;
+}
+.qstnr-qbody-4 fieldset {
+    border: none;
+    border-radius: 5px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.qstnr-qbody-4 .qstnr-qdivtitle {
+    display:block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.qstnr-qbody-4 .questitem {
+    margin-bottom: 20px;
+    background-color: #E0E0E0;
+    padding: 1em;
+    border-radius: 5px;
+}
+.qstnr-qbody-4 fieldset legend {
+    display:none;
+}
+.qstnr-qbody-4 fieldset select, .qstnr-qbody-4 fieldset textarea {
+    display: block;
+    margin-left: 1em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.qstnr-qbody-4 fieldset input {
+    margin-right: 0.5em;
+}
+.qstnr-qbody-4 .qstnr-radio {
+    width: auto;
+}
+/* END OF SELECTABLE STYLE: 4 */
+
+/* QUESTIONNAIRE SELECTABLE STYLE: 5
+ */
+/* qbody-5 */
+.qstnr-qbody-5 textarea {
+    width: 100%;
+}
+
+.qstnr-qbody-5 input[type=radio] {
+    display:none;
+}
+.qstnr-qbody-5 input[type=radio] + label {
+    padding-left: 10px;
+    border-radius: 0.7em;
+    border: 1px solid;
+    border-color: #F0F0F0;
+    display: block;
+    float: left;
+    width: calc(100% - 20px);
+    text-align: left;
+}
+.qstnr-qbody-5 input[type=radio] + label, .qstnr-qbody-5 input[type=checkbox] + label {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.qstnr-qbody-5 input[type=radio]:checked + label {
+    border: 1px inset;
+    border-color: #9aff5a;
+    /* background-color: #1FA0A0; */
+    background-color: #9aff5a;
+}
+.qstnr-qbody-5 input[type=checkbox] {
+    display:none;
+}
+.qstnr-qbody-5 input[type=checkbox] + label {
+    padding-left: 10px;
+    border-radius: 0.7em;
+    border-style:solid;
+    border: solid 1px;
+    border-color: #F0F0F0;
+    display: block;
+    float: left;
+    width: calc(100% - 20px);
+    text-align: left;
+}
+.qstnr-qbody-5 input[type=checkbox]:checked + label {
+    border: 1px inset;
+    border-color: #9aff5a;
+/*    background-color: #1FA0A0; */
+    background-color: #9aff5a;
+}
+
+.qstnr-qbody-5 fieldset {
+    padding: 0px;
+    margin: 0px;
+}
+
+.qstnr-qbody-5 .qstnr-qdivtitle {
+    display:block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: dotted 1px;
+}
+.qstnr-qbody-5 .questitem {
+    margin-bottom: 20px;
+    background-color: #E0E0E0;
+    padding: 15px;
+}
+.qstnr-qbody-5 fieldset legend {
+    display:none;
+}
+.qstnr-qbody-5 fieldset select, .qstnr-qbody-5 fieldset textarea {
+    display: block;
+    margin-left: 1em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.qstnr-qbody-5 fieldset input {
+    margin-right: 0.5em;
+}
+.qstnr-qbody-5 fieldset input, .qstnr-qbody-5 fieldset label {
+    margin-bottom: 0.5em;
+}
+/* END OF SELECTABLE STYLE: 5 */
+
+/*
+ QUESTIONNAIRE SELECTABLE STYLE: 'TEST-NORMAL'
+ */
+/* To disable selectable style temporarily, quote style name by ' or " like 'TEST-NORMAL' above.
+ */
+/* END OF SELECTABLE STYLE: TEST-NORMAL */
+/*
+ END OF SELECTABLE STYLE LIST
+ */
+/* for answerlist */
+/* for answerlist test */
+.qstnr-answerlist-body textarea {
+    height: 50em;
+    font-family: "osaka";
+    font-size: x-small;
+}
+/* end for test */
+.qstnr-answerlist {
+    overflow-x: scroll;
+}
+table.answers th {
+    background-color: #CCCCCC;
+    font-size: 4pt;
+}
+.qstnr-pagenavi {
+    text-align:center;
+    font-size: 10pt;
+}
+.qstnr-pagenavi span, .qstnr-pagenavi a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.qstnr-pagenavi a {
+    color: blue;
+    text-decoration: none;
+    border-bottom: none;
+}
+.qstnr-pagenavi a:hover {
+    color: orange;
+}
+.qstnr-csv-download {
+    text-align: right;
+}
+td.message {
+    font-size:8pt;
+}
+td.author {
+    font-size:12pt;
+}
+.qstnr-csv-download {
+    font-size:8pt;
+    text-decoration: underline;
+    border-bottom: none;
+}
+/* end for answerlist */
+
+/* for charts */
+.qstnr-summary, .qstnr-answerlist-body {
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.qstnr-chart {
+    max-height: 4096px;
+    min-height:200px;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+}
+/* end for charts */
+
+/* for tab display*/
+.qstnr-tabwindow {
+    position: relative;
+    display:none;
+    z-index: 20;
+}
+.qstnr-tabview {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.qstnr-tabwindow > div {
+    border-radius: 5px;
+    border-top: solid;
+    border-left: solid;
+    border-right: solid;
+    border-bottom: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 2px;
+}
+div.qstnr-tabview > div:first-child > div {
+    border-radius: 0px 5px 5px 5px;
+}
+input.qstnr-tab-switch {
+    display:none;
+}
+.qstnr-tabhandle {
+    display:inline-block;
+    border-top: solid;
+    border-left: solid;
+    border-right: solid;
+    border-bottom: none;
+    border-radius: 5px 5px 0px 0px;
+    border-width: 1px;
+    border-color: black;
+    margin-bottom: -2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: white;
+    z-index: 10;
+    position: relative;
+    color: blue;
+}
+/*
+.qstnr-tab-switch:checked + label { color: gray; border-width: 2px; z-index: 40;}
+.qstnr-tabhandle:checked ~ div {
+    display block;
+}
+ */
+/**
+.qstnr-tab-switch:checked + label {
+    border-width: 2px;
+}
+#qstnr-tab-switch-summary:checked ~ #qstnr-summary {
+    display: block;
+}
+#qstnr-tab-switch-list:checked ~ #qstnr-list {
+    display: block;
+}
+ */
+/* end for tab */
+
+/****************************************************
+ * utility styles                                   *
+ ****************************************************/
+.qstnr-loading {
+    background-image: url("ajax-loader.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.qstnr-waiting {
+    opacity: 0.4;
+}
+
+.qstnr-dialog {
+    opacity: 1.0;
+    z-index: 1024;
+    padding: 15px;
+    border-style: solid;
+    border-color: #BBBBBB;
+    border-width: 2px;
+    border-radius: 2px 2px 2px 2px;
+    background-color: #FFFFFF;
+    display:none;
+    position:absolute;
+}
+/*
+.qstnr-dialog table {
+    border: none:
+    margin: 0 0 0 0;
+    margin-bottom: 0;
+    padding: 0 0 0 0;
+}
+.qstnr-dialog th, .qstnr-dialog td {
+    border: none;
+}
+.qstnr-dialog td {
+    font-size: 24px;
+}
+.qstnr-dialog tr:first-child > td {
+    text-align: center;
+}
+.qstnr-dialog tr:nth-child(2) > td {
+    text-align: right;
+}
+*/
+.qstnr-dialog .qstnr-dialog-message {
+    display: block;
+    font-size: 10pt;
+    text-align: center;
+    clear: right;
+    margin-bottom: 10px;
+}
+.qstnr-dialog .qstnr-dialog-buttons {
+    display: block;
+    text-align: right;
+}
+.qstnr-ackbtn {
+}
+
