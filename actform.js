@@ -258,7 +258,7 @@ jQuery(function($) {
       } else {
 	datetimeval += sec;
       }
-      
+
       this.textchanged(datetimeval);
     },
     clearanswer: function() {
@@ -312,14 +312,15 @@ jQuery(function($) {
   var ActForm = self.Qst.ActForm = Backbone.Model.extend({
     author: "",
     email: "",
-    itemlist: [], 
+    itemlist: [],
     initialize: function(args) {
       this.set('itemlist', []);
-      this.url = qstnr_data.admin_ajax_url + "?" 
+      this.url = qstnr_data.admin_ajax_url + "?"
                   + $.param({
-                      action: "qstnr_questionnaire", 
+                      action: "qstnr_questionnaire",
                       postid: qstnr_data.postid,
-                      nonce: qstnr_data.nonce
+                      nonce: qstnr_data.nonce,
+                      booking: new URL(window.location.href).searchParams.get("booking")
                   }) ;
       // set cookie
       if (qstnr_data.cookie_data_for_js && qstnr_data.cookie_data_for_js.cookie_key) {
@@ -429,7 +430,7 @@ jQuery(function($) {
       this.unique_cookie = metadoc.unique_cookie();
       this.unique_email = (this.unique_cookie || ! this.ispublic) ? false : metadoc.unique_email();
       this.unique_name = (this.unique_cookie || ! this.ispublic) ? false : metadoc.unique_name();
-      // 
+      //
       this.trigger("reset");
     },
     r_validate: function() {
@@ -463,7 +464,7 @@ jQuery(function($) {
   var ActFormItemView = self.Qst.ActFormItemView = Backbone.View.extend({
     tagName: "div",
     className: "questitem",
-    
+
     initialize: function(arg) {
       this.model = arg.model;
       this.index = arg.index;
@@ -659,9 +660,9 @@ jQuery(function($) {
     initialize: function(arg) {
       this.dialogView = new Qst.DialogView({el: $("div.qstnr-answersheet div.qstnr-dialog")});
       this.inprogressView = new Qst.InprogressView({
-                              fg: ".qstnr-actform-bg", 
-                              el: "div.qstnr-answersheet", 
-                              bg: "form#qstnr-actform", 
+                              fg: ".qstnr-actform-bg",
+                              el: "div.qstnr-answersheet",
+                              bg: "form#qstnr-actform",
                               button: "button#qstnr-submit"});
       this.model = arg.model;
       this.nodelist = [];
@@ -697,9 +698,9 @@ jQuery(function($) {
       }
       //
       this.inprogressView = new Qst.InprogressView({
-                              fg: ".qstnr-actform-bg", 
-                              el: "div.qstnr-answersheet", 
-                              bg: "form#qstnr-actform", 
+                              fg: ".qstnr-actform-bg",
+                              el: "div.qstnr-answersheet",
+                              bg: "form#qstnr-actform",
                               button: "button#qstnr-submit"});
       //
       this.$("#qstnr-submit").show();
@@ -793,7 +794,7 @@ jQuery(function($) {
       _.each(views, function(view) {
 	view.model.clearanswer();
       }, this);
-      
+
       this.$el.show();
       this.$el.css('height', '');
       this.$el.css('opacity', '');
@@ -887,7 +888,7 @@ jQuery(function($) {
 	}
 	this.showsubmit(false);
       }.bind(this);
-      
+
       if (bsuccess) {
 	if (! eval(or[0] + '(data)') ) {
 	  if ( eval(or[1][0] + '(data)') ) {
@@ -1031,4 +1032,3 @@ jQuery(function($) {
     ///
   });
 });
-

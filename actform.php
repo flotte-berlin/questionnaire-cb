@@ -15,6 +15,26 @@ function initialize_actform() {
 
 }
 
+function get_user_booking_by_hash($user_id, $booking_hash) {
+  global $wpdb;
+
+  $datetime_today = new \DateTime();
+  $date_today = $datetime_today->format('Y-m-d');
+
+  //get bookings data
+  $table_name = $wpdb->prefix . 'cb_bookings';
+  $select_statement = "SELECT * FROM " . $table_name . " WHERE user_id = %d " .
+                      "AND hash = '%s' ".
+                      "AND date_end < '".$date_today."' ".
+                      "AND status = 'confirmed';";
+
+  $prepared_statement = $wpdb->prepare($select_statement, $user_id, $booking_hash);
+
+  $bookings_result = $wpdb->get_results($prepared_statement);
+
+  return $bookings_result;
+}
+
 function ajax_questionnaire() {
 
   if (! wp_verify_nonce($_GET['nonce'], QUESTIONNAIRE_NONCE . $_GET['postid']) ) {
@@ -81,6 +101,18 @@ function ajax_questionnaire() {
 	}
       }
     }
+    else {
+      $booking = sanitize_text_field( $_GET['booking'] );
+
+      //check if booking is valid (belongs to user)
+      $user_booking_results = get_user_booking_by_hash($userid, $booking);
+
+      if(count($user_booking_results) == 0) {
+        echo json_encode(array('success' => false, 'msg' => 'No booking found.')); //TODO: translate
+        die();
+      }
+
+    }
 
     if ($meta_array['disappear_after_timeout']) {
       $expire_timeout_value = new \DateTime($meta_array['form_expire_datetime']);
@@ -98,6 +130,7 @@ function ajax_questionnaire() {
 	  'userid' => $userid,
 	  'author' => $author,
 	  'email' => $email,
+    'url' => 'http://'.$booking,
 	  'meta' => $meta_array,
 	  'formdata' => $formdata));
   }
@@ -112,6 +145,7 @@ function get_unique_comment_id_from_condition(&$args) {
   $comments_query = array();
   if ($args['userid'] !== 0) {
     $comments_query['user_id'] = $args['userid'];
+    $comments_query['author_url'] = $args['url'];
   } else {
     if ($meta_array['unique_cookie'] === TRUE) {
       $cookie_key = cookie_visitor_key($postid);
@@ -162,7 +196,7 @@ function action_save_answer_comment($args) {
       'comment_post_ID' => $args['postid'],
         'comment_author' => $args['author'],
         'comment_author_email' => $args['email'],
-        'comment_author_url' => '',
+        'comment_author_url' => $args['url'],
         'comment_content' => $args['formdata'],
         'comment_type' => COMMENTTYPE,
         'comment_parent' => 0,
@@ -410,13 +444,18 @@ function get_unique_comment_id($postid, $conditions) {
       case "user_id":
 	$condition .= " and user_id = %d ";
 	array_push($values, $value);
+  break;
+  case "author_url":
+  $condition .= " and comment_author_url = %s ";
+  array_push($values, $value);
 	break;
       default;
 	break;
     }
   }
   $query .= $condition;
-  return $wpdb->get_var($wpdb->prepare($query, $values));
+  $prepared_statement = $wpdb->prepare($query, $values);
+  return $wpdb->get_var($prepared_statement);
 }
 
 function action_flood_comment( $time_lastcomment = 0, $time_newcomment = 0) {

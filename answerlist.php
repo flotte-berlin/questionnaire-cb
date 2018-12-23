@@ -35,7 +35,7 @@ function get_answer_list($postid, $offset, $number) {
 }
 
 /**
- * create header array for csv 
+ * create header array for csv
  */
 function headercsv($metadata) {
   $metadata_obj = json_decode($metadata, true);
@@ -47,7 +47,7 @@ function headercsv($metadata) {
   array_push($header[0], "");
   array_push($header[0], "");
   array_push($header[1], __("name", ns_()));
-  array_push($header[1], __("email", ns_()));
+  array_push($header[1], __("booking hash", ns_()));
   array_push($header[1], __("date", ns_()));
   // header, first row
   foreach ($items as $item) {
@@ -84,7 +84,7 @@ function get_answer_list_csv($postid) {
   $header = headercsv($meta);
 
   $locale = get_locale();
-  
+
   $stdout = fopen("php://output", "w");
   if (preg_match('/^ja.*/', $locale) === 1) {
     $charset = "SJIS"; // "SJIS";
@@ -104,8 +104,8 @@ function get_answer_list_csv($postid) {
     $record_data = json_decode($record->comment_content, true);
     $recarray = array();
     // push personal info
-    array_push($recarray, $record_data['author']);
-    array_push($recarray, $record_data['email']);
+    array_push($recarray, $record->comment_author);
+    array_push($recarray, str_replace('http://', '', $record->comment_author_url));
     array_push($recarray, $record->comment_date);
 
     // convert answer hash to array
@@ -216,4 +216,3 @@ function answerlist($ldata) {
 <?php
   dialogbox($ldata);
 }
-

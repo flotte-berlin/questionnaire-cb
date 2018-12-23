@@ -14,7 +14,7 @@ function initialize_notification() {
   add_ns_filter('comment_notification_text', 'filter_notification_text', 10, 2);
   add_ns_filter('comment_notification_subject', 'filter_notification_subject', 10, 2);
   add_ns_filter('questionnaire_add_inline_style', 'filter_add_inline_style', 10);
-  
+
 //  add_ns_filter('questionnaire_add_inline_style', 'filter_add_inline_style2', 20);
 //  add_ns_filter('comment_notification_recipients', 'filter_recipients');
 //  add_ns_filter('comment_notification_headers', 'filter_notification_headers');
@@ -90,7 +90,7 @@ function filter_notification_text($notify_message, $comment_id = 0) {
     }
 
     $post    = get_post( $comment->comment_post_ID );
-    
+
     $indent = "        ";
     try {
       $translated = "";
@@ -155,6 +155,5 @@ function filter_edit_comment() {
 }
 
 function filter_add_inline_style($style) {
-  return $style . "/* */ .qstnr-answersheet > form:after{content:'Producend By Questionnaire plugin developed by Microgadget,inc.'; font-size: 9px;margin-top:2em;line-height:1.5em;text-height:1.5em;white-space:pre;display:block;color:gray;} ";
+  return $style; //. "/* */ .qstnr-answersheet > form:after{content:'Producend By Questionnaire plugin developed by Microgadget,inc.'; font-size: 9px;margin-top:2em;line-height:1.5em;text-height:1.5em;white-space:pre;display:block;color:gray;} ";
 }
-

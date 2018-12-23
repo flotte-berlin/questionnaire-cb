@@ -373,12 +373,12 @@ jQuery(function($) {
     arg.min ? this.min = arg.min : undefined;
     arg.sec ? this.sec = arg.sec : undefined;
     arg.img ? this.img = arg.img : undefined;
-    
+
     arg.required ? this.required = arg.required : undefined;
     arg.constraint ? this.constraint = arg.constraint : undefined;
     arg.container ? this.container = arg.container : undefined;
   };
-  
+
   MetaFormItem.prototype = _.extend(MetaFormItem.prototype, {
     clone: function() {
       var dest = new MetaFormItem(this);
@@ -413,7 +413,7 @@ jQuery(function($) {
   function dateToInputString(date) {
     return date.toISOString().replace(/:[0-9]{2}\.[0-9]+[zZ]/, "");
   }
-  
+
   var MetaFormModel = self.Qst.MetaFormModel = Backbone.Model.extend({
     isPublic: false,
     viewtype: 1,
@@ -447,11 +447,12 @@ jQuery(function($) {
       dismiss_text: qstnr_data.txtOK,
     },
     initialize: function() {
-      this.url = qstnr_data.admin_ajax_url + "?" 
+      this.url = qstnr_data.admin_ajax_url + "?"
                   + $.param({
-                        action: "qstnr_formmeta", 
-                        nonce: qstnr_data.nonce, 
-                        postid: qstnr_data.postid
+                        action: "qstnr_formmeta",
+                        nonce: qstnr_data.nonce,
+                        postid: qstnr_data.postid,
+                        booking: new URL(window.location.href).searchParams.get("booking")
                   });
       // model data version.
       this.set('mdv', qstnr_data.mdv);
@@ -763,7 +764,7 @@ jQuery(function($) {
 	items[index - 1] = current;
 	prev.index = index;
 	current.index = index - 1;
-	
+
         this.checksequence();
       }
     },
@@ -776,7 +777,7 @@ jQuery(function($) {
 	items[index + 1] = current;
 	next.index = index;
 	current.index = index + 1;
-	
+
         this.checksequence();
       }
     },
@@ -810,4 +811,3 @@ jQuery(function($) {
   });
 
 });
-

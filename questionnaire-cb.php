@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: questionnaire
+Plugin Name: questionnaire (CB)
 Plugin URI: http://www.microgadget-inc.com/labo/wordpress/questionnaire/
-Description: Application for collecting questionnaires.
-Version: 2.8.0
+Description: Application for collecting questionnaires (with adjustments for usage with Commons Bookings)
+Version: 2.9.0
 Author: Hiroyoshi Kurohara(Microgadget,inc.)
 Author URI: http://www.microgadget-inc.com/
 License: GPLv2 or later
@@ -206,7 +206,7 @@ function has_key_and_true($key, $hash_obj) {
 function check_if_issuer($user) {
   if (has_key_and_true('edit_posts', $user->allcaps) &&
       has_key_and_true('edit_published_posts', $user->allcaps) &&
-      has_key_and_true('publish_posts', $user->allcaps) && 
+      has_key_and_true('publish_posts', $user->allcaps) &&
       has_key_and_true('edit_pages', $user->allcaps) &&
       has_key_and_true('edit_others_pages', $user->allcaps) &&
       has_key_and_true('edit_published_pages', $user->allcaps) &&
@@ -221,7 +221,7 @@ function js_localize_data($array_data) {
   $js_data = array(
     'mdv'		=> "2.0",
     'ajaxTimeout'           => 30000,
-      'addStyle'              => "", 
+      'addStyle'              => "",
       'txtSubmit'             => __('Submit', ns_()),
       'txtPleaseAnswer'       => __('Please Answer', ns_()),
       'txtFormDesignerTitle'  => __('Form Designer', ns_()),
@@ -245,7 +245,7 @@ function js_localize_data($array_data) {
       'txtNameRequest'		=> __('Please specify your name.', ns_()),
       'txtEmailRequest'		=> __('Please specify your e-mail address.', ns_())
   );
-  
+
   return array_merge($js_data, $array_data);
 }
 
@@ -287,9 +287,13 @@ function the_questionnaire_form($post) {
   wp_enqueue_script('underscore', includes_url('js/underscore.min.js'));
   wp_enqueue_script('backbone', includes_url('js/backbone.min.js'));
 
+  $booking = sanitize_text_field( $_GET['booking'] );
+
   $current_user = wp_get_current_user();
   if ($current_user->ID !== 0) {
-    $isloggedin = true;
+    $user_bookings = get_user_booking_by_hash($current_user->ID, $booking);
+
+    $isloggedin = count($user_bookings) > 0 ? true : false;
     $ispublic = false;
   } else {
     $isloggedin = false;
@@ -297,6 +301,8 @@ function the_questionnaire_form($post) {
 
   $jsonstr = get_qstnr_meta($post);
   $meta_array = json_decode($jsonstr, true);
+
+  $booking = sanitize_text_field( $_GET['booking'] );
 
   if ($meta_array['disappear_after_answer']) {
     $args = array(
@@ -306,7 +312,8 @@ function the_questionnaire_form($post) {
 	'author' => $_COOKIE['comment_author_' . COOKIEHASH],
 	'email' => $_COOKIE['comment_author_email_' . COOKIEHASH],
 	'remoteaddr' => $_SERVER['REMOTE_ADDR'],
-	'useragent' => $_SERVER['HTTP_USER_AGENT']
+	'useragent' => $_SERVER['HTTP_USER_AGENT'],
+  'url' => 'http://' . $booking
     );
 
     $comment_id = get_unique_comment_id_from_condition($args);
@@ -315,7 +322,7 @@ function the_questionnaire_form($post) {
       return $meta_array['form_alternative_content_answered'];
     }
   }
-  
+
   if ($meta_array['disappear_after_timeout']) {
     $tz = new \DateTimeZone(get_option('timezone_string'));
     $expire_timeout_value = new \DateTime($meta_array['form_expire_datetime'], $tz);
@@ -334,13 +341,13 @@ function the_questionnaire_form($post) {
   $frmvalue = get_answer_data($post->ID, $current_user->ID);
 
   $cookie_data_for_js = issue_cookie($post->ID, $jsonstr);
-  
-  $jsdata = js_localize_data(array( 
+
+  $jsdata = js_localize_data(array(
     'postid' => $post->ID,
       'isissuer' => check_if_issuer($current_user),
       'ispublic' => $ispublic,
-      'showForm' => 1, 
-      'addStyle' => ".qstnr-answersheet > form:after{content:'Producend By Questionnaire plugin developed by Microgadget,inc.'; font-size: 9px;margin-top:2em;line-height:1.5em;text-height:1.5em;white-space:pre;display:block;color:gray;} " . ($meta_array['usefss'] === TRUE ? str_replace('&plus;', '+', urldecode($meta_array['fss'])) : ""),
+      'showForm' => 1,
+      'addStyle' => "", //".qstnr-answersheet > form:after{content:'Producend By Questionnaire plugin developed by Microgadget,inc.'; font-size: 9px;margin-top:2em;line-height:1.5em;text-height:1.5em;white-space:pre;display:block;color:gray;} " . ($meta_array['usefss'] === TRUE ? str_replace('&plus;', '+', urldecode($meta_array['fss'])) : ""),
       'admin_ajax_url' => admin_url('admin-ajax.php'),
       'nonce' => wp_create_nonce(QUESTIONNAIRE_NONCE . $post->ID),
       'cookie_data_for_js' => $cookie_data_for_js
@@ -350,9 +357,9 @@ function the_questionnaire_form($post) {
 
   $html = "";
   if ( $isloggedin || $ispublic ) {
-    
+
     $GLOBALS[GLOBAL_KEY_HAS_QUESTIONNAIRE] = 1;
-  
+
     actform_enqueue_resources();
     $html = actform_ne($jsdata, array(
       'unique_cookie' => ($isloggedin ? false : $meta_array['unique_cookie']),
@@ -401,10 +408,9 @@ function questionnaire_copy_questionnaire($new_post_id, $old_post_object) {
   $answers = query_comments($old_post_object->ID, array());
 
   do_output_debug($answers);
-  
+
   foreach ($answers as $answer) {
     $answer->comment_post_ID = $new_post_id;
     wp_insert_comment((array) $answer);
   }
 }
-
