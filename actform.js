@@ -44,7 +44,7 @@ jQuery(function($) {
       value: 0,
       writable: true,
     },
-    "maxnum": {
+    "maxnumber": {
       enumerable: false,
       value: 99999,
       writable: true,
@@ -126,6 +126,7 @@ jQuery(function($) {
     this.receivers = [];
     this.valid = false;
     this.rows = arg.rows;
+    this.maxnumber = arg.maxnumber;
   };
 
   ActFormItem.prototype = _.extend(ActFormItem.prototype, {
@@ -138,8 +139,8 @@ jQuery(function($) {
           break;
         case Qst.TYPE_NUMBER:
           this.text = obj.text;
-          this.minnum = obj.minnum;
-          this.maxnum = obj.maxnum;
+          this.minnumber = obj.minnumber;
+          this.maxnumber = obj.maxnumber;
           break;
         case Qst.TYPE_DATETIME:
           this.text = obj.text;
@@ -382,7 +383,8 @@ jQuery(function($) {
               index: i,
               img: item.img,
               required: item.required,
-              constraint: item.constraint
+              constraint: item.constraint,
+              maxnumber: item.maxnumber
             });
             itemlist.push(currentFormItem);
             break;
@@ -404,8 +406,8 @@ jQuery(function($) {
               min: item.min,
               sec: item.sec,
               wday: item.wday,
-              minnum: item.minnum,
-              maxnum: item.maxnum,
+              minnumber: item.minnumber,
+              maxnumber: item.maxnumber,
               minyear: item.minyear,
               maxyear: item.maxyear,
             });
@@ -522,6 +524,7 @@ jQuery(function($) {
       "change input[type=checkbox]": "selchanged",
       "change input[type=radio]": "selchanged",
       "change input[type=number]": "numberchanged",
+      "change input[type=number]": "numberfocusedout",
       "change input.qstnr-date": "datechanged",
       "change select.qstnr-hour": "hourchanged",
       "change select.qstnr-min": "minchanged",
@@ -574,7 +577,7 @@ jQuery(function($) {
           cont.append($('<div class="qstnr-textarea"><textarea class="qstnr-message" placeholder="' + item.text + '" rows="' + item.rows + '" >' + (item.value ? item.value : "") + '</textarea></div>'));
           break;
         case Qst.TYPE_NUMBER:
-          cont.append($('<div class="qstnr-number"><input type="number" min="' + item.minnum + '" max="' + item.maxnum + '"></div>'));
+          cont.append($('<div class="qstnr-number"><input type="number" value="' + item.minnumber + '" min="' + item.minnumber + '" max="' + item.maxnumber + '"></div>'));
           break;
         case Qst.TYPE_DATETIME:
           var datetimeinput = $('<div class="qstnr-datetime"></div>');
@@ -647,6 +650,16 @@ jQuery(function($) {
     numberchanged: function(event) {
       this.model.numberchanged(this.$("input").val());
     },
+    numberfocusedout: function(event) {
+      var minnumber = this.$("input").attr('min');
+      var maxnumber = this.$("input").attr('max');
+      var val = parseInt(this.$("input").val());
+
+      if(!val || (minnumber && val < minnumber) || (maxnumber && val > maxnumber) ) {
+        this.$("input").val(minnumber);
+      }
+
+    },
     datechanged: function(event) {
       var dateval = this.$("input.qstnr-date").val();
       var hour = this.$("select.qstnr-hour option:selected").val();
@@ -666,6 +679,18 @@ jQuery(function($) {
     selchanged: function(event) {
       if (this.model.type === Qst.TYPE_CHECK || this.model.type === Qst.TYPE_RADIO) {
         this.model.select(this.$el.find(":checked"));
+
+        //disable unchecked checkboxes when max. number of allowed checked boxes is reached
+        if (this.model.type === Qst.TYPE_CHECK) {
+          var countchecked = this.$el.find(":checked").length;
+          var uncheckedinputs = this.$el.find('input[type="checkbox"]').not(":checked");
+          if(this.model.maxnumber == countchecked) {
+            uncheckedinputs.attr("disabled", true);
+          }
+          else {
+            uncheckedinputs.attr("disabled", false);
+          }
+        }
       } else {
         this.model.select(this.$el.find(":selected"));
       }

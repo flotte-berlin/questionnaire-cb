@@ -823,6 +823,7 @@ jQuery(function($) {
   var input_qstnr_form_item_imagename = "input[name=qstnr-form-item-imagename]";
   var button_qstnr_meta_image_delete = "button[name=qstnr-meta-image-delete]";
   var select_qstnr_meta_props_image_pos = "select[name=qstnr-meta-props-image-pos]";
+  var input_qstnr_meta_props_maxnumber = "input[name=qstnr-meta-props-maxnumber]";
   var input_qstnr_meta_props_required = "input[name=qstnr-meta-props-required]";
   var select_qstnr_meta_props_cond = "select[name=qstnr-meta-props-cond]";
   var select_qstnr_meta_props_cond_item = "select[name=qstnr-meta-props-cond-item]";
@@ -845,6 +846,7 @@ jQuery(function($) {
       "click input[name=qstnr-form-item-imagename]": "imagetext_clicked",
       "click button[name=qstnr-meta-image-delete]": "image_delete",
       "change select[name=qstnr-meta-props-image-pos]": "image_pos_changed",
+      "change input[name=qstnr-meta-props-maxnumber]": "maxnumber_changed",
       "change input[name=qstnr-meta-props-required]": "required_changed",
       "change select[name=qstnr-meta-props-cond]": "dependency_cond_changed",
       "change select[name=qstnr-meta-props-cond-item]": "dependency_cond_changed",
@@ -885,6 +887,7 @@ jQuery(function($) {
     },
     setpropsvalue: function() {
       this.show_imagecontrol();
+      this.$(input_qstnr_meta_props_maxnumber).val(this.model.maxnumber);
       this.$(input_qstnr_meta_props_required).prop("checked", this.model.required);
       var cond = this.model.constraint;
       this.$(select_qstnr_meta_props_cond).val(Qst.constraint_cond(cond));
@@ -976,6 +979,9 @@ jQuery(function($) {
       } else {
         this.$(div_qstnr_meta_constraint_dependency).hide();
       }
+    },
+    maxnumber_changed: function() {
+      this.model.maxnumber = this.$(input_qstnr_meta_props_maxnumber).val();
     },
     required_changed: function() {
       this.model.required = this.$(input_qstnr_meta_props_required).is(":checked");

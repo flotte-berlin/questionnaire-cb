@@ -483,6 +483,11 @@ function metaform($ldata) {
 	</fieldset>
 	<fieldset class="qstnr-meta-constraint" title="<?= __('Constraint settings', ns_()) ?>">
 	  <legend><?= __('Constraint settings', ns_()) ?></legend>
+    <div>
+      <label title="If following item's are of type 'Check', this specifies the max. number of possible answers.">Max. number of checked boxes
+        <input type="number" name="qstnr-meta-props-maxnumber"
+      </label>
+    </div>
 	  <div>
 	    <label title="<?= __('If checked, this item have to have some value to do submit.', ns_())?>"><?= __('Required?', ns_()) ?>
 	      <input type="checkbox" name="qstnr-meta-props-required">
