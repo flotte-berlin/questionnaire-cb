@@ -4,17 +4,17 @@ jQuery(function($) {
   if (self.Qst.getDialogView === undefined) {
     self.Qst.getDialogView = function() {
       if (self.Qst.dialogView === undefined) {
-	self.Qst.dialogView = new self.Qst.DialogView($(".qstnr-dialog"));
+        self.Qst.dialogView = new self.Qst.DialogView($(".qstnr-dialog"));
       }
       return self.Qst.dialogView;
     };
   }
-  
+
   var DialogView = self.Qst.DialogView = Backbone.View.extend({
     initialize: function(args) {
       this.ignore = false;
       if (args && args.el) {
-	this.setElement(args.el);
+        this.setElement(args.el);
       }
     },
     events: {
@@ -22,18 +22,19 @@ jQuery(function($) {
     },
     show: function(bshow, text, cls, buttontext) {
       if (bshow) {
-	if (buttontext) {
-	  this.$("button.qstnr-ackbtn").text(buttontext);
-	}
-	this.$el.css('opacity', '0');
-	this.$el.show();
-	this.$el.animate({opacity: "1"}, 400, function() {
-	}.bind(this));
+        if (buttontext) {
+          this.$("button.qstnr-ackbtn").text(buttontext);
+        }
+        this.$el.css('opacity', '0');
+        this.$el.show();
+        this.$el.animate({
+          opacity: "1"
+        }, 400, function() {}.bind(this));
         if (text) {
           this.$(".qstnr-dialog-message").html(text);
         }
-	this.$el.removeClass();
-	this.$el.addClass("qstnr-dialog");
+        this.$el.removeClass();
+        this.$el.addClass("qstnr-dialog");
         if (cls) {
           this.$el.addClass(cls);
         }
@@ -41,15 +42,19 @@ jQuery(function($) {
         var parent = this.$el.parent();
         var left = parent.offset().left + (parent.width() - this.$el.width()) / 2;
         var top = parent.offset().top + (parent.height() - this.$el.height()) / 2;
-        this.$el.offset({"left": left, "top": top });
+        this.$el.offset({
+          "left": left,
+          "top": top
+        });
       } else {
-	this.$el.animate({opacity:'0'}, 400, function() {
-	  this.$el.hide();
-	}.bind(this));
+        this.$el.animate({
+          opacity: '0'
+        }, 400, function() {
+          this.$el.hide();
+        }.bind(this));
       }
     },
-    render: function() {
-    },
+    render: function() {},
     dismiss: function() {
       this.ignore = true;
       this.show(false);
@@ -59,9 +64,9 @@ jQuery(function($) {
   var InprogressView = self.Qst.InprogressView = Backbone.View.extend({
     initialize: function(at) {
       if (at.el) {
-	this.setElement($(at.el).get(0));
+        this.setElement($(at.el).get(0));
       } else {
-	this.setElement(document.body);
+        this.setElement(document.body);
       }
       this.bg = this.$(at.bg);
       this.fg = this.$(at.fg);
@@ -79,27 +84,27 @@ jQuery(function($) {
       }
     },
     /**
-     * for save 
+     * for save
      */
     ajaxcall2: function(func, finished, args, options) {
       this.transit(true);
       try {
-	func(args, _.extend(options, {
-	  success: function(model, resultObj, options) {
-	    this.transit(false);
-	    try {
-	      finished(true, resultObj, null);
-	    } catch (e) {}
-	  }.bind(this),
-	  error: function(model, jqXHR, options) {
-	    this.transit(false);
-	    try {
-	      finished(false, null, jqXHR);
-	    } catch(e) {}
-	  }.bind(this),
-	}));
+        func(args, _.extend(options, {
+          success: function(model, resultObj, options) {
+            this.transit(false);
+            try {
+              finished(true, resultObj, null);
+            } catch (e) {}
+          }.bind(this),
+          error: function(model, jqXHR, options) {
+            this.transit(false);
+            try {
+              finished(false, null, jqXHR);
+            } catch (e) {}
+          }.bind(this),
+        }));
       } catch (e) {
-	this.transit(false);
+        this.transit(false);
       }
     },
     /**
@@ -108,24 +113,24 @@ jQuery(function($) {
     ajaxcall: function(func, finished, options) {
       this.transit(true);
       try {
-	func(_.extend(options, {
-	  success: function(model, resultObj, options) {
-	    this.transit(false);
-	    try {
-	      finished(true, resultObj, null);
-	    } catch(e) {}
-	  }.bind(this),
-	  error: function(model, jqXHR, options) {
-	    this.transit(false);
-	    try {
-	      finished(false, null, jqXHR);
-	    } catch(e) {}
-	  }.bind(this),
-	}));
+        func(_.extend(options, {
+          success: function(model, resultObj, options) {
+            this.transit(false);
+            try {
+              finished(true, resultObj, null);
+            } catch (e) {}
+          }.bind(this),
+          error: function(model, jqXHR, options) {
+            this.transit(false);
+            try {
+              finished(false, null, jqXHR);
+            } catch (e) {}
+          }.bind(this),
+        }));
       } catch (e) {
-	this.transit(false);
+        this.transit(false);
       }
     },
   });
-  
+
 });

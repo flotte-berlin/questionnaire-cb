@@ -6,8 +6,8 @@
  */
 
 jQuery(function($) {
-  if (! self.Qst) {
-    self.Qst = { };
+  if (!self.Qst) {
+    self.Qst = {};
   }
   var Qst = self.Qst;
 
@@ -20,7 +20,7 @@ jQuery(function($) {
   var AnswerList = Qst.AnswerList = Backbone.Model.extend({
     collection: null,
     total: 0,
-    lastpgidx: 0, 
+    lastpgidx: 0,
     start: 0,
     numlinks: 0,
     current: 0,
@@ -28,19 +28,19 @@ jQuery(function($) {
 
     initialize: function() {
       this.set('cntinpage', 20);
-      this.url = qstnr_data.admin_ajax_url + "?" 
-        + $.param({
-          action: "qstnr_answer_list", 
+      this.url = qstnr_data.admin_ajax_url + "?" +
+        $.param({
+          action: "qstnr_answer_list",
           nonce: qstnr_data.nonce,
-	  postid: qstnr_data.postid,
+          postid: qstnr_data.postid,
         });
     },
     parse: function(data, options) {
       var collection = new AnswerCollection();
       for (var i in data.collection) {
-	var entryModel = new Qst.ActForm(data.collection[i]);
-	entryModel.parse(data.collection[i]);
-	collection.push(entryModel);
+        var entryModel = new Qst.ActForm(data.collection[i]);
+        entryModel.parse(data.collection[i]);
+        collection.push(entryModel);
       }
       this.set('collection', collection);
       this.set('lastpgidx', Math.floor(data.total / data.cntinpage));
@@ -72,14 +72,24 @@ jQuery(function($) {
       return this.get('cntinpage');
     },
     getpage: function(start, current, options) {
-      this.fetch(_.extend(
-	{data: {
-	  start: start, 
-	  current: current, 
-	  cntinpage: this.cntinpage()}, processData: true}, options));
+      this.fetch(_.extend({
+        data: {
+          start: start,
+          current: current,
+          cntinpage: this.cntinpage()
+        },
+        processData: true
+      }, options));
     },
     initialfetch: function(options) {
-      this.fetch(_.extend({data: {start: 0, current: 0, cntinpage: 0}, processData: true}, options));
+      this.fetch(_.extend({
+        data: {
+          start: 0,
+          current: 0,
+          cntinpage: 0
+        },
+        processData: true
+      }, options));
     },
     collection: function() {
       return this.get('collection');
@@ -90,7 +100,7 @@ jQuery(function($) {
     el: $(".qstnr-answerlist-body"),
     initialize: function() {
       this.listenTo(this.model, "sync", function() {
-	this.render();
+        this.render();
       });
     },
     render: function() {
@@ -99,19 +109,24 @@ jQuery(function($) {
       this.$(".qstnr-answerlist-bg textarea").val(JSON.stringify(this.model));
     },
   });
-  
+
   /**
    * View for answerlist content area
    */
   var AnswerListView = Qst.AnswerListView = Backbone.View.extend({
     el: $(".qstnr-answerlist-body"),
     initialize: function(args) {
-      this.inprogressView = new Qst.InprogressView({ el: this.$el, bg:".qstnr-answerlist-bg", fg:".qstnr-answerlist", button:".qstnr-pagenavi"});
-//      this.inprogressView.ajaxcall(this.model.initialfetch.bind(this.model), this.finished.bind(this), {timeout: 500});
+      this.inprogressView = new Qst.InprogressView({
+        el: this.$el,
+        bg: ".qstnr-answerlist-bg",
+        fg: ".qstnr-answerlist",
+        button: ".qstnr-pagenavi"
+      });
+      //      this.inprogressView.ajaxcall(this.model.initialfetch.bind(this.model), this.finished.bind(this), {timeout: 500});
 
       this.dialogView = Qst.getDialogView();
       this.listenTo(this.model, "sync", function() {
-	this.render();
+        this.render();
       });
       this.metamodel = args.metamodel;
       this.model = args.model;
@@ -131,40 +146,68 @@ jQuery(function($) {
       var lastpgidx = this.model.lastpgidx();
 
       if (start === 0 && lastpgidx === 0) {
-	if (this.model.total() === 0) {
-	  nav.append("<p>no answer received");
-	}
-	return;
+        if (this.model.total() === 0) {
+          nav.append("<p>no answer received");
+        }
+        return;
       }
-      v = { start: 0, current: 0, text: "&lt;&lt;" };
+      v = {
+        start: 0,
+        current: 0,
+        text: "&lt;&lt;"
+      };
       tmpl = current > 0 ? tmpl_link : tmpl_fake;
-      nav.append( $(tmpl(v)) );
+      nav.append($(tmpl(v)));
 
-      v = { start: start > current ? start : start - 1, current: current - 1, text: "&lt;" };
+      v = {
+        start: start > current ? start : start - 1,
+        current: current - 1,
+        text: "&lt;"
+      };
       tmpl = current > 0 ? tmpl_link : tmpl_fake;
-      nav.append( $(tmpl(v)));
+      nav.append($(tmpl(v)));
 
-      v = { start: start - 1, current: current, text: '...' };
+      v = {
+        start: start - 1,
+        current: current,
+        text: '...'
+      };
       tmpl = start > 0 ? tmpl_link : tmpl_fake;
-      nav.append( $(tmpl(v)) );
+      nav.append($(tmpl(v)));
 
-      for (var i = start; i < start + numlinks && i <= lastpgidx;++i) {
-        v = { start: start, current: i, text: i + 1};
+      for (var i = start; i < start + numlinks && i <= lastpgidx; ++i) {
+        v = {
+          start: start,
+          current: i,
+          text: i + 1
+        };
         tmpl = i === current ? tmpl_fake : tmpl_link;
-        nav.append( $(tmpl(v)) );
+        nav.append($(tmpl(v)));
       }
 
-      v = { start: start + 1, current: (current > start ? current : current + 1), text: '...' };
+      v = {
+        start: start + 1,
+        current: (current > start ? current : current + 1),
+        text: '...'
+      };
       tmpl = start < lastpgidx ? tmpl_link : tmpl_fake;
-      nav.append( $(tmpl(v)) );
+      nav.append($(tmpl(v)));
 
-      v = { start: current >= start + numlinks ? start + 1 : start, current: current + 1, text: '&gt;' };
+      v = {
+        start: current >= start + numlinks ? start + 1 : start,
+        current: current + 1,
+        text: '&gt;'
+      };
       tmpl = current < lastpgidx ? tmpl_link : tmpl_fake;
-      nav.append( $(tmpl(v)) );
+      nav.append($(tmpl(v)));
 
-      v = { start: lastpgidx - numlinks, current: current > lastpgidx - numlinks ? current : lastpgidx - numlinks, text: '&gt;&gt;' };
+      v = {
+        start: lastpgidx - numlinks,
+        current: current > lastpgidx - numlinks ? current : lastpgidx - numlinks,
+        text: '&gt;&gt;'
+      };
       tmpl = current > lastpgidx ? tmpl_link : tmpl_fake;
-      nav.append( $(tmpl(v)) );
+      nav.append($(tmpl(v)));
 
       return nav;
     },
@@ -174,13 +217,16 @@ jQuery(function($) {
       navi.html("");
       contents.html("");
       this.pagenav(navi);
-      this.answerCollectionView = new AnswerCollectionView({model: this.model.collection(), metamodel: this.metamodel});
+      this.answerCollectionView = new AnswerCollectionView({
+        model: this.model.collection(),
+        metamodel: this.metamodel
+      });
       this.answerCollectionView.render();
       contents.append(this.answerCollectionView.$el);
       if (this.model.total() === 0) {
-	this.$('.qstnr-csv-download').hide();
+        this.$('.qstnr-csv-download').hide();
       } else {
-	this.$('.qstnr-csv-download').show();
+        this.$('.qstnr-csv-download').show();
       }
     },
     callgetpage: function(args, options) {
@@ -188,16 +234,16 @@ jQuery(function($) {
     },
     getpage: function() {
       var tgt = $(event.target);
-      this.inprogressView.ajaxcall2(this.callgetpage.bind(this), this.finished.bind(this), 
-				   {
-				     start: tgt.attr('start'), 
-				     current: tgt.attr('current')
-				   }, {timeout: qstnr_data.ajaxTimeout});
+      this.inprogressView.ajaxcall2(this.callgetpage.bind(this), this.finished.bind(this), {
+        start: tgt.attr('start'),
+        current: tgt.attr('current')
+      }, {
+        timeout: qstnr_data.ajaxTimeout
+      });
     },
     finished: function(bSuccess, data, errstatus) {
-      if (bSuccess) {
-      } else {
-	this.dialogView.show(true, data, errstatus);
+      if (bSuccess) {} else {
+        this.dialogView.show(true, data, errstatus);
       }
     },
   });
@@ -221,19 +267,24 @@ jQuery(function($) {
       var firstrow = $("<tr><th rowspan=2></th></tr>");
       var formitems = formmodel.itemlist();
       _.each(formitems, function(item) {
-        var v = { selcount: item.selections.length, title: item.title };
+        var v = {
+          selcount: item.selections.length,
+          title: item.title
+        };
         firstrow.append($(htmpl1(v)));
       });
       var secondrow = $("<tr></tr>");
       _.each(formitems, function(item) {
-	if (item.type === Qst.TYPE_TEXT) {
-	  secondrow.append($("<th></th>"));
-	} else {
-          for (var i = 0;i < item.selections.length;++i) {
-            var v = { seltext: item.selections[i] };
+        if (item.type === Qst.TYPE_TEXT) {
+          secondrow.append($("<th></th>"));
+        } else {
+          for (var i = 0; i < item.selections.length; ++i) {
+            var v = {
+              seltext: item.selections[i]
+            };
             secondrow.append($(htmpl2(v)));
           }
-	}
+        }
       });
 
       header.append(firstrow);
@@ -258,14 +309,20 @@ jQuery(function($) {
 
       this.model.each(function(formmodel) {
         var row = $("<tr></tr>");
-	row.append($(nametmpl({text: formmodel.author()})));
+        row.append($(nametmpl({
+          text: formmodel.author()
+        })));
         _.each(formmodel.itemlist(), function(item) {
           if (item.type === Qst.TYPE_TEXT || item.type === Qst.TYPE_NUMBER || item.type === Qst.TYPE_DATETIME) {
-            row.append($(texttmpl({text: item.value})));
+            row.append($(texttmpl({
+              text: item.value
+            })));
           } else {
-	    for (var i in item.selections) {
-	      row.append($(seltmpl({selected: item.selected[item.selectedname[i]]})));
-	    }
+            for (var i in item.selections) {
+              row.append($(seltmpl({
+                selected: item.selected[item.selectedname[i]]
+              })));
+            }
           }
         });
         this.$el.append(row);

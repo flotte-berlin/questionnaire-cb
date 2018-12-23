@@ -5,17 +5,17 @@
  * kurohara@yk.rim.or.jp, kurohara@microgadget-inc.com
  */
 jQuery(function($) {
-  if (! self.Qst) {
-    self.Qst = { };
+  if (!self.Qst) {
+    self.Qst = {};
   }
   _.extend(self.Qst, {
-      TYPE_LABEL  :'label',
-      TYPE_OPTION :'option',
-      TYPE_TEXT   :'text',
-      TYPE_RADIO  :'radio',
-    TYPE_CHECK  :'check',
-    TYPE_NUMBER : 'number',
-    TYPE_DATETIME : 'datetime',
+    TYPE_LABEL: 'label',
+    TYPE_OPTION: 'option',
+    TYPE_TEXT: 'text',
+    TYPE_RADIO: 'radio',
+    TYPE_CHECK: 'check',
+    TYPE_NUMBER: 'number',
+    TYPE_DATETIME: 'datetime',
   });
 
   self.Qst.constraint_cond = function constraint_cond(cond) {
@@ -23,11 +23,11 @@ jQuery(function($) {
     for (var key in cond) {
       condstr = key;
       for (var op in cond[key]) {
-	if (op === 'not') {
-	  condstr += 'ifoff';
-	} else {
-	  condstr += 'ifon';
-	}
+        if (op === 'not') {
+          condstr += 'ifoff';
+        } else {
+          condstr += 'ifon';
+        }
       }
     }
     return condstr;
@@ -36,23 +36,23 @@ jQuery(function($) {
     var p;
     if (cond) {
       if (cond.item) {
-	p = cond.item;
+        p = cond.item;
       } else {
-	var arr = [];
-	for (var i in cond) {
-	  p = constraint_item(cond[i]);
-	  if (p) {
-	    if (p instanceof Array) {
-	      return p;
-	    } else {
-	      arr.push(p);
-	      if (p === "required") {
-		break;
-	      }
-	    }
-	  }
-	}
-	p = arr;
+        var arr = [];
+        for (var i in cond) {
+          p = constraint_item(cond[i]);
+          if (p) {
+            if (p instanceof Array) {
+              return p;
+            } else {
+              arr.push(p);
+              if (p === "required") {
+                break;
+              }
+            }
+          }
+        }
+        p = arr;
       }
     }
     return p;
@@ -62,192 +62,192 @@ jQuery(function($) {
     "type": {
       enumerable: true,
       set: function(type) {
-	this.setprop("type", type);
+        this.setprop("type", type);
       },
       get: function() {
-	return this._type;
+        return this._type;
       },
     },
     "text": {
       enumerable: true,
       set: function(text) {
-	this.setprop("text", text, "textchange");
+        this.setprop("text", text, "textchange");
       },
       get: function() {
-	return this._text;
+        return this._text;
       },
     },
     "index": {
       enumerable: true,
       set: function(index) {
-	this.setprop("index", index);
+        this.setprop("index", index);
       },
       get: function() {
-	return this._index;
+        return this._index;
       },
     },
     "img": {
       enumerable: true,
       set: function(obj) {
-	this.setprop("img", obj, "change");
+        this.setprop("img", obj, "change");
       },
       get: function() {
-	return this._img;
+        return this._img;
       },
     },
     "required": {
       enumerable: true,
       set: function(btrue) {
-	this.setprop("required", btrue, "change");
+        this.setprop("required", btrue, "change");
       },
       get: function() {
-	return this._required;
+        return this._required;
       },
     },
     "constraint": {
       enumerable: true,
       set: function(opt) {
-	this.setprop("constraint", opt, "change");
+        this.setprop("constraint", opt, "change");
       },
       get: function() {
-	return this._constraint;
+        return this._constraint;
       },
     },
     "rows": {
       enumerable: true,
       set: function(opt) {
-	this.setprop("rows", opt, "change");
+        this.setprop("rows", opt, "change");
       },
       get: function() {
-	return this._rows;
+        return this._rows;
       },
     },
     "year": {
       enumerable: true,
       set: function(opt) {
-	this.setprop("year", opt);
+        this.setprop("year", opt);
       },
       get: function() {
-	return this._year;
+        return this._year;
       },
     },
     "month": {
       enumerable: true,
       set: function(opt) {
-	if (! opt) {
-	  this.container.suppressevents = true;
-	  this.setprop("day", false);
-	  this.container.suppressevents = false;
-	}
-	this.setprop("month", opt);
+        if (!opt) {
+          this.container.suppressevents = true;
+          this.setprop("day", false);
+          this.container.suppressevents = false;
+        }
+        this.setprop("month", opt);
       },
       get: function() {
-	return this._month;
+        return this._month;
       },
     },
     "day": {
       enumerable: true,
       set: function(opt) {
-	if (opt) {
-	  this.container.suppressevents = true;
-	  this.setprop("month", true);
-	  this.container.suppressevents = false;
-	}
-	this.setprop("day", opt);
+        if (opt) {
+          this.container.suppressevents = true;
+          this.setprop("month", true);
+          this.container.suppressevents = false;
+        }
+        this.setprop("day", opt);
       },
       get: function() {
-	return this._day;
+        return this._day;
       },
     },
     "wday": {
       enumerable: true,
       set: function(opt) {
-	this.setprop("wday", opt, "change");
+        this.setprop("wday", opt, "change");
       },
       get: function() {
-	return this._wday;
+        return this._wday;
       },
     },
     "hour": {
       enumerable: true,
       set: function(opt) {
-	if (!opt) {
-	  this.container.suppressevents = true;
-	  this.setprop("min", false);
-	  this.setprop("sec", false);
-	  this.container.suppressevents = false;
-	}
-	this.setprop("hour", opt);
+        if (!opt) {
+          this.container.suppressevents = true;
+          this.setprop("min", false);
+          this.setprop("sec", false);
+          this.container.suppressevents = false;
+        }
+        this.setprop("hour", opt);
       },
       get: function() {
-	return this._hour;
+        return this._hour;
       },
     },
     "min": {
       enumerable: true,
       set: function(opt) {
-	this.container.suppressevents = true;
-	if (opt) {
-	  this.setprop("hour", true);
-	} else {
-	  this.setprop("sec", false);
-	}
-	this.container.suppressevents = false;
-	this.setprop("min", opt);
+        this.container.suppressevents = true;
+        if (opt) {
+          this.setprop("hour", true);
+        } else {
+          this.setprop("sec", false);
+        }
+        this.container.suppressevents = false;
+        this.setprop("min", opt);
       },
       get: function() {
-	return this._min;
+        return this._min;
       },
     },
     "sec": {
       enumerable: true,
       set: function(opt) {
-	if (opt) {
-	  this.container.suppressevents = true;
-	  this.setprop("hour", true);
-	  this.setprop("min", true);
-	  this.container.suppressevents = false;
-	}
-	this.setprop("sec", opt);
+        if (opt) {
+          this.container.suppressevents = true;
+          this.setprop("hour", true);
+          this.setprop("min", true);
+          this.container.suppressevents = false;
+        }
+        this.setprop("sec", opt);
       },
       get: function() {
-	return this._sec;
+        return this._sec;
       },
     },
-    "maxnumber":{
+    "maxnumber": {
       enumerable: true,
       set: function(opt) {
-	this.setprop("maxnumber", opt, "change");
+        this.setprop("maxnumber", opt, "change");
       },
       get: function() {
-	return this._maxnumber;
+        return this._maxnumber;
       },
     },
-    "minnumber":{
+    "minnumber": {
       enumerable: true,
       set: function(opt) {
-	this.setprop("minnumber", opt, "change");
+        this.setprop("minnumber", opt, "change");
       },
       get: function() {
-	return this._minnumber;
+        return this._minnumber;
       },
     },
     "minyear": {
       enumerable: true,
       set: function(opt) {
-	this.setprop("minyear", opt, "change");
+        this.setprop("minyear", opt, "change");
       },
       get: function() {
-	return this._minyear;
+        return this._minyear;
       },
     },
     "maxyear": {
       enumerable: true,
       set: function(opt) {
-	this.setprop("maxyear", opt, "change");
+        this.setprop("maxyear", opt, "change");
       },
       get: function() {
-	return this._maxyear;
+        return this._maxyear;
       },
     },
     "_type": {
@@ -320,17 +320,17 @@ jQuery(function($) {
       value: false,
       writable: true,
     },
-    "_maxnumber":{
+    "_maxnumber": {
       enumerable: false,
       value: 999999,
       writable: true,
     },
-    "_minnumber":{
+    "_minnumber": {
       enumerable: false,
       value: 0,
       writable: true,
     },
-    "_minyear":{
+    "_minyear": {
       enumerable: false,
       value: 1900,
       writable: true,
@@ -385,27 +385,27 @@ jQuery(function($) {
       return dest;
     },
     setprop: function(propname, value, events) {
-      var changed = (this[ "_" + propname ] === undefined && value === undefined ? false : (this[ "_" + propname ] !== value ? true : (this[ "_" + propname ].toString() === value.toString())));
-      this[ "_" + propname ] = value;
-      if (changed && ! this.container.suppressevents) {
-	if (propname === 'required') {
-	  this.container.suppressevents = true;
-	  this.container.reconstruct_action_cond();
-	  this.container.suppressevents = false;
-	}
-	if (events) {
-	  this.container.trigger(events, this._index);
-	} else {
-	  //	  this.container.trigger("change", this._index);
-	  this.container.checksequence();
-	  this.container.trigger("reset", this._index);
-	}
+      var changed = (this["_" + propname] === undefined && value === undefined ? false : (this["_" + propname] !== value ? true : (this["_" + propname].toString() === value.toString())));
+      this["_" + propname] = value;
+      if (changed && !this.container.suppressevents) {
+        if (propname === 'required') {
+          this.container.suppressevents = true;
+          this.container.reconstruct_action_cond();
+          this.container.suppressevents = false;
+        }
+        if (events) {
+          this.container.trigger(events, this._index);
+        } else {
+          //	  this.container.trigger("change", this._index);
+          this.container.checksequence();
+          this.container.trigger("reset", this._index);
+        }
       }
     },
     clearconstraint: function() {
       if (this.type !== Qst.TYPE_LABEL) {
-	this.required = false;
-	this.constraint = {};
+        this.required = false;
+        this.constraint = {};
       }
     },
   });
@@ -422,8 +422,8 @@ jQuery(function($) {
       viewtype: 1,
       isPublic: false,
       items: [],
-      usefss:false,
-      fss:"",
+      usefss: false,
+      fss: "",
       notifyflag: true,
       unique_email: true,
       unique_name: false,
@@ -441,88 +441,91 @@ jQuery(function($) {
       form_alternative_content_expired: "",
       use_action_setting: false,
       ack_type: "default",
-      action_cond: { "none": null },
+      action_cond: {
+        "none": null
+      },
       submit_text: qstnr_data.txtSubmit,
       ack_text: qstnr_data.txtThankYou,
       dismiss_text: qstnr_data.txtOK,
     },
     initialize: function() {
-      this.url = qstnr_data.admin_ajax_url + "?"
-                  + $.param({
-                        action: "qstnr_formmeta",
-                        nonce: qstnr_data.nonce,
-                        postid: qstnr_data.postid,
-                        booking: new URL(window.location.href).searchParams.get("booking")
-                  });
+      this.url = qstnr_data.admin_ajax_url + "?" +
+        $.param({
+          action: "qstnr_formmeta",
+          nonce: qstnr_data.nonce,
+          postid: qstnr_data.postid,
+          booking: new URL(window.location.href).searchParams.get("booking")
+        });
       // model data version.
       this.set('mdv', qstnr_data.mdv);
       this._suppressevents = [];
-      Object.defineProperty(this, "suppressevents",
-			    {
-			      get : function()
-			      {
-				if (this._suppressevents.length === 0) {
-				  return false;
-				} else {
-				  return true;
-				}
-			      },
-			      set : function(newValue)
-			      {
-				if (newValue) {
-				  this._suppressevents.push(newValue);
-				} else {
-				  this._suppressevents.pop();
-				}
-			      },
-			      enumerable : false,
-			      configurable : true
-			    }
-			   );
+      Object.defineProperty(this, "suppressevents", {
+        get: function() {
+          if (this._suppressevents.length === 0) {
+            return false;
+          } else {
+            return true;
+          }
+        },
+        set: function(newValue) {
+          if (newValue) {
+            this._suppressevents.push(newValue);
+          } else {
+            this._suppressevents.pop();
+          }
+        },
+        enumerable: false,
+        configurable: true
+      });
     },
     parse: function(data, option) {
       try {
-	if (data && data.items) {
-	  this.suppressevents = true;
-	  this.items([]);
-	  var index = 0;
-	  _.each(data.items, function(item) {
-	    var arg = {container: this, index: index++ };
-	    _.extend(arg, item);
-	    this.items().push(new MetaFormItem(arg));
-	  }, this);
-	  delete data.items;
-	  this.checksequence();
-	  this.suppressevents = false;
-	}
-	this.trigger("reset");
-	return data;
+        if (data && data.items) {
+          this.suppressevents = true;
+          this.items([]);
+          var index = 0;
+          _.each(data.items, function(item) {
+            var arg = {
+              container: this,
+              index: index++
+            };
+            _.extend(arg, item);
+            this.items().push(new MetaFormItem(arg));
+          }, this);
+          delete data.items;
+          this.checksequence();
+          this.suppressevents = false;
+        }
+        this.trigger("reset");
+        return data;
       } catch (e) {
-	console.log(e);
-	return null;
+        console.log(e);
+        return null;
       }
     },
     check_action_cond: function() {
-      if (this.ispublic() && (! this.unique_cookie() && (this.unique_name() || this.unique_email()))) {
-	var cond = Qst.constraint_cond(this.action_cond());
-	if (cond === 'submitifon') {
-	  this.action_cond({'none':null});
-	}
+      if (this.ispublic() && (!this.unique_cookie() && (this.unique_name() || this.unique_email()))) {
+        var cond = Qst.constraint_cond(this.action_cond());
+        if (cond === 'submitifon') {
+          this.action_cond({
+            'none': null
+          });
+        }
       }
     },
     getset_bool: function(name, btrue) {
       if (btrue === undefined) {
-	return this.get(name);
+        return this.get(name);
       } else {
-	this.set(name, btrue != 0);
-	this.check_action_cond();
+        this.set(name, btrue != 0);
+        this.check_action_cond();
       }
     },
     getset_val: function(name, val) {
       if (val === undefined) {
-	return this.get(name);
+        return this.get(name);
       } else {
-	this.set(name, val);
+        this.set(name, val);
       }
     },
     unique_name: function(btrue) {
@@ -586,66 +589,84 @@ jQuery(function($) {
       var itemval = [];
       var levelop = {};
       if (items && items.length > 0 && items[0] === 'required') {
-	var modelitems = this.items();
-	var qid = 0;
-	// insert "dummy" item.
-	itemval.push({item: "required"});
-	// insert all required items.
-	_.each(modelitems, function(modelitem) {
-	  if (modelitem.type === Qst.TYPE_LABEL) {
-	    if (modelitem.required) {
-	      itemval.push({ item: "[" + qid + "]" });
-	    }
-	    qid++;
-	  }
-	});
-	levelop = { and: itemval };
+        var modelitems = this.items();
+        var qid = 0;
+        // insert "dummy" item.
+        itemval.push({
+          item: "required"
+        });
+        // insert all required items.
+        _.each(modelitems, function(modelitem) {
+          if (modelitem.type === Qst.TYPE_LABEL) {
+            if (modelitem.required) {
+              itemval.push({
+                item: "[" + qid + "]"
+              });
+            }
+            qid++;
+          }
+        });
+        levelop = {
+          and: itemval
+        };
       } else {
-	if (items && items.length > 0) {
-	  _.each(items, function(e) {
-	    itemval.push( {item: e} );
-	  }, this);
-	}
-	levelop = { or: itemval };
+        if (items && items.length > 0) {
+          _.each(items, function(e) {
+            itemval.push({
+              item: e
+            });
+          }, this);
+        }
+        levelop = {
+          or: itemval
+        };
       }
       if (itemval.length > 0) {
-	var condition = {};
-	switch (cond_type) {
-	case 'none':
-	case 'default':
-	  break;
-	case 'submitifon':
-	  condition.submit = levelop;
-	  break;
-	case "showifon":
-	  condition.show = levelop;
-	  break;
-	case "showifoff":
-	  condition.show = { not: levelop };
-	  break;
-	case "hideifon":
-	  condition.hide = levelop;
-	  break;
-	case "hideifoff":
-	  condition.hide = { not: levelop };
-	  break;
-	case "enableifon":
-	  condition.enable = levelop;
-	  break;
-	case "enableifoff":
-	  condition.enable = { not: levelop };
-	  break;
-	case "disableifon":
-	  condition.disable = levelop;
-	  break;
-	case "disableifoff":
-	  condition.disable = { not: levelop };
-	  break;
-	default:
-	  break;
-	}
-	this.action_cond(condition);
-	return true;
+        var condition = {};
+        switch (cond_type) {
+          case 'none':
+          case 'default':
+            break;
+          case 'submitifon':
+            condition.submit = levelop;
+            break;
+          case "showifon":
+            condition.show = levelop;
+            break;
+          case "showifoff":
+            condition.show = {
+              not: levelop
+            };
+            break;
+          case "hideifon":
+            condition.hide = levelop;
+            break;
+          case "hideifoff":
+            condition.hide = {
+              not: levelop
+            };
+            break;
+          case "enableifon":
+            condition.enable = levelop;
+            break;
+          case "enableifoff":
+            condition.enable = {
+              not: levelop
+            };
+            break;
+          case "disableifon":
+            condition.disable = levelop;
+            break;
+          case "disableifoff":
+            condition.disable = {
+              not: levelop
+            };
+            break;
+          default:
+            break;
+        }
+        this.action_cond(condition);
+        return true;
       }
       return false;
     },
@@ -668,38 +689,38 @@ jQuery(function($) {
     },
     viewtype: function(type) {
       if (type === undefined) {
-	return this.get('viewtype');
+        return this.get('viewtype');
       } else {
-	this.set('viewtype', type);
+        this.set('viewtype', type);
       }
     },
     usefss: function(use) {
       if (use === undefined) {
-	return this.get('usefss');
+        return this.get('usefss');
       } else {
-	this.set('usefss', use);
+        this.set('usefss', use);
       }
     },
     notifyflag: function(bNotify) {
       if (bNotify === undefined) {
-	return this.get('notifyflag');
+        return this.get('notifyflag');
       } else {
-	this.set('notifyflag', bNotify);
+        this.set('notifyflag', bNotify);
       }
     },
-    fss:function(fss) {
+    fss: function(fss) {
       if (fss === undefined) {
-	return this.get('fss');
+        return this.get('fss');
       } else {
-	this.set('fss', fss);
+        this.set('fss', fss);
       }
     },
     items: function(val) {
       if (val) {
-	this.set('items', val);
-	return this;
+        this.set('items', val);
+        return this;
       } else {
-	return this.get('items');
+        return this.get('items');
       }
     },
     transit: function(t) {
@@ -708,22 +729,25 @@ jQuery(function($) {
     transitcondition: function(i, cond) {
       var transit = this.get('transit');
       if (i < transit.length) {
-	if (cond) {
-	  transit[i].condition = cond;
-	} else {
-	  return transit[i].condition;
-	}
+        if (cond) {
+          transit[i].condition = cond;
+        } else {
+          return transit[i].condition;
+        }
       }
     },
     transitdest: function(i, dest, target) {
       var transit = this.get('transit');
       if (i < transit.length) {
-	if (dest) {
-	  transit[i].url = dest;
-	  transit[i].target = target;
-	} else {
-	  return { url: transit[i].url, target: transit[i].target };
-	}
+        if (dest) {
+          transit[i].url = dest;
+          transit[i].target = target;
+        } else {
+          return {
+            url: transit[i].url,
+            target: transit[i].target
+          };
+        }
       }
     },
     renumber: function() {
@@ -732,18 +756,21 @@ jQuery(function($) {
       var i = 0;
       var qid = 1;
       _.each(items, function(item) {
-	item.index = i++;
-	item.qid = qid;
-	if (item.type === Qst.TYPE_LABEL) {
-	  qid++;
-	}
+        item.index = i++;
+        item.qid = qid;
+        if (item.type === Qst.TYPE_LABEL) {
+          qid++;
+        }
       });
-      this. suppressevents = false;
+      this.suppressevents = false;
     },
     addnew: function() {
       var items = this.get('items');
       this.suppressevents = true;
-      items.push(new MetaFormItem({container: this, index: items.length}));
+      items.push(new MetaFormItem({
+        container: this,
+        index: items.length
+      }));
       this.checksequence();
       this.suppressevents = false;
       this.trigger('add');
@@ -760,10 +787,10 @@ jQuery(function($) {
       if (index > 0) {
         var current = items[index];
         var prev = items[index - 1];
-	items[index] = prev;
-	items[index - 1] = current;
-	prev.index = index;
-	current.index = index - 1;
+        items[index] = prev;
+        items[index - 1] = current;
+        prev.index = index;
+        current.index = index - 1;
 
         this.checksequence();
       }
@@ -773,10 +800,10 @@ jQuery(function($) {
       if (index < items.length - 1) {
         var current = items[index];
         var next = items[index + 1];
-	items[index] = next;
-	items[index + 1] = current;
-	next.index = index;
-	current.index = index + 1;
+        items[index] = next;
+        items[index + 1] = current;
+        next.index = index;
+        current.index = index + 1;
 
         this.checksequence();
       }
@@ -803,7 +830,7 @@ jQuery(function($) {
         }
         prevtype = item.type;
         isfirst = false;
-	item.clearconstraint();
+        item.clearconstraint();
       });
       this.renumber();
       this.suppressevents = false;

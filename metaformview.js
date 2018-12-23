@@ -5,12 +5,12 @@ jQuery(function($) {
     el: "#qstnr-formmeta",
     show: function(bShow, message) {
       if (bShow) {
-	this.$el.addClass("formmeta-errorview");
-	this.$(".formmeta-errorview-msgbox").text(message);
-	this.$(".formmeta-errorview-msgbox").css("display", "block");
+        this.$el.addClass("formmeta-errorview");
+        this.$(".formmeta-errorview-msgbox").text(message);
+        this.$(".formmeta-errorview-msgbox").css("display", "block");
       } else {
-	this.$el.removeClass("formmeta-errorview");
-	this.$(".formmeta-errorview-msgbox").css("display", "none");
+        this.$el.removeClass("formmeta-errorview");
+        this.$(".formmeta-errorview-msgbox").css("display", "none");
       }
     },
   });
@@ -22,14 +22,16 @@ jQuery(function($) {
     initialize: function(obj) {
       this.parent = obj.parent;
       this.model = obj.model;
-      this.propsView = new Qst.FormMetaPropsView({parent: this});
+      this.propsView = new Qst.FormMetaPropsView({
+        parent: this
+      });
     },
     events: {
       "click .qstnr-deletebtn": "dodelete",
-      "click .qstnr-upbtn"    : "doup",
-      "click .qstnr-downbtn"  : "dodown",
+      "click .qstnr-upbtn": "doup",
+      "click .qstnr-downbtn": "dodown",
       "click .qstnr-itemtypesel": "propstoggle",
-      "click .qstnr-nametext" : "propstoggle",
+      "click .qstnr-nametext": "propstoggle",
       "change .qstnr-itemtypesel": "onselchange",
       "change .qstnr-nametext": "ontextchange",
       "click input.qstnr-item-props": "propsburger_click",
@@ -49,48 +51,75 @@ jQuery(function($) {
     },
     setenabled: function(formertype) {
       var en;
-      var allfalse = { 'label': false, 'radio':false, 'text':false, 'check': false, 'option':false, 'number': false, 'datetime': false };
-      var alltrue = { 'label': true, 'radio':true, 'text':true, 'check': true, 'option':true, 'number':true, 'datetime': true };
-      
+      var allfalse = {
+        'label': false,
+        'radio': false,
+        'text': false,
+        'check': false,
+        'option': false,
+        'number': false,
+        'datetime': false
+      };
+      var alltrue = {
+        'label': true,
+        'radio': true,
+        'text': true,
+        'check': true,
+        'option': true,
+        'number': true,
+        'datetime': true
+      };
+
       if (formertype) {
-	switch (formertype) {
-	case Qst.TYPE_LABEL:
-	  en = alltrue;
-	  en[Qst.TYPE_LABEL] = false;
-	  break;
-	case Qst.TYPE_RADIO:
-	case Qst.TYPE_CHECK:
-	case Qst.TYPE_OPTION:
-	  en = allfalse;
-	  en[Qst.TYPE_LABEL] = en[formertype] = true;
-	  break;
-	case Qst.TYPE_TEXT:
-	case Qst.TYPE_NUMBER:
-	case Qst.TYPE_DATETIME:
-	  en = allfalse;
-	  en[Qst.TYPE_LABEL] = true;
-	  break;
-	default:
-	  break;
-	}
+        switch (formertype) {
+          case Qst.TYPE_LABEL:
+            en = alltrue;
+            en[Qst.TYPE_LABEL] = false;
+            break;
+          case Qst.TYPE_RADIO:
+          case Qst.TYPE_CHECK:
+          case Qst.TYPE_OPTION:
+            en = allfalse;
+            en[Qst.TYPE_LABEL] = en[formertype] = true;
+            break;
+          case Qst.TYPE_TEXT:
+          case Qst.TYPE_NUMBER:
+          case Qst.TYPE_DATETIME:
+            en = allfalse;
+            en[Qst.TYPE_LABEL] = true;
+            break;
+          default:
+            break;
+        }
       } else {
-	// topmost item
-	en = { 'label': true, 'radio':false, 'text':false, 'check': false, 'option':false, 'number': false, 'datetime': false };
+        // topmost item
+        en = {
+          'label': true,
+          'radio': false,
+          'text': false,
+          'check': false,
+          'option': false,
+          'number': false,
+          'datetime': false
+        };
       }
       return en;
     },
     render: function() {
-      var data = { items: this.model.items(), view: this };
+      var data = {
+        items: this.model.items(),
+        view: this
+      };
       this.$el.html(this.template(data));
       return this;
     },
     getitemrecord: function(event) {
       var e = $(event.currentTarget);
-      for (var i = 0;i < 10;++i) {
-	if (e.attr('itemindex')) {
-	  return e;
-	}
-	e = e.parent();
+      for (var i = 0; i < 10; ++i) {
+        if (e.attr('itemindex')) {
+          return e;
+        }
+        e = e.parent();
       }
       return null;
     },
@@ -98,7 +127,7 @@ jQuery(function($) {
       var index = 0;
       var e = this.getitemrecord(event);
       if (e !== null) {
-	index = parseInt(e.attr('itemindex'));
+        index = parseInt(e.attr('itemindex'));
       }
       return index;
     },
@@ -133,25 +162,25 @@ jQuery(function($) {
     propstoggle: function(event) {
       var rec = this.getitemrecord(event);
       if (rec.find(".qstnr-item-props").is(':checked')) {
-	this.propsburger_click(event);
+        this.propsburger_click(event);
       }
     },
     propsburger_click: function(event) {
       var rec = this.getitemrecord(event);
       var propsIndex = this.getitemindex(event);
       if (this.lastPropsIndex === propsIndex) {
-      	rec.find("input[name=qstnr-item-props]").prop('checked', false);
-      	this.toggle_props();
-	this.lastPropsIndex = undefined;
+        rec.find("input[name=qstnr-item-props]").prop('checked', false);
+        this.toggle_props();
+        this.lastPropsIndex = undefined;
       } else {
-	this.lastPropsIndex = propsIndex;
+        this.lastPropsIndex = propsIndex;
       }
     },
     toggle_props: function() {
       var props = this.$("input[name=qstnr-item-props]");
       var items = this.$("tr.qstnr-form-meta-item-props-record");
       props.each(function(p) {
-	this.propsView.show($(items[p]), this.model.items()[p], props[p].checked);
+        this.propsView.show($(items[p]), this.model.items()[p], props[p].checked);
       }.bind(this));
     },
     minnumber_change: function(event) {
@@ -203,43 +232,43 @@ jQuery(function($) {
       this.getitem(event).maxyear = $(event.currentTarget).val();
     },
     onclick: function() {},
-    
+
     get_depend_itemlist: function(index) {
       var itemlist = [];
       var itemindex = 0;
       var qid = 0;
       _.each(this.model.items(), function(item) {
-	if (index === undefined || item.index < index) {
-	  var labelstr;
-	  var iteminfo;
-	  if (item.type === Qst.TYPE_LABEL) {
-	    qid++;
-	    itemindex = 0;
-	    labelstr = item.text.substr(0, 16);
-	    if (labelstr.length >= 16) {
-	      labelstr = labelstr + "...";
-	    }
-	    iteminfo = {
-	      label: "Q." + qid + " (" + labelstr + ")",
-	      index: item.index,
-	      value: '[' + (qid - 1) + ']'
-	    };
-	  } else {
-	    itemindex++;
-	    labelstr = item.text.substr(0, 16);
-	    if (labelstr.length >= 16) {
-	      labelstr = labelstr + "...";
-	    }
-	    iteminfo = {
-	      label: "Q." + qid + ":item-" + itemindex + "  (" + labelstr + ")",
-	      index: item.index,
-	      value: '[' + (qid - 1) + ',' + (itemindex - 1) + ']'
-	    };
-	  }
-	  itemlist.push(iteminfo);
-	} else {
-	  return false;
-	}
+        if (index === undefined || item.index < index) {
+          var labelstr;
+          var iteminfo;
+          if (item.type === Qst.TYPE_LABEL) {
+            qid++;
+            itemindex = 0;
+            labelstr = item.text.substr(0, 16);
+            if (labelstr.length >= 16) {
+              labelstr = labelstr + "...";
+            }
+            iteminfo = {
+              label: "Q." + qid + " (" + labelstr + ")",
+              index: item.index,
+              value: '[' + (qid - 1) + ']'
+            };
+          } else {
+            itemindex++;
+            labelstr = item.text.substr(0, 16);
+            if (labelstr.length >= 16) {
+              labelstr = labelstr + "...";
+            }
+            iteminfo = {
+              label: "Q." + qid + ":item-" + itemindex + "  (" + labelstr + ")",
+              index: item.index,
+              value: '[' + (qid - 1) + ',' + (itemindex - 1) + ']'
+            };
+          }
+          itemlist.push(iteminfo);
+        } else {
+          return false;
+        }
       }, this);
       return itemlist;
     },
@@ -248,10 +277,17 @@ jQuery(function($) {
   var FormMetaView = self.Qst.FormMetaView = Backbone.View.extend({
     el: $("#qstnr-formmeta"),
     initialize: function() {
-      this.inprogressView = new Qst.InprogressView({bg: "#qstnr-formmeta", fg: ".qstnr-formmeta-bg", button: "#qstnr-savemeta"});
+      this.inprogressView = new Qst.InprogressView({
+        bg: "#qstnr-formmeta",
+        fg: ".qstnr-formmeta-bg",
+        button: "#qstnr-savemeta"
+      });
       this.dialogView = new Qst.DialogView();
       this.errorView = new Qst.MetaFormErrorView();
-      this.itemListView = new  Qst.MetaFormItemListView({parent: this, model: this.model });
+      this.itemListView = new Qst.MetaFormItemListView({
+        parent: this,
+        model: this.model
+      });
 
       this.listenTo(this.model, "add remove reset", this.modelchanged);
       //
@@ -259,54 +295,56 @@ jQuery(function($) {
       var oldIsMCE = wpLink.isMCE;
       var oldHtmlUpdate = wpLink.htmlUpdate;
       wpLink.open = function(editorId, callbackfunc) {
-	if (callbackfunc) {
-	  wpLink.isMCE = function() { return false; };
-	  wpLink.htmlUpdate = function() {
-	    var attrs, text, html, begin, end, cursor, selection,
-		textarea = wpLink.textarea;
+        if (callbackfunc) {
+          wpLink.isMCE = function() {
+            return false;
+          };
+          wpLink.htmlUpdate = function() {
+            var attrs, text, html, begin, end, cursor, selection,
+              textarea = wpLink.textarea;
 
-	    if ( ! textarea ) {
-	      return;
-	    }
+            if (!textarea) {
+              return;
+            }
 
-	    attrs = wpLink.getAttrs();
+            attrs = wpLink.getAttrs();
 
-	    // If there's no href, return.
-	    if ( ! attrs.href ) {
-	      return;
-	    }
-	    callbackfunc(attrs.href, attrs.target);
-	    // Insert HTML
-	    wpLink.close();
-	    textarea.focus();
-	  };
-	  var ed,
-	      $body = $( document.body );
+            // If there's no href, return.
+            if (!attrs.href) {
+              return;
+            }
+            callbackfunc(attrs.href, attrs.target);
+            // Insert HTML
+            wpLink.close();
+            textarea.focus();
+          };
+          var ed,
+            $body = $(document.body);
 
-	  $body.addClass( 'modal-open' );
+          $body.addClass('modal-open');
 
-	  wpLink.range = null;
-	  this.textarea = editorId[0];
-	  this.textarea.focus();
-	  if (document.selection) {
-	    this.range = document.selection.createRange();
-	  }
-	  $('#wp-link-wrap .wp-link-text-field').hide();
-	  $('#wp-link-wrap .link-target').hide();
-	  $('#wp-link-wrap').show();
-	  $('#wp-link-backdrop').show();
+          wpLink.range = null;
+          this.textarea = editorId[0];
+          this.textarea.focus();
+          if (document.selection) {
+            this.range = document.selection.createRange();
+          }
+          $('#wp-link-wrap .wp-link-text-field').hide();
+          $('#wp-link-wrap .link-target').hide();
+          $('#wp-link-wrap').show();
+          $('#wp-link-backdrop').show();
 
-	  wpLink.refresh();
+          wpLink.refresh();
 
-	  $( document ).trigger( 'wplink-open', $('#wp-link-wrap') );
-	  
-	} else {
-	  wpLink.isMCE = oldIsMCE;
-	  wpLink.htmlUpdate = oldHtmlUpdate;
-	  $('#wp-link-wrap .link-target').show();
-	  $('#wp-link-wrap .wp-link-text-field').show();
-	  wpLink.old_open(editorId);
-	}
+          $(document).trigger('wplink-open', $('#wp-link-wrap'));
+
+        } else {
+          wpLink.isMCE = oldIsMCE;
+          wpLink.htmlUpdate = oldHtmlUpdate;
+          $('#wp-link-wrap .link-target').show();
+          $('#wp-link-wrap .wp-link-text-field').show();
+          wpLink.old_open(editorId);
+        }
       };
       wpLink.old_open = oldLinkOpen;
     },
@@ -315,24 +353,24 @@ jQuery(function($) {
       "click .qstnr-additem": "doadd",
       "change #qstnr-viewtype": "viewtypechange",
       "click #qstnr-savemeta": "dosubmit",
-      "click #qstnr-redraw":"doredraw",
+      "click #qstnr-redraw": "doredraw",
       "change #qstnr-usefss": "usefss",
       "change #qstnr-fss": "fss",
       "change #qstnr-notify-author": "notifyflag",
       "change #qstnr-unique-name": "unique_name",
       "change #qstnr-unique-email": "unique_email",
-      "change #qstnr-unique-ip":"unique_ip",
-      "change #qstnr-unique-browser":"unique_browser",
-      "change #qstnr-unique-cookie":"unique_cookie",
-      "change #qstnr-cookie-expire-months":"cookie_expire_months",
-      "change #qstnr-cookie-expire-days":"cookie_expire_days",
-      "change #qstnr-cookie-expire-hours":"cookie_expire_hours",
-      "change #qstnr-cookie-expire-mins":"cookie_expire_mins",
-      "change #qstnr-disappear-after-answer":"disappear_after_answer",
-      "change #qstnr-form-alternative-content-answered":"form_alternative_content_answered",
-      "change #qstnr-disappear-after-timeout":"disappear_after_timeout",
-      "change #qstnr-form-expire-datetime":"form_expire_datetime",
-      "change #qstnr-form-alternative-content-expired":"form_alternative_content_expired",
+      "change #qstnr-unique-ip": "unique_ip",
+      "change #qstnr-unique-browser": "unique_browser",
+      "change #qstnr-unique-cookie": "unique_cookie",
+      "change #qstnr-cookie-expire-months": "cookie_expire_months",
+      "change #qstnr-cookie-expire-days": "cookie_expire_days",
+      "change #qstnr-cookie-expire-hours": "cookie_expire_hours",
+      "change #qstnr-cookie-expire-mins": "cookie_expire_mins",
+      "change #qstnr-disappear-after-answer": "disappear_after_answer",
+      "change #qstnr-form-alternative-content-answered": "form_alternative_content_answered",
+      "change #qstnr-disappear-after-timeout": "disappear_after_timeout",
+      "change #qstnr-form-expire-datetime": "form_expire_datetime",
+      "change #qstnr-form-alternative-content-expired": "form_alternative_content_expired",
       "click input[name=qstnr-shortcode]": "copy_shortcode",
       "change #qstnr-specify-action-property": "check_action_settings",
       "change #qstnr-action-property-ack-type": "change_ack_type",
@@ -344,7 +382,7 @@ jQuery(function($) {
       "change #qstnr-action-property-cond-item": "change_action_cond_item",
       "change #qstnr-form-alternative-content-after-hidden": "change_alternative_content_hidden",
       "change #qstnr-form-meta-keep-size-after-hidden": "change_keep_size",
-      "click #qstnr-form-meta-add-transit":"add_transit",
+      "click #qstnr-form-meta-add-transit": "add_transit",
       "click input[name=qstnr-form-meta-transit-dest]": "transit_dest_clicked",
       "change input[name=qstnr-form-meta-transit-dest]": "transit_dest_changed",
       "click input[name=qstnr-form-meta-transit-condition]": "transit_import_answer_clicked",
@@ -377,11 +415,11 @@ jQuery(function($) {
       this.$("#qstnr-form-alternative-content-expired").val(this.model.form_alternative_content_expired());
       this.$("#qstnr-form-meta-keep-size-after-hidden").prop("checked", this.model.keep_size());
       this.showfssf(this.model.usefss());
-      
+
       this.$("#qstnr-form-meta-form").html("");
-      
+
       this.itemListView.render();
-      
+
       this.$("#qstnr-form-shortcode").val('[questionnaire id="' + qstnr_data.postid + '"]');
       this.$("#qstnr-meta-shortcode").val('[questionnaire_showmeta id="' + qstnr_data.postid + '"]');
       this.$("#qstnr-summary-shortcode").val('[questionnaire_summary id="' + qstnr_data.postid + '"]');
@@ -400,65 +438,68 @@ jQuery(function($) {
       this.$("#qstnr-action-property-dismiss-text").val(this.model.dismiss_text());
       this.$("#qstnr-form-alternative-content-after-hidden").val(this.model.post_ack_content());
       if (this.model.ispublic() && (this.model.unique_email() || this.model.unique_name()) && !this.model.unique_cookie()) {
-	this.$("#qstnr-action-property-cond option[value=submitifon]").prop('disabled', 'disabled');
+        this.$("#qstnr-action-property-cond option[value=submitifon]").prop('disabled', 'disabled');
       } else {
-	this.$("#qstnr-action-property-cond option[value=submitifon]").removeAttr('disabled');
+        this.$("#qstnr-action-property-cond option[value=submitifon]").removeAttr('disabled');
       }
       if (action_type && action_type !== "") {
-	this.$("#qstnr-action-property-cond").val(action_type);
+        this.$("#qstnr-action-property-cond").val(action_type);
       }
       //
       var itemselect = this.$("#qstnr-action-property-cond-item");
       itemselect.html('');
       var itemlist = this.itemListView.get_depend_itemlist();
-      itemlist.push( {value: 'required', label: 'all required have value'} );
+      itemlist.push({
+        value: 'required',
+        label: 'all required have value'
+      });
       _.each(itemlist, function(item) {
-	itemselect.append($('<option value="' + item['value'] + '">' + item['label'] + '</option>'));
+        itemselect.append($('<option value="' + item['value'] + '">' + item['label'] + '</option>'));
       }.bind(this));
       if (action_type && action_type !== "" && action_type !== 'none' && action_type !== 'default') {
-	itemselect.val(action_item);
-	itemselect.removeAttr('disabled');
+        itemselect.val(action_item);
+        itemselect.removeAttr('disabled');
       } else {
-	itemselect.prop('disabled', 'disabled');
+        itemselect.prop('disabled', 'disabled');
       }
       if (ack_type === "default" || ack_type === "dialogbox" || ack_type === "dialogbox-hide" || ack_type === "transit,dialogbox") {
-	this.$("#qstnr-action-property-ack-text").removeAttr('disabled');
-	this.$("#qstnr-action-property-dismiss-text").removeAttr('disabled');
+        this.$("#qstnr-action-property-ack-text").removeAttr('disabled');
+        this.$("#qstnr-action-property-dismiss-text").removeAttr('disabled');
       } else {
-	this.$("#qstnr-action-property-ack-text").prop('disabled', "disabled");
-	this.$("#qstnr-action-property-dismiss-text").prop('disabled', "disabled");
+        this.$("#qstnr-action-property-ack-text").prop('disabled', "disabled");
+        this.$("#qstnr-action-property-dismiss-text").prop('disabled', "disabled");
       }
       if (ack_type === "-hide" || ack_type === "dialogbox-hide" || ack_type === "transit,-hide") {
-	this.$(".qstnr-form-meta-alternative-after-hidden").addClass("qstnr-optional-input-area-visible");
+        this.$(".qstnr-form-meta-alternative-after-hidden").addClass("qstnr-optional-input-area-visible");
       } else {
-	this.$(".qstnr-form-meta-alternative-after-hidden").removeClass("qstnr-optional-input-area-visible");
+        this.$(".qstnr-form-meta-alternative-after-hidden").removeClass("qstnr-optional-input-area-visible");
       }
 
       if (ack_type === "transit,dialogbox" || ack_type === "transit,-hide") {
-	this.$("#qstnr-form-meta-transit-settings").addClass("qstnr-optional-input-area-visible");
+        this.$("#qstnr-form-meta-transit-settings").addClass("qstnr-optional-input-area-visible");
       } else {
-	this.$("#qstnr-form-meta-transit-settings").removeClass("qstnr-optional-input-area-visible");
+        this.$("#qstnr-form-meta-transit-settings").removeClass("qstnr-optional-input-area-visible");
       }
 
       if (action_type === 'submitifon') {
-	this.$("#qstnr-action-property-submit-text").prop('disabled', "disabled");
+        this.$("#qstnr-action-property-submit-text").prop('disabled', "disabled");
       } else {
-	this.$("#qstnr-action-property-submit-text").removeAttr('disabled');
+        this.$("#qstnr-action-property-submit-text").removeAttr('disabled');
       }
 
       this.render_transit();
     },
     enable_uniques: function(use_cookie) {
       if (use_cookie) {
-	this.$("#qstnr-unique-name").prop("disabled", "disabled");
-	this.$("#qstnr-unique-email").prop("disabled", "disabled");
-	this.$("#qstnr-unique-ip").prop("disabled", "disabled");
-	this.$("#qstnr-unique-browser").prop("disabled", "disabled");
+        this.$("#qstnr-unique-name").prop("disabled", "disabled");
+        this.$("#qstnr-unique-email").prop("disabled", "disabled");
+        this.$("#qstnr-unique-ip").prop("disabled", "disabled");
+        this.$("#qstnr-unique-browser").prop("disabled", "disabled");
       } else {
-	this.$("#qstnr-unique-name").removeAttr("disabled");
-	this.$("#qstnr-unique-email").removeAttr("disabled");
-	this.$("#qstnr-unique-ip").removeAttr("disabled");
-	this.$("#qstnr-unique-browser").removeAttr("disabled");
+        this.$("#qstnr-unique-name").removeAttr("disabled");
+        this.$("#qstnr-unique-email").removeAttr("disabled");
+        this.$("#qstnr-unique-ip").removeAttr("disabled");
+        this.$("#qstnr-unique-browser").removeAttr("disabled");
       }
     },
     unique_browser: function(event) {
@@ -487,26 +528,29 @@ jQuery(function($) {
     },
     get_finished: function(bSuccess, data, jqXHR) {
       if (bSuccess) {
-	this.errorView.show(false);
-	this.render();
+        this.errorView.show(false);
+        this.render();
       } else {
-	var errmsg = qstnr_data.txtRequestError;
-	errmsg += " " + jqXHR.status + "," + jqXHR.statusText;
-	this.errorView.show(true, errmsg);
+        var errmsg = qstnr_data.txtRequestError;
+        errmsg += " " + jqXHR.status + "," + jqXHR.statusText;
+        this.errorView.show(true, errmsg);
       }
     },
     put_finished: function(bSuccess, data, jqXHR) {
-      if (bSuccess) {
-      } else {
-	var errmsg = qstnr_data.txtRequestError;
-	errmsg += jqXHR.status + "," + jqXHR.statusText;
-	this.dialogView.show(true, errmsg);
+      if (bSuccess) {} else {
+        var errmsg = qstnr_data.txtRequestError;
+        errmsg += jqXHR.status + "," + jqXHR.statusText;
+        this.dialogView.show(true, errmsg);
       }
     },
-    dosubmit:function() {
+    dosubmit: function() {
       var savefunc = this.model.save.bind(this.model);
       var finishfunc = this.put_finished.bind(this);
-      this.inprogressView.ajaxcall2(savefunc, finishfunc, {container: undefined}, {timeout: qstnr_data.ajaxTimeout});
+      this.inprogressView.ajaxcall2(savefunc, finishfunc, {
+        container: undefined
+      }, {
+        timeout: qstnr_data.ajaxTimeout
+      });
     },
     doredraw: function() {
       this.model.trigger('reset');
@@ -514,16 +558,18 @@ jQuery(function($) {
     load: function() {
       var fetchfunc = this.model.fetch.bind(this.model);
       var finishfunc = this.get_finished.bind(this);
-      this.inprogressView.ajaxcall(fetchfunc, finishfunc, {timeout:qstnr_data.ajaxTimeout});
+      this.inprogressView.ajaxcall(fetchfunc, finishfunc, {
+        timeout: qstnr_data.ajaxTimeout
+      });
     },
     showfssf: function(bshow) {
       if (bshow) {
-	this.$("#qstnr-fss").prop("disabled", false);
-	this.clearfss();
-	this.applyfss(this.$("#qstnr-fss").val());
+        this.$("#qstnr-fss").prop("disabled", false);
+        this.clearfss();
+        this.applyfss(this.$("#qstnr-fss").val());
       } else {
-	this.clearfss();
-	this.$("#qstnr-fss").prop("disabled", true);
+        this.clearfss();
+        this.$("#qstnr-fss").prop("disabled", true);
       }
     },
     usefss: function(event) {
@@ -561,7 +607,7 @@ jQuery(function($) {
     },
     form_alternative_content_answered: function() {
       this.model.form_alternative_content_answered(this.$("#qstnr-form-alternative-content-answered").val());
-    }, 
+    },
     disappear_after_timeout: function() {
       this.model.disappear_after_timeout(this.$("#qstnr-disappear-after-timeout").prop('checked'));
     },
@@ -577,7 +623,7 @@ jQuery(function($) {
       document.execCommand('copy');
     },
     check_action_settings: function(event) {
-      var use_action_setting =  $(event.currentTarget).is(":checked");
+      var use_action_setting = $(event.currentTarget).is(":checked");
       this.model.use_action_setting(use_action_setting);
     },
     change_ack_type: function(event) {
@@ -605,86 +651,89 @@ jQuery(function($) {
       var items = this.$("#qstnr-action-property-cond-item").val();
       var itemval = [];
       _.each(items, function(e) {
-	if (e !== 'none') {
-	  itemval.push(e);
-	}
+        if (e !== 'none') {
+          itemval.push(e);
+        }
       });
       this.model.set_action_cond(cond_type, itemval);
     },
     change_action_cond: function(event) {
       if (this.set_action_cond()) {
-	this.show_action_settings();
+        this.show_action_settings();
       }
       var val = $(event.currentTarget).val();
       if (val === "none" || val === "default") {
-	this.$("#qstnr-action-property-cond-item").val([]);
-	this.$("#qstnr-action-property-cond-item").prop('disabled', 'disabled');
-	this.$("#qstnr-action-property-submit-text").removeAttr('disabled');
+        this.$("#qstnr-action-property-cond-item").val([]);
+        this.$("#qstnr-action-property-cond-item").prop('disabled', 'disabled');
+        this.$("#qstnr-action-property-submit-text").removeAttr('disabled');
       } else if (val === 'submitifon') {
-	this.$("#qstnr-action-property-submit-text").prop('disabled', "disabled");
-	this.$("#qstnr-action-property-cond-item").removeAttr('disabled');
+        this.$("#qstnr-action-property-submit-text").prop('disabled', "disabled");
+        this.$("#qstnr-action-property-cond-item").removeAttr('disabled');
       } else {
-	this.$("#qstnr-action-property-cond-item").removeAttr('disabled');
-	this.$("#qstnr-action-property-submit-text").removeAttr('disabled');
+        this.$("#qstnr-action-property-cond-item").removeAttr('disabled');
+        this.$("#qstnr-action-property-submit-text").removeAttr('disabled');
       }
     },
     change_action_cond_item: function(event) {
-//      this.set_action_cond();
+      //      this.set_action_cond();
     },
     click_action_cond_item: function(event) {
       if ($(event.currentTarget).val() === "required") {
-	this.$('#qstnr-action-property-cond-item option[value^="["]').removeProp("selected");
+        this.$('#qstnr-action-property-cond-item option[value^="["]').removeProp("selected");
       } else {
-	this.$('#qstnr-action-property-cond-item option[value="required"]').removeProp("selected");
+        this.$('#qstnr-action-property-cond-item option[value="required"]').removeProp("selected");
       }
       this.set_action_cond();
     },
     render_transit: function() {
       var stringify = function(obj) {
-	var str = "";
-	for (var i in obj) {
-	  for (var key in obj[i]) {
-	    if (key === 'on') {
-	      str += JSON.stringify(obj[i][key]) + "=on";
-	    } else if (key === 'match') {
-	      str += "[" + obj[i][key][0] + "]=match(" + (obj[i][key][1] === "" ? "*" : obj[i][key][1]) + ")";
-	    }
-	  }
-	  str += " ";
-	}
-	return str;
+        var str = "";
+        for (var i in obj) {
+          for (var key in obj[i]) {
+            if (key === 'on') {
+              str += JSON.stringify(obj[i][key]) + "=on";
+            } else if (key === 'match') {
+              str += "[" + obj[i][key][0] + "]=match(" + (obj[i][key][1] === "" ? "*" : obj[i][key][1]) + ")";
+            }
+          }
+          str += " ";
+        }
+        return str;
       };
       this.add_default_transit();
       var transit_tmpl = _.template($("#qstnr-form-meta-transit-template").html());
-      this.$("#qstnr-form-meta-transit-settings").html(transit_tmpl({ data: this.model.transit(), stringify: stringify }));
+      this.$("#qstnr-form-meta-transit-settings").html(transit_tmpl({
+        data: this.model.transit(),
+        stringify: stringify
+      }));
     },
     add_default_transit: function() {
       var transit = this.model.transit();
-      if (! (transit instanceof Array) ) {
-	this.model.transit([]);
-	transit = this.model.transit();
+      if (!(transit instanceof Array)) {
+        this.model.transit([]);
+        transit = this.model.transit();
       }
       if (transit.length === 0) {
-	transit.push({
-	  'default': true,
-	  'url': ""
-	});
+        transit.push({
+          'default': true,
+          'url': ""
+        });
       }
     },
     add_transit: function() {
       this.add_default_transit();
       var transit = this.model.transit();
       transit.push({
-	'url': "",
-	'condition': []
+        'url': "",
+        'condition': []
       });
       this.render_transit();
     },
     transit_clear_dest: function(event) {
       var transit = this.model.transit();
       if (transit.length > 0) {
-	transit[0].url = "";
-	this.render_transit();
+        transit[0].url = "";
+        this.render_transit();
       }
     },
     transit_item_delete: function(event) {
@@ -695,70 +744,72 @@ jQuery(function($) {
     transit_dest_clicked: function(event) {
       var textarea = $(event.currentTarget);
       wpLink.open(textarea, function(href, target) {
-	//	textarea.val(href);
-	var i = textarea.attr('transit_id');
-	this.model.transitdest(i, href, target);
-	this.render_transit();
+        //	textarea.val(href);
+        var i = textarea.attr('transit_id');
+        this.model.transitdest(i, href, target);
+        this.render_transit();
       }.bind(this));
     },
     transit_import_answer_clicked: function(event) {
       this.actviewmodal(true, event.currentTarget);
       this.model.trigger('reset');
       this.sampleSaveHook = function(model) {
-	var conditionlist = [];
-	var index = 0;
-	_.each(model.itemlist(), function(item) {
-	  if (item.valid) {
-	    switch (item.type) {
-	    case Qst.TYPE_TEXT:
-	    case Qst.TYPE_NUMBER:
-	    case Qst.TYPE_DATETIME:
-	      conditionlist.push({ match: [ index , item.value ] });
-	      break;
-	    default:
-	      _.each(item.selectedname, function(name, j) {
-		if (item.selected[name]) {
-		  conditionlist.push({ on: [index, j] });
-		}
-	      });
-	      break;
-	    }
-	  }
-	  ++index;
-	}, this);
-	this.actviewmodal(false);
-	var i = $(event.currentTarget).attr('transit_id');
-	this.model.transitcondition(i, conditionlist);
-	this.render_transit();
+        var conditionlist = [];
+        var index = 0;
+        _.each(model.itemlist(), function(item) {
+          if (item.valid) {
+            switch (item.type) {
+              case Qst.TYPE_TEXT:
+              case Qst.TYPE_NUMBER:
+              case Qst.TYPE_DATETIME:
+                conditionlist.push({
+                  match: [index, item.value]
+                });
+                break;
+              default:
+                _.each(item.selectedname, function(name, j) {
+                  if (item.selected[name]) {
+                    conditionlist.push({
+                      on: [index, j]
+                    });
+                  }
+                });
+                break;
+            }
+          }
+          ++index;
+        }, this);
+        this.actviewmodal(false);
+        var i = $(event.currentTarget).attr('transit_id');
+        this.model.transitcondition(i, conditionlist);
+        this.render_transit();
       };
     },
     clearfss: function() {
       if (this.fsssid !== undefined) {
-	var sheet = document.styleSheets[this.fsssid];
-	for (var i = this.fssapplied.length - 1;i >= 0;--i) {
-	  try {
-	    sheet.deleteRule(this.fssapplied[i]);
-	  } catch (e) {
-	  }
-	}
-	this.fssapplied = [];
+        var sheet = document.styleSheets[this.fsssid];
+        for (var i = this.fssapplied.length - 1; i >= 0; --i) {
+          try {
+            sheet.deleteRule(this.fssapplied[i]);
+          } catch (e) {}
+        }
+        this.fssapplied = [];
       }
     },
     applyfss: function(fsstext) {
       this.fssapplied = [];
       if (this.fsssid === undefined) {
-	this.fsssid = document.styleSheets.length - 1;
+        this.fsssid = document.styleSheets.length - 1;
       }
       var sheet = document.styleSheets[this.fsssid];
       var ruleset = Qst.CSSUtil.join(Qst.CSSUtil.embrace(Qst.CSSUtil.split(fsstext), "div.qstnr-answersheet"));
       var ruleid = sheet.cssRules.length;
       for (var i in ruleset) {
-	this.fssapplied.push(ruleid);
-	try {
-	  sheet.insertRule(ruleset[i], ruleid);
-	} catch (e) {
-	}
-	++ruleid;
+        this.fssapplied.push(ruleid);
+        try {
+          sheet.insertRule(ruleset[i], ruleid);
+        } catch (e) {}
+        ++ruleid;
       }
     },
     escapeCSS: function(src) {
@@ -782,26 +833,26 @@ jQuery(function($) {
   var select_qstnr_form_image_size_unit = "select[name=qstnr-form-image-size-unit]";
   var div_qstnr_meta_constraint_dependency = "div.qstnr-meta-constraint-dependency";
   var fieldset_qstnr_meta_constraint = "fieldset.qstnr-meta-constraint";
-  var span_qstnr_meta_props_image_pos_wrap =  "span[name=qstnr-meta-props-image-pos-wrap]";
+  var span_qstnr_meta_props_image_pos_wrap = "span[name=qstnr-meta-props-image-pos-wrap]";
   var div_qstnr_meta_props_image_geometry = "div.qstnr-meta-props-image-geometry";
   var div_qstnr_meta_props_image_params = "div.qstnr-meta-props-image-params";
-  
+
   var FormMetaPropsView = self.Qst.FormMetaPropsView = Backbone.View.extend({
     tagName: "div",
     className: "",
     template: _.template($("#qstnr-props-panel-template").html()),
     events: {
       "click input[name=qstnr-form-item-imagename]": "imagetext_clicked",
-      "click button[name=qstnr-meta-image-delete]":"image_delete",
+      "click button[name=qstnr-meta-image-delete]": "image_delete",
       "change select[name=qstnr-meta-props-image-pos]": "image_pos_changed",
       "change input[name=qstnr-meta-props-required]": "required_changed",
       "change select[name=qstnr-meta-props-cond]": "dependency_cond_changed",
       "change select[name=qstnr-meta-props-cond-item]": "dependency_cond_changed",
       "change input[name=qstnr-meta-props-image-geometry-auto]": "toggle_auto_geometry",
-      "change input[name=qstnr-form-image-opacity]":"image_opacity",
-      "change input[name=qstnr-form-image-width]":"image_width",
-      "change input[name=qstnr-form-image-height]":"image_height",
-      "change select[name=qstnr-form-image-size-unit]":"image_size_unit",
+      "change input[name=qstnr-form-image-opacity]": "image_opacity",
+      "change input[name=qstnr-form-image-width]": "image_width",
+      "change input[name=qstnr-form-image-height]": "image_height",
+      "change select[name=qstnr-form-image-size-unit]": "image_size_unit",
     },
     initialize: function(args) {
       this.parent = args.parent;
@@ -809,28 +860,27 @@ jQuery(function($) {
     show: function(rec, model, bshow) {
       var prop = rec.find("div.qstnr-form-meta-item-props-wrap");
       if (bshow) {
-	this.setElement(prop)
-	this.model = model;
-	this.$el.html(this.template());
-	this.setpropsvalue();
-	this.delegateEvents();
-	prop.css("max-height", "0");
-	prop.css("display", "block");
-	prop.animate({
-	  "max-height": "4000px"
-	}, 100, function() {
-	});
+        this.setElement(prop)
+        this.model = model;
+        this.$el.html(this.template());
+        this.setpropsvalue();
+        this.delegateEvents();
+        prop.css("max-height", "0");
+        prop.css("display", "block");
+        prop.animate({
+          "max-height": "4000px"
+        }, 100, function() {});
       } else {
-	prop.animate({
-	  "max-heigt": "0"
-	}, 100, function() {
-	  prop.html("");
-	});
+        prop.animate({
+          "max-heigt": "0"
+        }, 100, function() {
+          prop.html("");
+        });
       }
     },
     setimageinfostring: function(img) {
       if (img) {
-	this.$(input_qstnr_form_item_imagename).val(img.name);
+        this.$(input_qstnr_form_item_imagename).val(img.name);
       }
     },
     setpropsvalue: function() {
@@ -839,77 +889,77 @@ jQuery(function($) {
       var cond = this.model.constraint;
       this.$(select_qstnr_meta_props_cond).val(Qst.constraint_cond(cond));
       if (this.model.index > 0 && this.model.type === Qst.TYPE_LABEL) {
-	var itemselect = this.$(select_qstnr_meta_props_cond_item);
-	itemselect.html("");
-	itemselect.append('<option value="none">None</option>');
-	var itemlist = this.parent.get_depend_itemlist(this.model.index);
-	_.each(itemlist, function(item) {
-	  itemselect.append($('<option value="' + item['value'] + '">' + item['label'] + '</option>'));
-	}.bind(this));
-	if (this.model.required) {
-	  this.$(div_qstnr_meta_constraint_dependency).hide();
-	} else {
-	  this.$(div_qstnr_meta_constraint_dependency).show();
-	}
-	this.$(fieldset_qstnr_meta_constraint).show();
-	this.$(select_qstnr_meta_props_cond_item).val(Qst.constraint_item(cond));
+        var itemselect = this.$(select_qstnr_meta_props_cond_item);
+        itemselect.html("");
+        itemselect.append('<option value="none">None</option>');
+        var itemlist = this.parent.get_depend_itemlist(this.model.index);
+        _.each(itemlist, function(item) {
+          itemselect.append($('<option value="' + item['value'] + '">' + item['label'] + '</option>'));
+        }.bind(this));
+        if (this.model.required) {
+          this.$(div_qstnr_meta_constraint_dependency).hide();
+        } else {
+          this.$(div_qstnr_meta_constraint_dependency).show();
+        }
+        this.$(fieldset_qstnr_meta_constraint).show();
+        this.$(select_qstnr_meta_props_cond_item).val(Qst.constraint_item(cond));
       } else {
-	if (this.model.type === Qst.TYPE_LABEL) {
-	  this.$(div_qstnr_meta_constraint_dependency).hide();
-	} else {
-	  this.$(fieldset_qstnr_meta_constraint).hide();
-	}
+        if (this.model.type === Qst.TYPE_LABEL) {
+          this.$(div_qstnr_meta_constraint_dependency).hide();
+        } else {
+          this.$(fieldset_qstnr_meta_constraint).hide();
+        }
       }
     },
     imagetext_clicked: function(event) {
       wp.media.editor.open($(event.currentTarget), {
-	multiple: false,
-	customcb: function(props, attachment) {
-	  /*
-	    attachment.title
-	    attachment.name
-	    attachment.filename
-	    attachment.url
-	    attachment.sizes
-	  */
-	  var image = attachment.sizes[props.size];
-	  image['align'] = props.align;
-	  image['name'] = attachment.name;
-	  this.setimageinfostring(image);
-	  image.geoparam = {
-	    opacity: 1.0,
-	    width: image.width,
-	    height: image.height
-	  };
-	  image.pos = "before";
-	  image.auto = true;
-	  this.model.img = image;
-	  this.show_imagecontrol();
-	}.bind(this)
+        multiple: false,
+        customcb: function(props, attachment) {
+          /*
+            attachment.title
+            attachment.name
+            attachment.filename
+            attachment.url
+            attachment.sizes
+          */
+          var image = attachment.sizes[props.size];
+          image['align'] = props.align;
+          image['name'] = attachment.name;
+          this.setimageinfostring(image);
+          image.geoparam = {
+            opacity: 1.0,
+            width: image.width,
+            height: image.height
+          };
+          image.pos = "before";
+          image.auto = true;
+          this.model.img = image;
+          this.show_imagecontrol();
+        }.bind(this)
       });
     },
     image_pos_changed: function() {
       if (this.model.img) {
-	var img = this.model.img;
-	img.pos = this.$(select_qstnr_meta_props_image_pos).val();
-	this.model.img = img;
+        var img = this.model.img;
+        img.pos = this.$(select_qstnr_meta_props_image_pos).val();
+        this.model.img = img;
       }
     },
     show_imagecontrol: function() {
       var d = this.$(button_qstnr_meta_image_delete + "," + span_qstnr_meta_props_image_pos_wrap + "," + div_qstnr_meta_props_image_geometry);
-      
+
       if (this.model.img && this.model.img.name && this.model.img.name !== "") {
-	this.$(select_qstnr_meta_props_image_pos).val(this.model.img.pos);
-	this.$(input_qstnr_meta_props_image_geometry_auto).prop('checked', this.model.img.auto);
-	if (this.model.img.geoparam) {
-	  this.$(input_qstnr_form_image_opacity).val(this.model.img.geoparam.opacity);
-	  this.$(input_qstnr_form_image_width).val(this.model.img.geoparam.width);
-	  this.$(input_qstnr_form_image_height).val(this.model.img.geoparam.height);
-	}
-	d.show();
-	this.show_geometry(!this.model.img.auto);
+        this.$(select_qstnr_meta_props_image_pos).val(this.model.img.pos);
+        this.$(input_qstnr_meta_props_image_geometry_auto).prop('checked', this.model.img.auto);
+        if (this.model.img.geoparam) {
+          this.$(input_qstnr_form_image_opacity).val(this.model.img.geoparam.opacity);
+          this.$(input_qstnr_form_image_width).val(this.model.img.geoparam.width);
+          this.$(input_qstnr_form_image_height).val(this.model.img.geoparam.height);
+        }
+        d.show();
+        this.show_geometry(!this.model.img.auto);
       } else {
-	d.hide();
+        d.hide();
       }
     },
     image_delete: function() {
@@ -922,9 +972,9 @@ jQuery(function($) {
     },
     show_dependency: function(bshow) {
       if (this.model.index !== 0 && bshow) {
-	this.$(div_qstnr_meta_constraint_dependency).show();
+        this.$(div_qstnr_meta_constraint_dependency).show();
       } else {
-	this.$(div_qstnr_meta_constraint_dependency).hide();
+        this.$(div_qstnr_meta_constraint_dependency).hide();
       }
     },
     required_changed: function() {
@@ -933,39 +983,39 @@ jQuery(function($) {
     },
     show_geometry: function(bshow) {
       if (bshow) {
-	this.$(div_qstnr_meta_props_image_params).show();
+        this.$(div_qstnr_meta_props_image_params).show();
       } else {
-	this.$(div_qstnr_meta_props_image_params).hide();
+        this.$(div_qstnr_meta_props_image_params).hide();
       }
     },
     toggle_auto_geometry: function() {
       if (this.model.img) {
-	var autogeo = this.$(input_qstnr_meta_props_image_geometry_auto).is(":checked");
-	var img = this.model.img;
-	img.auto = autogeo;
-	this.model.img = img;
-	this.show_geometry(! autogeo);
+        var autogeo = this.$(input_qstnr_meta_props_image_geometry_auto).is(":checked");
+        var img = this.model.img;
+        img.auto = autogeo;
+        this.model.img = img;
+        this.show_geometry(!autogeo);
       }
     },
     image_width: function() {
       var img = this.model.img;
       if (img && img.geoparam) {
-	img.geoparam.width = this.$(input_qstnr_form_image_width).val();
-	this.model.img = img;
+        img.geoparam.width = this.$(input_qstnr_form_image_width).val();
+        this.model.img = img;
       }
     },
     image_height: function() {
       var img = this.model.img;
       if (img && img.geoparam) {
-	img.geoparam.height = this.$(input_qstnr_form_image_height).val();
-	this.model.img = img;
+        img.geoparam.height = this.$(input_qstnr_form_image_height).val();
+        this.model.img = img;
       }
     },
     image_opacity: function() {
       var img = this.model.img;
       if (img && img.geoparam) {
-	img.geoparam.opacity = this.$(input_qstnr_form_image_opacity).val();
-	this.model.img = img;
+        img.geoparam.opacity = this.$(input_qstnr_form_image_opacity).val();
+        this.model.img = img;
       }
     },
     dependency_cond_changed: function() {
@@ -973,56 +1023,82 @@ jQuery(function($) {
       var items = this.$(select_qstnr_meta_props_cond_item).val();
       var itemval = [];
       _.each(items, function(item) {
-	if (item !== 'none') {
-	  itemval.push({ item: item });
-	}
+        if (item !== 'none') {
+          itemval.push({
+            item: item
+          });
+        }
       });
       var constraint = {};
       if (cond && cond !== "" && cond !== "none" && itemval.length > 0) {
-	switch (cond) {
-	case "showifon":
-	  constraint.show = { or: itemval };
-	  break;
-	case "showifoff":
-	  constraint.show = { not: { or: itemval } };
-	  break;
-	case "hideifon":
-	  constraint.hide = { or: itemval };
-	  break;
-	case "hideifoff":
-	  constraint.hide = { not: { or: itemval } };
-	  break;
-	case "enableifon":
-	  constraint.enable = { or: itemval };
-	  break;
-	case "enableifoff":
-	  constraint.enable = { not: { or: itemval } };
-	  break;
-	case "disableifon":
-	  constraint.disable = { or: itemval };
-	  break;
-	case "disableifoff":
-	  constraint.disable = { not: { or: itemval } };
-	  break;
-	default:
-	  break;
-	}
+        switch (cond) {
+          case "showifon":
+            constraint.show = {
+              or: itemval
+            };
+            break;
+          case "showifoff":
+            constraint.show = {
+              not: {
+                or: itemval
+              }
+            };
+            break;
+          case "hideifon":
+            constraint.hide = {
+              or: itemval
+            };
+            break;
+          case "hideifoff":
+            constraint.hide = {
+              not: {
+                or: itemval
+              }
+            };
+            break;
+          case "enableifon":
+            constraint.enable = {
+              or: itemval
+            };
+            break;
+          case "enableifoff":
+            constraint.enable = {
+              not: {
+                or: itemval
+              }
+            };
+            break;
+          case "disableifon":
+            constraint.disable = {
+              or: itemval
+            };
+            break;
+          case "disableifoff":
+            constraint.disable = {
+              not: {
+                or: itemval
+              }
+            };
+            break;
+          default:
+            break;
+        }
       }
       this.model.constraint = constraint;
     },
   });
-  
+
   $(document).ready(function() {
     if (wp && wp.media) {
       var old_sender = wp.media.editor.send.attachment;
       var old_open = wp.media.editor.open;
       wp.media.editor.open = function(editor, options) {
-	if (options.customcb) {
-	  wp.media.editor.send.attachment = options.customcb;
-	} else {
-	  wp.media.editor.send.attachment = old_sender;
-	}
-	old_open(editor, options);
+        if (options.customcb) {
+          wp.media.editor.send.attachment = options.customcb;
+        } else {
+          wp.media.editor.send.attachment = old_sender;
+        }
+        old_open(editor, options);
       };
     }
   });
