@@ -524,7 +524,7 @@ jQuery(function($) {
       "change input[type=checkbox]": "selchanged",
       "change input[type=radio]": "selchanged",
       "change input[type=number]": "numberchanged",
-      "change input[type=number]": "numberfocusedout",
+      "focusedout input[type=number]": "numberfocusedout",
       "change input.qstnr-date": "datechanged",
       "change select.qstnr-hour": "hourchanged",
       "change select.qstnr-min": "minchanged",
