@@ -323,8 +323,6 @@ function the_questionnaire_form($post)
     $jsonstr = get_qstnr_meta($post);
     $meta_array = json_decode($jsonstr, true);
 
-    $booking = sanitize_text_field($_GET['booking']);
-
     if ($meta_array['disappear_after_answer']) {
         $args = array(
         'postid' => $post->ID,
@@ -334,7 +332,7 @@ function the_questionnaire_form($post)
         'email' => $_COOKIE['comment_author_email_' . COOKIEHASH],
         'remoteaddr' => $_SERVER['REMOTE_ADDR'],
         'useragent' => $_SERVER['HTTP_USER_AGENT'],
-        'url' => 'http://' . $booking
+        'url' => 'http://' . $booking //for booking uniqueness check
         );
 
         $comment_id = get_unique_comment_id_from_condition($args);
@@ -354,7 +352,15 @@ function the_questionnaire_form($post)
     }
 
     if ($meta_array['isPublic'] === true) {
-        $ispublic = true;
+        //check if booking is valid
+        $booking_results = get_booking_by_hash($booking);
+        if(count($booking_results) == 0) {
+            $ispublic = false;
+        }
+        else {
+            $ispublic = true;
+        }
+
     } else {
         $ispublic = false;
     }

@@ -27,10 +27,31 @@ function get_user_booking_by_hash($user_id, $booking_hash)
     $table_name = $wpdb->prefix . 'cb_bookings';
     $select_statement = "SELECT * FROM " . $table_name . " WHERE user_id = %d " .
                       "AND hash = '%s' ".
-                      "AND date_end < '".$date_today."' ".
+                      "AND date_end <= '".$date_today."' ".
                       "AND status = 'confirmed';";
 
     $prepared_statement = $wpdb->prepare($select_statement, $user_id, $booking_hash);
+
+    $bookings_result = $wpdb->get_results($prepared_statement);
+
+    return $bookings_result;
+}
+
+function get_booking_by_hash($booking_hash)
+{
+    global $wpdb;
+
+    $datetime_today = new \DateTime();
+    $date_today = $datetime_today->format('Y-m-d');
+
+    //get bookings data
+    $table_name = $wpdb->prefix . 'cb_bookings';
+    $select_statement = "SELECT * FROM " . $table_name . " " .
+                      "WHERE hash = '%s' ".
+                      "AND date_end <= '".$date_today."' ".
+                      "AND status = 'confirmed';";
+
+    $prepared_statement = $wpdb->prepare($select_statement, $booking_hash);
 
     $bookings_result = $wpdb->get_results($prepared_statement);
 
@@ -77,6 +98,8 @@ function ajax_questionnaire()
             $email = $formdata_array['email'];
         }
 
+        $booking = sanitize_text_field($_GET['booking']);
+
         if ($userid === 0) {
             // check required fields.
             if ($meta_array['unique_cookie'] === true) {
@@ -106,7 +129,6 @@ function ajax_questionnaire()
             }
         }
         else {
-            $booking = sanitize_text_field($_GET['booking']);
 
             //check if booking is valid (belongs to user)
             $user_booking_results = get_user_booking_by_hash($userid, $booking);
@@ -135,7 +157,7 @@ function ajax_questionnaire()
             'userid' => $userid,
             'author' => $author,
             'email' => $email,
-            'url' => 'http://'.$booking,
+            'url' => 'http://'.$booking, //for booking uniqueness check
             'meta' => $meta_array,
             'formdata' => $formdata)
         );
@@ -150,10 +172,14 @@ function get_unique_comment_id_from_condition(&$args)
 
     $meta_array = $args['meta'];
     $comments_query = array();
+
+    $comments_query['author_url'] = $args['url'];  //for booking uniqueness check
+
     if ($args['userid'] !== 0) {
         $comments_query['user_id'] = $args['userid'];
-        $comments_query['author_url'] = $args['url'];
+
     } else {
+
         if ($meta_array['unique_cookie'] === true) {
             $cookie_key = cookie_visitor_key($postid);
             $cookie_unique_key = "";
@@ -175,11 +201,15 @@ function get_unique_comment_id_from_condition(&$args)
             if ($meta_array['unique_browser'] === true) {
                 $comments_query['comment_agent'] = $args['useragent'];
             }
+
+            //we use booking hash in $comments_query['author_url'] for identification
+            /*
             // fake mail address if needed
-            //    for avoid miss dicision of comments flood.
+            // for avoid miss dicision of comments flood.
             if ($args['email'] == null || $args['email'] === '') {
                 $args['email'] = 'hash_' . hash('md5', $args['remoteaddr'] . $args['useragent']) . '@fake.fake';
             }
+            */
         }
     }
 
