@@ -275,7 +275,7 @@ jQuery(function($) {
       });
       var secondrow = $("<tr></tr>");
       _.each(formitems, function(item) {
-        if (item.type === Qst.TYPE_TEXT) {
+        if (item.type === Qst.TYPE_TEXT || item.type === Qst.TYPE_NUMBER) {
           secondrow.append($("<th></th>"));
         } else {
           for (var i = 0; i < item.selections.length; ++i) {
