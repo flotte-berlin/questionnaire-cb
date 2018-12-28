@@ -3,7 +3,7 @@
 Plugin Name: questionnaire (CB)
 Plugin URI: http://www.microgadget-inc.com/labo/wordpress/questionnaire/
 Description: Application for collecting questionnaires (with adjustments for usage with Commons Bookings)
-Version: 2.10.0
+Version: 2.11.0
 Author: Hiroyoshi Kurohara(Microgadget,inc.)
 Author URI: http://www.microgadget-inc.com/
 License: GPLv2 or later
