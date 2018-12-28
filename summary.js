@@ -26,7 +26,7 @@ jQuery(function($) {
         if (data[i].type !== 'text') {
           var item = {};
           item.title = data[i].title;
-          item.type = (data[i].type === 'radio' || data[i].type === 'option') ? "pie" : "bar";
+          item.type = (data[i].type === 'radio' || data[i].type === 'option' || data[i].type === 'number') ? "pie" : "bar";
           item.validCount = data[i].valid;
           item.data = [];
           for (var j in data[i].selections) {

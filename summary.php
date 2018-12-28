@@ -80,12 +80,40 @@ function summary_total($postid)
             foreach ($itemlist as $index => $item) {
                 $isvalid = false;
                 if ($item['type'] !== 'text') {
-                    foreach ($item['selected'] as $key => $value) {
-                        if ($value === true) {
-                                 $isvalid = true;
-                                 $sum[$index]['selected'][$key]++ ;
+                    if ($item['type'] == 'number') {
+                      if($item['valid']) {
+                        $isvalid = true;
+                        if(!isset($sum[$index]['selected'][$item['value']])) {
+
+                          $key = array_search ($item['value'], $sum[$index]['selections']);
+
+                          if($key === false) {
+                            //add new selection
+                            $key = sizeof($sum[$index]['selections']);
+                            $sum[$index]['selections'][] = $item['value'];
+
+                            $sum[$index]['selected']['option_selected_' . $key] = 1;
+                            $sum[$index]['selectedname'][] = 'option_selected_' . $key;
+                          }
+                          else {
+                            $sum[$index]['selected']['option_selected_' . $key]++;
+                          }
+                        }
+                        else {
+                          $sum[$index]['selected'][$item['value']]++;
+                        }
+                      }
+
+                    }
+                    else {
+                        foreach ($item['selected'] as $key => $value) {
+                            if ($value === true) {
+                                     $isvalid = true;
+                                     $sum[$index]['selected'][$key]++ ;
+                            }
                         }
                     }
+
                 }
                 if ($isvalid === true) {
                           $sum[$index]['valid']++;
