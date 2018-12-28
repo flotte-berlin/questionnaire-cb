@@ -38,10 +38,10 @@ jQuery(function($) {
         if (cls) {
           this.$el.addClass(cls);
         }
-        // locate at center.
+        // locate at center bottom
         var parent = this.$el.parent();
         var left = parent.offset().left + (parent.width() - this.$el.width()) / 2;
-        var top = parent.offset().top + (parent.height() - this.$el.height()) / 2;
+        var top = parent.offset().top + parent.height() - this.$el.height();
         this.$el.offset({
           "left": left,
           "top": top
