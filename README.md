@@ -1,7 +1,9 @@
 # Questionnaire-CB
 
 **Contributors:** kurohara, poilu  
-**Donate link:** http://www.microgadget-inc.com/donate-to-the-questionnaire/  
+**Donate link:**  
+http://www.microgadget-inc.com/donate-to-the-questionnaire/  
+https://flotte-berlin.de/mitmachen/unterstuetzt-uns/  
 **Tags:** questionnaire, survey, vote, plugin  
 **Requires at least:** 4.2.2  
 **Tested up to:** 4.9.6  
@@ -15,7 +17,7 @@ Issue questionnaire (survey/vote) on your own WordPress site.
 
 ## Preamble
 
-This plugin is based on the Wordpress plugin [Questionnaire](https://wordpress.org/plugins/questionnaire/) (v2.8.0) with some adjustments to connect surveys with [Commons Booking](https://github.com/wielebenwir/commons-booking) bookings and some bug fixes.
+This plugin is based on the Wordpress plugin [Questionnaire](https://wordpress.org/plugins/questionnaire/) (v2.8.0) by Hiroyoshi Kurohara (Microgadget Inc.) with some adjustments to connect surveys with [Commons Booking](https://github.com/wielebenwir/commons-booking) bookings and some bug fixes.
 
 ## Description
 
@@ -112,6 +114,6 @@ You can use several ways to backup questionnaires.
 
 1. This project is using [Icomoon](https://github.com/Keyamoon) icon fonts.
 
-== Additional Requirements ==
+## Additional Requirements
 
-1. To use this plugin, your WordPress should be running on PHP ver 5.3 or lator.
+1. To use this plugin, your WordPress should be running on PHP ver 5.3 or later.
