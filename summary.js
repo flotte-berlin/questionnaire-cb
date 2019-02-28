@@ -26,7 +26,8 @@ jQuery(function($) {
         if (data[i].type !== 'text') {
           var item = {};
           item.title = data[i].title;
-          item.type = (data[i].type === 'radio' || data[i].type === 'option' || data[i].type === 'number') ? "pie" : "bar";
+          item.type = (data[i].type === 'radio' || data[i].type === 'option') ? "pie" : "bar";
+          item.datatype = data[i].type;
           item.validCount = data[i].valid;
           item.data = [];
           for (var j in data[i].selections) {
@@ -35,6 +36,10 @@ jQuery(function($) {
               count: data[i].selected[data[i].selectedname[j]],
             };
             item.data.push(point);
+          }
+          //for numbers: sort data by itemname
+          if(data[i].type === 'number') {
+            item.data = _.sortBy(item.data, function(o) { return parseInt(o.itemname); })
           }
           chartData.push(item);
         }
@@ -58,7 +63,7 @@ jQuery(function($) {
       var chartData = this.model.chartData();
       var chartIndex = 1;
       if (chartData.length === 0) {
-        this.$el.html("<p>no valid data");
+        this.$el.html("<p>no valid data</p>");
       } else {
         this.$el.html("");
       }
@@ -103,7 +108,11 @@ jQuery(function($) {
                 precision: 0,
               }, ],
               categoryField: "itemname",
-              rotate: true,
+              rotate: data.datatype == 'number' ? false : true,
+              categoryAxis: {
+                autoGridCount: false,
+                gridCount: data.data.length
+              }
             };
             break;
           default:
