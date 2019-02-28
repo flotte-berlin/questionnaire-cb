@@ -84,7 +84,8 @@ jQuery(function($) {
               theme: "light",
               dataProvider: data.data,
               titleField: "itemname",
-              valueField: "count"
+              valueField: "count",
+              maxLabelWidth: 300
             };
             break;
           case 'bar':
