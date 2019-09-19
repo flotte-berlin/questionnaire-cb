@@ -3,7 +3,7 @@
 Plugin Name: questionnaire (CB)
 Plugin URI: https://github.com/flotte-berlin/questionnaire-cb
 Description: Application for collecting questionnaires (with adjustments for usage with Commons Bookings)
-Version: 2.11.1
+Version: 2.11.2
 Author: Hiroyoshi Kurohara(Microgadget,inc.), poilu
 Author URI: https://github.com/poilu
 License: GPLv2 or later
@@ -182,7 +182,8 @@ function get_comments_number($counted)
 
 function comments_filter($comments)
 {
-    if ($GLOBALS['post']->post_type === POSTTYPE) {
+    $post = $GLOBALS['post'];
+    if (is_object($post) && $GLOBALS['post']->post_type === POSTTYPE) {
         $result = array();
         foreach ($comments as $comment) {
             if ($comment->comment_type !== COMMENTTYPE) {
@@ -220,13 +221,13 @@ function has_key_and_true($key, $hash_obj)
 
 function check_if_issuer($user)
 {
-    if (has_key_and_true('edit_posts', $user->allcaps) 
-        && has_key_and_true('edit_published_posts', $user->allcaps) 
-        && has_key_and_true('publish_posts', $user->allcaps) 
-        && has_key_and_true('edit_pages', $user->allcaps) 
-        && has_key_and_true('edit_others_pages', $user->allcaps) 
-        && has_key_and_true('edit_published_pages', $user->allcaps) 
-        && has_key_and_true('moderate_comments', $user->allcaps) 
+    if (has_key_and_true('edit_posts', $user->allcaps)
+        && has_key_and_true('edit_published_posts', $user->allcaps)
+        && has_key_and_true('publish_posts', $user->allcaps)
+        && has_key_and_true('edit_pages', $user->allcaps)
+        && has_key_and_true('edit_others_pages', $user->allcaps)
+        && has_key_and_true('edit_published_pages', $user->allcaps)
+        && has_key_and_true('moderate_comments', $user->allcaps)
     ) {
         return true;
     } else {
@@ -308,10 +309,10 @@ function the_questionnaire_form($post)
     wp_enqueue_script('underscore', includes_url('js/underscore.min.js'));
     wp_enqueue_script('backbone', includes_url('js/backbone.min.js'));
 
-    $booking = sanitize_text_field($_GET['booking']);
+    $booking = isset($_GET['booking']) ? sanitize_text_field($_GET['booking']) : null;
 
     $current_user = wp_get_current_user();
-    if ($current_user->ID !== 0) {
+    if($current_user->ID !== 0) {
         $user_bookings = get_user_booking_by_hash($current_user->ID, $booking);
 
         $isloggedin = count($user_bookings) > 0 ? true : false;
@@ -408,7 +409,8 @@ function the_content($content)
 {
     $post = $GLOBALS['post'];
 
-    if ($post->post_type === POSTTYPE 
+    if (is_object($post)
+        && $post->post_type === POSTTYPE
         && $GLOBALS['wp_query']->post_count === 1
     ) {
 

@@ -18,6 +18,10 @@ function initialize_actform()
 
 function get_user_booking_by_hash($user_id, $booking_hash)
 {
+    if(!$booking_hash) {
+        return [];
+    }
+
     global $wpdb;
 
     $datetime_today = new \DateTime();
