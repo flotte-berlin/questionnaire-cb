@@ -3,7 +3,7 @@
 Plugin Name: questionnaire (CB)
 Plugin URI: https://github.com/flotte-berlin/questionnaire-cb
 Description: Application for collecting questionnaires (with adjustments for usage with Commons Bookings)
-Version: 2.11.2
+Version: 2.11.3
 Author: Hiroyoshi Kurohara(Microgadget,inc.), poilu
 Author URI: https://github.com/poilu
 License: GPLv2 or later
@@ -165,7 +165,7 @@ function get_comments_number($counted)
 {
 
     $post = $GLOBALS['post'];
-    if ($post->post_type === POSTTYPE) {
+    if (is_object($post) && $post->post_type === POSTTYPE) {
         clear_comment_filter();
         $comments = get_comments(
             array(
@@ -183,7 +183,7 @@ function get_comments_number($counted)
 function comments_filter($comments)
 {
     $post = $GLOBALS['post'];
-    if (is_object($post) && $GLOBALS['post']->post_type === POSTTYPE) {
+    if (is_object($post) && $post->post_type === POSTTYPE) {
         $result = array();
         foreach ($comments as $comment) {
             if ($comment->comment_type !== COMMENTTYPE) {
