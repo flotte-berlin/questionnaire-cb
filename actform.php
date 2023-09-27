@@ -180,7 +180,10 @@ function get_unique_comment_id_from_condition(&$args)
     $comments_query['author_url'] = $args['url'];  //for booking uniqueness check
 
     if ($args['userid'] !== 0) {
-        $comments_query['user_id'] = $args['userid'];
+        //don't use user_id for booking uniqueness check if questionnaire is public (prevent duplicate entries for signed-in and not-signed-in users)
+        if(!$args['meta']['isPublic']) {
+          $comments_query['user_id'] = $args['userid'];
+        }
 
     } else {
 

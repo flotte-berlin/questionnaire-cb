@@ -3,7 +3,7 @@
 Plugin Name: questionnaire (CB)
 Plugin URI: https://github.com/flotte-berlin/questionnaire-cb
 Description: Application for collecting questionnaires (with adjustments for usage with Commons Bookings)
-Version: 2.11.3
+Version: 2.11.4
 Author: Hiroyoshi Kurohara(Microgadget,inc.), poilu
 Author URI: https://github.com/poilu
 License: GPLv2 or later
