@@ -16,32 +16,83 @@ function initialize_actform()
 
 }
 
-function get_user_booking_by_hash($user_id, $booking_hash)
-{
-    if(!$booking_hash) {
-        return [];
-    }
+function get_user_booking_by_hash($user_id, $booking_hash) {
+  if(!$booking_hash) {
+    return [];
+  }
 
+  $cb2_bookings = get_user_booking_by_hash_cb2($user_id, $booking_hash);
+  if(count($cb2_bookings) > 0) {
+    return $cb2_bookings;
+  }
+  else {
+    return get_user_booking_by_hash_cb1($user_id, $booking_hash);
+  }
+}
+
+function get_user_booking_by_hash_cb1($user_id, $booking_hash)
+{
     global $wpdb;
+
+    $table_name = $wpdb->prefix . "cb_bookings";
+    if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+      return [];
+    }
 
     $datetime_today = new \DateTime();
     $date_today = $datetime_today->format('Y-m-d');
 
     //get bookings data
-    $table_name = $wpdb->prefix . 'cb_bookings';
     $select_statement = "SELECT * FROM " . $table_name . " WHERE user_id = %d " .
                       "AND hash = '%s' ".
                       "AND date_end <= '".$date_today."' ".
                       "AND status = 'confirmed';";
 
     $prepared_statement = $wpdb->prepare($select_statement, $user_id, $booking_hash);
-
     $bookings_result = $wpdb->get_results($prepared_statement);
 
     return $bookings_result;
 }
 
-function get_booking_by_hash($booking_hash)
+function get_user_booking_by_hash_cb2($user_id, $booking_hash) {
+  if(class_exists('\CommonsBooking\Wordpress\CustomPostType\Booking')) {
+    $datetime_today = new \DateTime();
+
+    $args = [
+      'name' => $booking_hash,
+      'author' => $user_id,
+      'post_type' => \CommonsBooking\Wordpress\CustomPostType\Booking::getPostType(),
+      'post_status' => 'confirmed',
+      'meta_key' => 'repetition-end', 
+      'meta_value' => $datetime_today->getTimestamp(),
+      'meta_compare' => '<=',
+    ];
+  
+    $query = new \WP_Query( $args );
+    if ( $query->have_posts() ) {
+      $bookings =  $query->get_posts();
+      return $bookings;
+    }
+  }
+
+  return [];
+}
+
+function get_booking_by_hash($booking_hash) {
+  if(!$booking_hash) {
+    return [];
+  }
+
+  $cb2_bookings = get_booking_by_hash_cb2($booking_hash);
+  if(count($cb2_bookings) > 0) {
+    return $cb2_bookings;
+  }
+  else {
+    return get_booking_by_hash_cb1($booking_hash);
+  }
+}
+
+function get_booking_by_hash_cb1($booking_hash)
 {
     global $wpdb;
 
@@ -50,6 +101,10 @@ function get_booking_by_hash($booking_hash)
 
     //get bookings data
     $table_name = $wpdb->prefix . 'cb_bookings';
+    if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+      return [];
+    }
+
     $select_statement = "SELECT * FROM " . $table_name . " " .
                       "WHERE hash = '%s' ".
                       "AND date_end <= '".$date_today."' ".
@@ -60,6 +115,29 @@ function get_booking_by_hash($booking_hash)
     $bookings_result = $wpdb->get_results($prepared_statement);
 
     return $bookings_result;
+}
+
+function get_booking_by_hash_cb2($booking_hash) {
+  if(class_exists('\CommonsBooking\Wordpress\CustomPostType\Booking')) {
+    $datetime_today = new \DateTime();
+
+    $args = [
+      'name' => $booking_hash,
+      'post_type' => \CommonsBooking\Wordpress\CustomPostType\Booking::getPostType(),
+      'post_status' => 'confirmed',
+      'meta_key' => 'repetition-end', 
+      'meta_value' => $datetime_today->getTimestamp(),
+      'meta_compare' => '<=',
+    ];
+  
+    $query = new \WP_Query( $args );
+    if ( $query->have_posts() ) {
+      $bookings =  $query->get_posts();
+      return $bookings;
+    }
+  }
+
+  return [];
 }
 
 function ajax_questionnaire()
